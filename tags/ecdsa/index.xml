@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>ecdsa on Willem&#39;s blog</title>
+    <link>https://nlitsme.github.io/tags/ecdsa/</link>
+    <description>Recent content in ecdsa on Willem&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Thu, 19 Jun 2014 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://nlitsme.github.io/tags/ecdsa/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>MPMP12 Marching band Problem</title>
+      <link>https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/</link>
+      <pubDate>Fri, 07 Aug 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/</guid>
+      <description>&lt;h1 id=&#34;marching-band-problem&#34;&gt;Marching Band problem&lt;/h1&gt;
+&lt;p&gt;In this document I describe a solution to the &amp;lsquo;marchingband&amp;rsquo; problem as stated on &lt;a href=&#34;http://think-maths.co.uk/marchingband&#34;&gt;think-maths&lt;/a&gt;:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;What is the fewest number of performers you require for your marching band to
+have 64 marching options? (Only whole positive numbers will be accepted)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Where a &amp;lsquo;marchingband&amp;rsquo; can march only in a rectangular shape.&lt;/p&gt;
+&lt;p&gt;Also, I present solutions in higher dimensions, and a solution with complex numbers, and a proof that the 2D case has a solution for all numbers of marching options.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MPMP11 David and Anton age puzzle</title>
+      <link>https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/</link>
+      <pubDate>Mon, 27 Jul 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/</guid>
+      <description>&lt;p&gt;The puzzle: &lt;a href=&#34;http://think-maths.co.uk/agepuzzle&#34;&gt;David and Anton puzzle&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;David and Anton&amp;rsquo;s ages combined equals 65.&lt;/p&gt;
+&lt;p&gt;David is currently three times as old as Anton was when David was half as old as Anton will be when Anton is three times as old as David was when David was three times as old as Anton.
+How old is David?&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MPMP9 Take away triangles</title>
+      <link>https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/</link>
+      <pubDate>Sat, 27 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/</guid>
+      <description>&lt;p&gt;The puzzle: &lt;a href=&#34;http://think-maths.co.uk/trianglepuzzle&#34;&gt;Take away Triangles&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;Playing with the triangles, and looking at n-gons with n &amp;gt;= 3, I found you
+always end up in some cycle ( well, unless you start with irrational numbers on
+the triangle&amp;rsquo;s corners ), then googling for a couple of cycle lengths, I found
+this integer sequence related to your triangles puzzle:&lt;/p&gt;
+&lt;p&gt;&lt;a href=&#34;https://oeis.org/A038553&#34;&gt;https://oeis.org/A038553&lt;/a&gt;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Maximum cycle length in differentiation digraph for n-bit binary sequences.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>MPMP8 Paper folding challenge</title>
+      <link>https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/</link>
+      <pubDate>Thu, 11 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/</guid>
+      <description>&lt;p&gt;This post describes my solution to Matt Parker&amp;rsquo;s puzzle #8:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;The &lt;a href=&#34;http://think-maths.co.uk/foldingchallenge&#34;&gt;think-maths&lt;/a&gt; foldingchallenge.&lt;/li&gt;
+&lt;li&gt;Matt Parker&amp;rsquo;s &lt;a href=&#34;https://www.youtube.com/watch?v=GpClxF41ugg&#34;&gt;youtube&lt;/a&gt; channel.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;My solution involves looking at the pattern of folds when viewing the folded stack from the sides.
+And then using some python code to generate all possible ways the folds can match up in a way
+that you will still end up with two rows of 4 sheets.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A commandline tool for youtube.</title>
+      <link>https://nlitsme.github.io/2020/06/youtube-tool/</link>
+      <pubDate>Tue, 09 Jun 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/06/youtube-tool/</guid>
+      <description>&lt;p&gt;Did you ever want to conveniently search a youtube video&amp;rsquo;s comments in a textfile? or
+find that specific comment in a long speech. Maybe you are interested when exactly
+one subject was talked about in a live chat.&lt;/p&gt;
+&lt;p&gt;I wrote a python commandline tool for that: &lt;a href=&#34;https://github.com/nlitsme/youtube_tool&#34;&gt;yttool&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MPMP7 - Unique distancing</title>
+      <link>https://nlitsme.github.io/2020/05/2020-05-29-mpmp7-unique-distancing/</link>
+      <pubDate>Thu, 28 May 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/05/2020-05-29-mpmp7-unique-distancing/</guid>
+      <description>&lt;h1 id=&#34;solver-for-n-dimensional-variants-of-the-mpmp7-unique-distancing-problem&#34;&gt;Solver for n-dimensional variants of the MPMP7 Unique Distancing problem.&lt;/h1&gt;
+&lt;p&gt;Project with tools for the 7th &lt;a href=&#34;http://think-maths.co.uk/uniquedistance&#34;&gt;Matt Parker Math Puzzle problem&lt;/a&gt;.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Solution for the problem stated in the MPMP7 youtube video.&lt;/li&gt;
+&lt;li&gt;Solutions for smaller and larger grids.&lt;/li&gt;
+&lt;li&gt;Solutions in 3 or more dimensional grids&lt;/li&gt;
+&lt;li&gt;Can I fit more markers on the grid?&lt;/li&gt;
+&lt;li&gt;Can I solve this on an 8x8 grid?&lt;/li&gt;
+&lt;li&gt;Do solutions exist for larger 2D grids?&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>About me</title>
+      <link>https://nlitsme.github.io/about/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/about/</guid>
+      <description>My name is Willem Hengeveld, i have been working as a software developer and reverse engineer since about 1992. Before that, i have been programming since about 1978, starting with my dad&amp;rsquo;s programmable calculator, a TI-58. In 1980 i got my first &amp;lsquo;real&amp;rsquo; computer, a Commodore PET-2001, later succeeded by a Commodore-64. I have been present on the internet since about 1992
+Nowadays you can find me on github, twitter and occasionally on stackoverflow or youtube.</description>
+    </item>
+    
+    <item>
+      <title>Ancient MSDOS tools</title>
+      <link>https://nlitsme.github.io/2020/02/2020-02-07-ancient-tools/</link>
+      <pubDate>Fri, 07 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/02/2020-02-07-ancient-tools/</guid>
+      <description>&lt;p&gt;Looking through some really old cds, i found some interesting tools i wrote about 25 years ago:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nlitsme/MSDOS_demon_dialer_tool&#34;&gt;github:MSDOS_demon_dialer_tool&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nlitsme/MSDOS_game_of_life&#34;&gt;github:MSDOS_game_of_life&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://github.com/nlitsme/MSDOS_interrupt_catcher&#34;&gt;github:MSDOS_interrupt_catcher&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Several problems I ran in to while trying out gohugo</title>
+      <link>https://nlitsme.github.io/2020/02/hugo-problems/</link>
+      <pubDate>Tue, 04 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/02/hugo-problems/</guid>
+      <description>&lt;p&gt;Several problems I ran into as a novice &lt;a href=&#34;https://gohugo.io&#34;&gt;gohugo&lt;/a&gt; user.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the quickstart example does not work.&lt;/li&gt;
+&lt;li&gt;some content fails to render without any error message&lt;/li&gt;
+&lt;li&gt;don&amp;rsquo;t name your post &amp;lsquo;index.md&amp;rsquo;&lt;/li&gt;
+&lt;li&gt;posts without a frontmatter are not clickable, but do show in the index.&lt;/li&gt;
+&lt;li&gt;the &amp;lsquo;more&amp;rsquo; looks like another post, while it is intended as a summary of &amp;lsquo;other&amp;rsquo; posts.&lt;/li&gt;
+&lt;li&gt;no date in frontmatter the year 1 is assumed.&lt;/li&gt;
+&lt;li&gt;Overly complicated error messages:&lt;/li&gt;
+&lt;li&gt;it was not clear to me at first that you do need the extra subdirectory level under contents.&lt;/li&gt;
+&lt;li&gt;how do i select what part of my post i want in the summary.&lt;/li&gt;
+&lt;li&gt;The summaries are not always rendered properly, creating an ugly index page.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>List of git repositories which have an unreasonably large .git directory</title>
+      <link>https://nlitsme.github.io/2020/02/needlesly-large-gitrepos/</link>
+      <pubDate>Mon, 03 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/02/needlesly-large-gitrepos/</guid>
+      <description>&lt;p&gt;Some github projects have unreasonably large .git directories. Examples: conan/docs and Arduino.
+&lt;code&gt;conan/docs&lt;/code&gt; seem to have solved this.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Ways of converting numbers to and from text in python</title>
+      <link>https://nlitsme.github.io/2020/02/python-number-conversion/</link>
+      <pubDate>Sun, 02 Feb 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/02/python-number-conversion/</guid>
+      <description>&lt;p&gt;There are several methods of converting numbers to and from strings in python.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>features which I would like to see in c&#43;&#43;</title>
+      <link>https://nlitsme.github.io/2020/01/c-wannahaves/</link>
+      <pubDate>Fri, 17 Jan 2020 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2020/01/c-wannahaves/</guid>
+      <description>&lt;p&gt;Some c++ features I have looked for, but do not exist.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;a std::min or compare which works for differently signed or sized arguments&lt;/li&gt;
+&lt;li&gt;an iteratorrange, which takes a pair of iterators&lt;/li&gt;
+&lt;li&gt;a way to test for the existence of a type in &lt;code&gt;std::enable_if&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;initialize a subclass field &lt;em&gt;before&lt;/em&gt; a baseclass&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;auto&lt;/code&gt; on class members&lt;/li&gt;
+&lt;li&gt;nested structured binding&lt;/li&gt;
+&lt;li&gt;automatic context deduction for switch&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>The MSM 8974 bootrom</title>
+      <link>https://nlitsme.github.io/2019/11/msm-8974-bootrom/</link>
+      <pubDate>Fri, 08 Nov 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2019/11/msm-8974-bootrom/</guid>
+      <description>&lt;p&gt;Analyzing the Qualcomm MSM 8974 bootrom.&lt;/p&gt;
+&lt;p&gt;The bootrom is 192k byte in size. It has bootcode for the three main subsystems of the 8974:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;the modem - qdsp4 / hexagon code&lt;/li&gt;
+&lt;li&gt;RPM - the power manager - ARM code&lt;/li&gt;
+&lt;li&gt;The Application cpu - ARM code&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;All devices I have inspected have the same bootrom. But a facitlity exists to apply patches
+to the bootrom via the use of special fuses.&lt;/p&gt;
+&lt;p&gt;Unfortunately the fuses in my device are configured in a way that the &amp;lsquo;patch&amp;rsquo; area is not readable.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>A problem I had with my timemachine backups</title>
+      <link>https://nlitsme.github.io/2019/10/osx-backup-problem/</link>
+      <pubDate>Wed, 30 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2019/10/osx-backup-problem/</guid>
+      <description>&lt;p&gt;For several weeks my timemachine backup failed, being stuck in &amp;lsquo;inprogress&amp;rsquo; with lots of disk activity occurring.
+The culprit turned out to be spotlight, trying to index the backupdisk while timemachine was trying to backup to it.
+adding my backupdisk in the &amp;lsquo;privacy&amp;rsquo; tab of spotlight resolved the problem.&lt;/p&gt;
+&lt;p&gt;in the process list, processes with &amp;lsquo;md&amp;rsquo; in the name, like &lt;code&gt;mds_stores&lt;/code&gt; and &amp;lsquo;mds&amp;rsquo; and &lt;code&gt;mdworker_shared&lt;/code&gt; belong to spotlight.
+Timemachine is handled by &amp;lsquo;backupd&amp;rsquo;.&lt;/p&gt;
+&lt;p&gt;tmutil  is the commandline tool for managing timemachine.  mdutil is the commandline tool for managing spotlight.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>c&#43;&#43; type tests which are not in the std library.</title>
+      <link>https://nlitsme.github.io/2019/10/c-type_tests/</link>
+      <pubDate>Thu, 24 Oct 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2019/10/c-type_tests/</guid>
+      <description>&lt;p&gt;Some c++ type tests which i found useful:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;is_range&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;IsStreamInsertable&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;is_callable&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;is_searchable&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;is_vector&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;is_container&lt;/code&gt;&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>features I would like to see in python</title>
+      <link>https://nlitsme.github.io/2019/08/python-wannahaves/</link>
+      <pubDate>Thu, 29 Aug 2019 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2019/08/python-wannahaves/</guid>
+      <description>&lt;p&gt;Some python features I have looked for, but do not exist.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;assignment operator&lt;/li&gt;
+&lt;li&gt;class setup&lt;/li&gt;
+&lt;li&gt;conditional assignment&lt;/li&gt;
+&lt;li&gt;boolean inplace operators&lt;/li&gt;
+&lt;li&gt;byte() conversion&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>a simple fix for the missing mipsel error in the android sdk</title>
+      <link>https://nlitsme.github.io/2018/11/fix-android-sdk/</link>
+      <pubDate>Fri, 30 Nov 2018 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2018/11/fix-android-sdk/</guid>
+      <description>&lt;p&gt;A problem I ran into a few times: after reinstalling or updating the android sdk, suddenly some
+projects starts failing to compile with a message about a missing &amp;lsquo;mips64el&amp;rsquo; path.&lt;/p&gt;
+&lt;p&gt;The following will fix this:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir -p $ANDROID_HOME/ndk-bundle/toolchains/mips64el-linux-android-4.9/prebuilt/darwin-x86_64/
+mkdir -p $ANDROID_HOME/ndk-bundle/toolchains/mipsel-linux-android-4.9/prebuilt/darwin-x86_64/
+
+touch $ANDROID_HOME/ndk-bundle/toolchains/mips64el-linux-android-4.9/prebuilt/darwin-x86_64/NOTICE-MIPS64
+touch $ANDROID_HOME/ndk-bundle/toolchains/mipsel-linux-android-4.9/prebuilt/darwin-x86_64/NOTICE-MIPS
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>modules for investigating python internals</title>
+      <link>https://nlitsme.github.io/2017/10/python-internals/</link>
+      <pubDate>Tue, 03 Oct 2017 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2017/10/python-internals/</guid>
+      <description>&lt;p&gt;Several modules exist which can be used to investigate the internals of python&lt;/p&gt;
+&lt;p&gt;dis, ipdb, inspect&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Vim Encryption investigated</title>
+      <link>https://nlitsme.github.io/2016/12/vim-encryption/</link>
+      <pubDate>Thu, 15 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2016/12/vim-encryption/</guid>
+      <description>&lt;p&gt;VIM can encrypt text files transparently.
+I wrote a python script which can decrypt all three types given the password,
+or do a simple dictionary search.&lt;/p&gt;
+&lt;p&gt;Never use the old methods ( &lt;code&gt;zip&lt;/code&gt; and &lt;code&gt;blowfish&lt;/code&gt; ) the way these are used in VIM
+is broken. The latest &lt;code&gt;blowfish2&lt;/code&gt; method is somewhat better, though there is room
+for improvement.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Writing portable python code</title>
+      <link>https://nlitsme.github.io/2016/12/writing-portable-python-code/</link>
+      <pubDate>Tue, 06 Dec 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2016/12/writing-portable-python-code/</guid>
+      <description>&lt;h1 id=&#34;portable-python&#34;&gt;Portable python&lt;/h1&gt;
+&lt;p&gt;When writing python code I try to write code which will run both on python2 and python3.
+Below is a list of items I regularly use.&lt;/p&gt;
+&lt;p&gt;I know there is a module named &amp;lsquo;six&amp;rsquo; which probably also handles some of these cases,
+I still need to look into that.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

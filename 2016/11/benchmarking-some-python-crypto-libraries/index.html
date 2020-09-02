@@ -1,0 +1,1332 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Benchmarking some python crypto libraries - Willem&#39;s blog
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="I wrote a little benchmark, comparing the PyCrypto and cryptography python modules.
+You can find the script here.
+results Most symmetric ciphers are significantly faster in pyCrypto for small blocksizes. but cryptography is much faster for larger data.
+The ratio is the byterate of pycrypto divided by the byterate of cryptography. So values less than 1 mean: cryptography is faster, values larger than 1: pycrypto is faster.
+I found that the cryptography library is generally faster for large data volumes, while pycrypto is faster for encrypting small items.
+" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>Benchmarking some python crypto libraries - Willem&#39;s blog</title>
+  
+  
+  <link rel="stylesheet" href="https://nlitsme.github.io/css/style.min.13468ef5be61550fa4d002a591d5552c85369a01cbae5e2d95dc8022cab38679.css">
+  
+  <link rel="stylesheet" href="/assets/css/highlight.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="Benchmarking some python crypto libraries" />
+<meta property="og:description" content="I wrote a little benchmark, comparing the PyCrypto and cryptography python modules.
+You can find the script here.
+results
+Most symmetric ciphers are significantly faster in pyCrypto for small blocksizes.
+but cryptography is much faster for larger data.
+The ratio is the byterate of pycrypto divided by the byterate of cryptography.
+So values less than 1 mean: cryptography is faster, values larger than 1: pycrypto is faster.
+I found that the cryptography library is generally faster for large data volumes, while pycrypto
+is faster for encrypting small items." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nlitsme.github.io/2016/11/benchmarking-some-python-crypto-libraries/" />
+<meta property="article:published_time" content="2016-11-26T00:00:00+00:00" />
+<meta property="article:modified_time" content="2016-11-26T00:00:00+00:00" />
+<meta itemprop="name" content="Benchmarking some python crypto libraries">
+<meta itemprop="description" content="I wrote a little benchmark, comparing the PyCrypto and cryptography python modules.
+You can find the script here.
+results
+Most symmetric ciphers are significantly faster in pyCrypto for small blocksizes.
+but cryptography is much faster for larger data.
+The ratio is the byterate of pycrypto divided by the byterate of cryptography.
+So values less than 1 mean: cryptography is faster, values larger than 1: pycrypto is faster.
+I found that the cryptography library is generally faster for large data volumes, while pycrypto
+is faster for encrypting small items.">
+<meta itemprop="datePublished" content="2016-11-26T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2016-11-26T00:00:00+00:00" />
+<meta itemprop="wordCount" content="755">
+
+
+
+<meta itemprop="keywords" content="benchmark,crypto,python," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Benchmarking some python crypto libraries"/>
+<meta name="twitter:description" content="I wrote a little benchmark, comparing the PyCrypto and cryptography python modules.
+You can find the script here.
+results
+Most symmetric ciphers are significantly faster in pyCrypto for small blocksizes.
+but cryptography is much faster for larger data.
+The ratio is the byterate of pycrypto divided by the byterate of cryptography.
+So values less than 1 mean: cryptography is faster, values larger than 1: pycrypto is faster.
+I found that the cryptography library is generally faster for large data volumes, while pycrypto
+is faster for encrypting small items."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+            
+          <a href="/">
+              <h2 id="name" class="hidden-xs hidden-sm">Willem&#39;s blog</h2>
+          </a>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>The Netherlands</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+            
+            
+            <a href="https://nlitsme.github.io/tags/android/" class="tag-list-link">android</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/arm/" class="tag-list-link">arm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/benchmark/" class="tag-list-link">benchmark</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/bitcoin/" class="tag-list-link">bitcoin</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/c&#43;&#43;/" class="tag-list-link">c&#43;&#43;</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/commandline/" class="tag-list-link">commandline</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crack/" class="tag-list-link">crack</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crypto/" class="tag-list-link">crypto</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ecdsa/" class="tag-list-link">ecdsa</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/elcapitan/" class="tag-list-link">elcapitan</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/galois-field/" class="tag-list-link">galois-field</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/git/" class="tag-list-link">git</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hexdmper/" class="tag-list-link">hexdmper</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ida/" class="tag-list-link">ida</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/interrupts/" class="tag-list-link">interrupts</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/itsutils/" class="tag-list-link">itsutils</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/life/" class="tag-list-link">life</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/math/" class="tag-list-link">math</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/modular-arithmetic/" class="tag-list-link">modular-arithmetic</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/msdos/" class="tag-list-link">msdos</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/museum/" class="tag-list-link">museum</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/netware/" class="tag-list-link">netware</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx/" class="tag-list-link">osx</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx10.11/" class="tag-list-link">osx10.11</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pchardware/" class="tag-list-link">pchardware</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pdf/" class="tag-list-link">pdf</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/perl/" class="tag-list-link">perl</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/philosophy/" class="tag-list-link">philosophy</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/portability/" class="tag-list-link">portability</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/problems/" class="tag-list-link">problems</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/puzzle/" class="tag-list-link">puzzle</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/qualcomm/" class="tag-list-link">qualcomm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/reversing/" class="tag-list-link">reversing</a><span
+                    class="tag-list-count">12</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/soundblaster/" class="tag-list-link">soundblaster</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/templates/" class="tag-list-link">templates</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/thinkmaths/" class="tag-list-link">thinkmaths</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/timemachine/" class="tag-list-link">timemachine</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/tor/" class="tag-list-link">tor</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/vim/" class="tag-list-link">vim</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/wince/" class="tag-list-link">wince</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/youtube/" class="tag-list-link">youtube</a><span
+                    class="tag-list-count">1</span>
+            
+
+    </div>
+</div>
+
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="title">MPMP12 Marching band Problem</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" class="title">MPMP11 David and Anton age puzzle</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-07-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-07-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/" class="title">MPMP9 Take away triangles</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="title">MPMP8 Paper folding challenge</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/youtube-tool/" class="title">A commandline tool for youtube.</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-09</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://nlitsme.github.io/2016/11/pdf-certificate-encryption/" title="PDF Certificate Encryption"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://nlitsme.github.io/2016/11/hexdumper-for-c-iostreams/"
+                    title="Hexdumper for C&#43;&#43; IOStreams"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="twitter,email"
+                data-mobile-sites="twitter,email,whatsapp,signal"></div>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2016/11/benchmarking-some-python-crypto-libraries/"
+    >Benchmarking some python crypto libraries</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://nlitsme.github.io/2016/11/benchmarking-some-python-crypto-libraries/" class="article-date">
+  <time datetime="2016-11-26 00:00:00 &#43;0000 UTC" itemprop="datePublished">2016-11-26</time>
+</a>
+</span>
+  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/benchmark/"> benchmark </a>
+    <a class="article-tag-link" href="/tags/crypto/"> crypto </a>
+    <a class="article-tag-link" href="/tags/python/"> python </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2016/11/benchmarking-some-python-crypto-libraries/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 755words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 4minutes </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p>I wrote a little benchmark, comparing the <a href="https://github.com/dlitz/pycrypto">PyCrypto</a> and <a href="https://github.com/pyca/cryptography">cryptography</a> python modules.</p>
+<p>You can find the script <a href="https://github.com/nlitsme/pyCryptoBenchmarking">here</a>.</p>
+<h1 id="results">results</h1>
+<p>Most symmetric ciphers are significantly faster in <code>pyCrypto</code> for small blocksizes.
+but cryptography is much faster for larger data.</p>
+<p>The <code>ratio</code> is the byterate of <code>pycrypto</code> divided by the byterate of <code>cryptography</code>.
+So values less than 1 mean: <code>cryptography</code> is faster, values larger than 1: <code>pycrypto</code> is faster.</p>
+<p>I found that the <code>cryptography</code> library is generally faster for large data volumes, while <code>pycrypto</code>
+is faster for encrypting small items.</p>
+<h2 id="symmetric-crypto">symmetric crypto</h2>
+<p>Both <code>pycrypto</code> and <code>cryptography</code> have some call overhead.
+for <code>pycrypto</code> the byterate stabilizes for messages over 1K,
+while for `cryptography this happens for messages over 16K.</p>
+<p>message size = 32 bytes, in Mbyte/sec</p>
+<table>
+<thead>
+<tr>
+<th align="right">pycrypto</th>
+<th align="right">cryptography</th>
+<th align="right">ratio</th>
+<th align="left">cipher</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">154</td>
+<td align="right">102</td>
+<td align="right">1.51</td>
+<td align="left">aes</td>
+</tr>
+<tr>
+<td align="right">129</td>
+<td align="right">91</td>
+<td align="right">1.41</td>
+<td align="left">blowfish</td>
+</tr>
+<tr>
+<td align="right">88</td>
+<td align="right">88</td>
+<td align="right">1.00</td>
+<td align="left">cast</td>
+</tr>
+<tr>
+<td align="right">52</td>
+<td align="right">71</td>
+<td align="right">0.74</td>
+<td align="left">des128</td>
+</tr>
+<tr>
+<td align="right">58</td>
+<td align="right">71</td>
+<td align="right">0.82</td>
+<td align="left">des192</td>
+</tr>
+<tr>
+<td align="right">102</td>
+<td align="right">73</td>
+<td align="right">1.41</td>
+<td align="left">des64</td>
+</tr>
+<tr>
+<td align="right">187</td>
+<td align="right">97</td>
+<td align="right">1.92</td>
+<td align="left">rc4</td>
+</tr>
+</tbody>
+</table>
+<p>message size = 1048576 bytes, in Mbyte/sec</p>
+<table>
+<thead>
+<tr>
+<th align="right">pycrypto</th>
+<th align="right">cryptography</th>
+<th align="right">ratio</th>
+<th align="left">cipher</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">2054</td>
+<td align="right">22920</td>
+<td align="right">0.09</td>
+<td align="left">aes</td>
+</tr>
+<tr>
+<td align="right">326</td>
+<td align="right">936</td>
+<td align="right">0.35</td>
+<td align="left">blowfish</td>
+</tr>
+<tr>
+<td align="right">144</td>
+<td align="right">871</td>
+<td align="right">0.17</td>
+<td align="left">cast</td>
+</tr>
+<tr>
+<td align="right">79</td>
+<td align="right">231</td>
+<td align="right">0.34</td>
+<td align="left">des128</td>
+</tr>
+<tr>
+<td align="right">78</td>
+<td align="right">231</td>
+<td align="right">0.34</td>
+<td align="left">des192</td>
+</tr>
+<tr>
+<td align="right">212</td>
+<td align="right">234</td>
+<td align="right">0.90</td>
+<td align="left">des64</td>
+</tr>
+<tr>
+<td align="right">486</td>
+<td align="right">5050</td>
+<td align="right">0.10</td>
+<td align="left">rc4</td>
+</tr>
+</tbody>
+</table>
+<h2 id="hash-algorithms">hash algorithms</h2>
+<p>Both <code>pycrypto</code> and <code>cryptography</code> have some call overhead.
+for <code>pycrypto</code> the byterate stabilizes for messages over 16K,
+while for `cryptography this happens for messages over 1M.</p>
+<p>message size = 32 bytes, in Mbyte/sec</p>
+<table>
+<thead>
+<tr>
+<th align="right">pycrypto</th>
+<th align="right">cryptography</th>
+<th align="right">ratio</th>
+<th align="left">algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">120</td>
+<td align="right">14</td>
+<td align="right">8.17</td>
+<td align="left">md5</td>
+</tr>
+<tr>
+<td align="right">114</td>
+<td align="right">14</td>
+<td align="right">7.65</td>
+<td align="left">ripemd</td>
+</tr>
+<tr>
+<td align="right">112</td>
+<td align="right">18</td>
+<td align="right">6.19</td>
+<td align="left">sha1</td>
+</tr>
+<tr>
+<td align="right">112</td>
+<td align="right">17</td>
+<td align="right">6.44</td>
+<td align="left">sha224</td>
+</tr>
+<tr>
+<td align="right">134</td>
+<td align="right">17</td>
+<td align="right">7.57</td>
+<td align="left">sha256</td>
+</tr>
+<tr>
+<td align="right">89</td>
+<td align="right">16</td>
+<td align="right">5.25</td>
+<td align="left">sha384</td>
+</tr>
+<tr>
+<td align="right">90</td>
+<td align="right">16</td>
+<td align="right">5.42</td>
+<td align="left">sha512</td>
+</tr>
+</tbody>
+</table>
+<p>message size = 1048576 bytes, in Mbyte/sec</p>
+<table>
+<thead>
+<tr>
+<th align="right">pycrypto</th>
+<th align="right">cryptography</th>
+<th align="right">ratio</th>
+<th align="left">algorithm</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">5596</td>
+<td align="right">5231</td>
+<td align="right">1.07</td>
+<td align="left">md5</td>
+</tr>
+<tr>
+<td align="right">322</td>
+<td align="right">1660</td>
+<td align="right">0.19</td>
+<td align="left">ripemd</td>
+</tr>
+<tr>
+<td align="right">7871</td>
+<td align="right">6141</td>
+<td align="right">1.28</td>
+<td align="left">sha1</td>
+</tr>
+<tr>
+<td align="right">439</td>
+<td align="right">3498</td>
+<td align="right">0.13</td>
+<td align="left">sha224</td>
+</tr>
+<tr>
+<td align="right">390</td>
+<td align="right">3451</td>
+<td align="right">0.11</td>
+<td align="left">sha256</td>
+</tr>
+<tr>
+<td align="right">651</td>
+<td align="right">5219</td>
+<td align="right">0.12</td>
+<td align="left">sha384</td>
+</tr>
+<tr>
+<td align="right">611</td>
+<td align="right">5186</td>
+<td align="right">0.12</td>
+<td align="left">sha512</td>
+</tr>
+</tbody>
+</table>
+<h1 id="blocksize-dependency">blocksize dependency</h1>
+<p>The Symmetric ciphers.</p>
+<table>
+<thead>
+<tr>
+<th align="right">AES</th>
+<th align="right">BLOWFISH</th>
+<th align="right">CAST</th>
+<th align="right">DES128</th>
+<th align="right">DES192</th>
+<th align="right">DES64</th>
+<th align="right">RC4</th>
+<th align="right">msgsize</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">1.51</td>
+<td align="right">1.41</td>
+<td align="right">1.00</td>
+<td align="right">0.74</td>
+<td align="right">0.82</td>
+<td align="right">1.41</td>
+<td align="right">1.92</td>
+<td align="right">32</td>
+</tr>
+<tr>
+<td align="right">1.30</td>
+<td align="right">1.12</td>
+<td align="right">0.65</td>
+<td align="right">0.59</td>
+<td align="right">0.63</td>
+<td align="right">1.36</td>
+<td align="right">1.23</td>
+<td align="right">64</td>
+</tr>
+<tr>
+<td align="right">1.21</td>
+<td align="right">0.85</td>
+<td align="right">0.38</td>
+<td align="right">0.48</td>
+<td align="right">0.49</td>
+<td align="right">1.23</td>
+<td align="right">0.88</td>
+<td align="right">128</td>
+</tr>
+<tr>
+<td align="right">0.99</td>
+<td align="right">0.68</td>
+<td align="right">0.30</td>
+<td align="right">0.38</td>
+<td align="right">0.44</td>
+<td align="right">1.22</td>
+<td align="right">0.47</td>
+<td align="right">256</td>
+</tr>
+<tr>
+<td align="right">0.78</td>
+<td align="right">0.62</td>
+<td align="right">0.25</td>
+<td align="right">0.38</td>
+<td align="right">0.38</td>
+<td align="right">1.16</td>
+<td align="right">0.35</td>
+<td align="right">512</td>
+</tr>
+<tr>
+<td align="right">0.56</td>
+<td align="right">0.51</td>
+<td align="right">-.&ndash;</td>
+<td align="right">0.38</td>
+<td align="right">-.&ndash;</td>
+<td align="right">-.&ndash;</td>
+<td align="right">0.22</td>
+<td align="right">1024</td>
+</tr>
+<tr>
+<td align="right">0.36</td>
+<td align="right">0.52</td>
+<td align="right">0.16</td>
+<td align="right">0.35</td>
+<td align="right">0.38</td>
+<td align="right">1.09</td>
+<td align="right">0.15</td>
+<td align="right">2048</td>
+</tr>
+<tr>
+<td align="right">0.24</td>
+<td align="right">0.44</td>
+<td align="right">0.17</td>
+<td align="right">0.33</td>
+<td align="right">0.39</td>
+<td align="right">1.00</td>
+<td align="right">0.13</td>
+<td align="right">4096</td>
+</tr>
+<tr>
+<td align="right">0.17</td>
+<td align="right">0.43</td>
+<td align="right">0.17</td>
+<td align="right">0.31</td>
+<td align="right">0.37</td>
+<td align="right">0.99</td>
+<td align="right">0.10</td>
+<td align="right">8192</td>
+</tr>
+<tr>
+<td align="right">0.12</td>
+<td align="right">0.39</td>
+<td align="right">0.17</td>
+<td align="right">0.32</td>
+<td align="right">0.36</td>
+<td align="right">1.03</td>
+<td align="right">0.10</td>
+<td align="right">16384</td>
+</tr>
+<tr>
+<td align="right">0.11</td>
+<td align="right">0.40</td>
+<td align="right">0.17</td>
+<td align="right">0.33</td>
+<td align="right">0.36</td>
+<td align="right">1.03</td>
+<td align="right">0.10</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td align="right">0.09</td>
+<td align="right">0.36</td>
+<td align="right">0.17</td>
+<td align="right">0.37</td>
+<td align="right">0.35</td>
+<td align="right">1.06</td>
+<td align="right">0.08</td>
+<td align="right">65536</td>
+</tr>
+<tr>
+<td align="right">0.10</td>
+<td align="right">0.40</td>
+<td align="right">0.17</td>
+<td align="right">0.30</td>
+<td align="right">0.32</td>
+<td align="right">0.99</td>
+<td align="right">0.08</td>
+<td align="right">131072</td>
+</tr>
+<tr>
+<td align="right">0.09</td>
+<td align="right">0.37</td>
+<td align="right">0.15</td>
+<td align="right">0.33</td>
+<td align="right">0.35</td>
+<td align="right">0.85</td>
+<td align="right">0.07</td>
+<td align="right">262144</td>
+</tr>
+<tr>
+<td align="right">0.09</td>
+<td align="right">0.40</td>
+<td align="right">0.17</td>
+<td align="right">0.32</td>
+<td align="right">0.34</td>
+<td align="right">0.99</td>
+<td align="right">0.11</td>
+<td align="right">524288</td>
+</tr>
+<tr>
+<td align="right">0.09</td>
+<td align="right">0.35</td>
+<td align="right">0.17</td>
+<td align="right">0.34</td>
+<td align="right">0.34</td>
+<td align="right">0.90</td>
+<td align="right">0.10</td>
+<td align="right">1048576</td>
+</tr>
+</tbody>
+</table>
+<p>And for hashing algorithms.
+For the <code>SHAxxx</code> algorithms cryptography is faster for messages over 1K.
+While for <code>MD5</code> and <code>SHA1</code> pyCrypto is always faster.</p>
+<table>
+<thead>
+<tr>
+<th align="right">MD5</th>
+<th align="right">RIPEMD</th>
+<th align="right">SHA1</th>
+<th align="right">SHA224</th>
+<th align="right">SHA256</th>
+<th align="right">SHA384</th>
+<th align="right">SHA512</th>
+<th align="right">msgsize</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">8.17</td>
+<td align="right">7.65</td>
+<td align="right">6.19</td>
+<td align="right">6.44</td>
+<td align="right">7.57</td>
+<td align="right">5.25</td>
+<td align="right">5.42</td>
+<td align="right">32</td>
+</tr>
+<tr>
+<td align="right">7.36</td>
+<td align="right">4.33</td>
+<td align="right">6.31</td>
+<td align="right">4.23</td>
+<td align="right">4.99</td>
+<td align="right">6.08</td>
+<td align="right">5.66</td>
+<td align="right">64</td>
+</tr>
+<tr>
+<td align="right">7.32</td>
+<td align="right">3.06</td>
+<td align="right">6.22</td>
+<td align="right">3.76</td>
+<td align="right">3.60</td>
+<td align="right">3.74</td>
+<td align="right">3.63</td>
+<td align="right">128</td>
+</tr>
+<tr>
+<td align="right">6.06</td>
+<td align="right">2.14</td>
+<td align="right">6.10</td>
+<td align="right">2.27</td>
+<td align="right">2.34</td>
+<td align="right">2.57</td>
+<td align="right">2.52</td>
+<td align="right">256</td>
+</tr>
+<tr>
+<td align="right">5.42</td>
+<td align="right">1.29</td>
+<td align="right">5.54</td>
+<td align="right">1.43</td>
+<td align="right">1.42</td>
+<td align="right">1.78</td>
+<td align="right">1.76</td>
+<td align="right">512</td>
+</tr>
+<tr>
+<td align="right">4.75</td>
+<td align="right">0.73</td>
+<td align="right">5.07</td>
+<td align="right">0.76</td>
+<td align="right">0.86</td>
+<td align="right">1.20</td>
+<td align="right">1.07</td>
+<td align="right">1024</td>
+</tr>
+<tr>
+<td align="right">3.17</td>
+<td align="right">0.45</td>
+<td align="right">3.67</td>
+<td align="right">0.51</td>
+<td align="right">0.48</td>
+<td align="right">0.72</td>
+<td align="right">0.65</td>
+<td align="right">2048</td>
+</tr>
+<tr>
+<td align="right">2.38</td>
+<td align="right">0.34</td>
+<td align="right">2.96</td>
+<td align="right">0.33</td>
+<td align="right">0.32</td>
+<td align="right">0.42</td>
+<td align="right">0.40</td>
+<td align="right">4096</td>
+</tr>
+<tr>
+<td align="right">1.79</td>
+<td align="right">0.30</td>
+<td align="right">2.26</td>
+<td align="right">0.20</td>
+<td align="right">0.23</td>
+<td align="right">0.29</td>
+<td align="right">0.27</td>
+<td align="right">8192</td>
+</tr>
+<tr>
+<td align="right">1.70</td>
+<td align="right">0.26</td>
+<td align="right">1.65</td>
+<td align="right">0.17</td>
+<td align="right">0.18</td>
+<td align="right">0.23</td>
+<td align="right">0.19</td>
+<td align="right">16384</td>
+</tr>
+<tr>
+<td align="right">1.32</td>
+<td align="right">0.24</td>
+<td align="right">1.31</td>
+<td align="right">0.14</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+<td align="right">0.16</td>
+<td align="right">32768</td>
+</tr>
+<tr>
+<td align="right">1.10</td>
+<td align="right">0.23</td>
+<td align="right">1.20</td>
+<td align="right">0.14</td>
+<td align="right">0.14</td>
+<td align="right">0.15</td>
+<td align="right">0.15</td>
+<td align="right">65536</td>
+</tr>
+<tr>
+<td align="right">1.05</td>
+<td align="right">0.23</td>
+<td align="right">1.05</td>
+<td align="right">0.13</td>
+<td align="right">0.14</td>
+<td align="right">0.13</td>
+<td align="right">0.13</td>
+<td align="right">131072</td>
+</tr>
+<tr>
+<td align="right">1.03</td>
+<td align="right">0.25</td>
+<td align="right">1.05</td>
+<td align="right">0.14</td>
+<td align="right">0.13</td>
+<td align="right">0.11</td>
+<td align="right">0.12</td>
+<td align="right">262144</td>
+</tr>
+<tr>
+<td align="right">1.04</td>
+<td align="right">0.21</td>
+<td align="right">1.00</td>
+<td align="right">0.13</td>
+<td align="right">0.13</td>
+<td align="right">0.12</td>
+<td align="right">0.12</td>
+<td align="right">524288</td>
+</tr>
+<tr>
+<td align="right">1.07</td>
+<td align="right">0.19</td>
+<td align="right">1.28</td>
+<td align="right">0.13</td>
+<td align="right">0.11</td>
+<td align="right">0.12</td>
+<td align="right">0.12</td>
+<td align="right">1048576</td>
+</tr>
+</tbody>
+</table>
+<h2 id="asymmetric-crypto">asymmetric crypto</h2>
+<p>in encryptions per second, all using a 512 bit message.</p>
+<p>|  pow() || pycrypto | cryptography | ratio | modulus bits |
+| &mdash;&mdash;:| &mdash;&mdash;:| &mdash;&ndash;:| &mdash;-:| &mdash;&ndash;:|
+|   17267|  11827 | 34152 | 0.35 | 1024  |
+|    4920|   5014 | 17657 | 0.28 | 2048  |
+|    1440|   1717 |  6247 | 0.27 | 4096  |</p>
+<p>So the <code>cryptography</code> library is generally faster.
+The <code>pycrypto</code> performance is roughly equal to using the <code>pow()</code> function.</p>
+<h2 id="random-numbers">random numbers</h2>
+<p>in Mbyte/sec</p>
+<table>
+<thead>
+<tr>
+<th align="right">random</th>
+<th align="right">sysrand</th>
+<th align="right">pycrypto</th>
+<th align="right">r/s</th>
+<th align="right">s/p</th>
+<th align="right">msgsize</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td align="right">478.0</td>
+<td align="right">55.9</td>
+<td align="right">2.0</td>
+<td align="right">8.6</td>
+<td align="right">27.4</td>
+<td align="right">32</td>
+</tr>
+<tr>
+<td align="right">726.4</td>
+<td align="right">70.9</td>
+<td align="right">3.1</td>
+<td align="right">10.2</td>
+<td align="right">22.6</td>
+<td align="right">64</td>
+</tr>
+<tr>
+<td align="right">1148.9</td>
+<td align="right">81.0</td>
+<td align="right">3.8</td>
+<td align="right">14.2</td>
+<td align="right">21.1</td>
+<td align="right">128</td>
+</tr>
+<tr>
+<td align="right">1476.4</td>
+<td align="right">88.1</td>
+<td align="right">4.4</td>
+<td align="right">16.8</td>
+<td align="right">20.1</td>
+<td align="right">256</td>
+</tr>
+<tr>
+<td align="right">1757.5</td>
+<td align="right">93.4</td>
+<td align="right">3.9</td>
+<td align="right">18.8</td>
+<td align="right">24.2</td>
+<td align="right">512</td>
+</tr>
+<tr>
+<td align="right">2141.6</td>
+<td align="right">94.3</td>
+<td align="right">2.6</td>
+<td align="right">22.7</td>
+<td align="right">36.6</td>
+<td align="right">1024</td>
+</tr>
+<tr>
+<td align="right">2339.3</td>
+<td align="right">100.2</td>
+<td align="right">1.9</td>
+<td align="right">23.3</td>
+<td align="right">53.4</td>
+<td align="right">2048</td>
+</tr>
+<tr>
+<td align="right">2405.1</td>
+<td align="right">94.8</td>
+<td align="right">1.1</td>
+<td align="right">25.4</td>
+<td align="right">83.1</td>
+<td align="right">4096</td>
+</tr>
+<tr>
+<td align="right">2361.0</td>
+<td align="right">101.9</td>
+<td align="right">0.6</td>
+<td align="right">23.2</td>
+<td align="right">158.7</td>
+<td align="right">8192</td>
+</tr>
+<tr>
+<td align="right">2568.1</td>
+<td align="right">97.7</td>
+<td align="right">0.3</td>
+<td align="right">26.3</td>
+<td align="right">286.8</td>
+<td align="right">16384</td>
+</tr>
+</tbody>
+</table>
+<p>Conclusion: secure random numbers are expensive.</p>
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>Permalink: </strong>
+      <a href="https://nlitsme.github.io/2016/11/benchmarking-some-python-crypto-libraries/" title="Benchmarking some python crypto libraries" target="_blank" rel="external">https://nlitsme.github.io/2016/11/benchmarking-some-python-crypto-libraries/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/nlitsme" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://nlitsme.github.io/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/nlitsme" target="_blank"><span class="text-dark">Willem Hengeveld</span><small class="ml-1x"></small></a></h3>
+        <div>Interested in taking things apart.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+<hr>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/nlitsme" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://gitlab.com/itsme" target="_blank" title="gitlab" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitlab"></i></a></li>
+    <li><a href="https://www.reddit.com/user/nlitsme1" target="_blank" title="reddit" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-reddit"></i></a></li>
+    <li><a href="/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://stackoverflow.com/users/1049677/" target="_blank" title="stackoverflow" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-stackoverflow"></i></a></li>
+    <li><a href="https://twitter.com/twitsme" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+    <li><a href="https://youtube.com/channel/UCmYzOAvL7VTpZmQXtuqJsZg" target="_blank" title="youtube" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-youtube"></i></a></li>
+</ul>
+
+  <div class="copyright">
+    &copy;2000  -
+    2020
+    <!-- based on https://github.com/xiaoheiAh/hugo-theme-pure -->
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="/assets/js/highlight.pack.js"></script>
+<script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://nlitsme.github.io/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://nlitsme.github.io/js/plugin.min.fdac970cab83e09d53dc1375262e937ce79eb7c241a1672b120c35a47a21b227.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/nlitsme.github.io\/',
+            CONTENT_URL: 'https:\/\/nlitsme.github.io\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://nlitsme.github.io/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/nlitsme.github.io\/2016\/11\/benchmarking-some-python-crypto-libraries\/';
+        this.page.identifier = 'nlitsme';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nlitsme' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+  </body>
+</html>

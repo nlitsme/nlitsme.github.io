@@ -1,0 +1,53 @@
+'kleine' westcoast arcnet kaart : WT-NUI/A-PC2
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿                     SW2
+³                      JP11    ÃÄÄ        ram  rom   678
+³ SW2  SW1                     ³          c0    c4   000   0=up
+³                              ³          c8    cc   001   1=down
+³                              ÃÄÄÄ¿      d0    d4   100
+³                              ÃÄÄÄÙ      d8    dc   101
+³                              ³          e0    e4   010
+³          J                   ³          e8    ec   011
+³  bootrom P                   ³          f0    f4   110
+³ JP2      1                   ³          f8    fc   111
+ÀÄÄÄÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄ´    SW2.54321 = bit 8-4 of IOaddress
+    ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ   ³     (00000=200, 10000=210, ...)
+
+JP1 : 7/5/3/2  : IRQ setting       SW1.87654321 = bit 7-0 of node address
+                                       00010100 = node 14
+JP11:  .!       __       .!
+       .!       ..       .!
+   star net    bus net  bus+term
+
+
+
+********************************************************************************
+
+ÚÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄ¿
+³ =====CN3========  =====CN2=========   =CN5=  =CN4=         ³
+³                                                           !³
+³ !                                                         !³
+³ C               82c863                  82c865            C³
+³ N                                                         N³
+³ 6    JP   JP15                  JP                        1³
+³ !    1111                       000000001                 !³
+³      4312                       234567890                 !³
+ÃÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÂÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÂÄÄÄÄÄ´
+ÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙÀÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÄÙ     ³
+
+CN1=printer  CN6=game  CN3=IDE  CN2=Floppy  CN5=com2/4  CN4=com1/3
+
+jp2 : lpt enable(12)  disable(23)
+jp3 : SIO0: com1(12)  com3(23)               (3f8/3e8)
+jp4 : floppy enable(12)  disable(23)
+jp5 : SIO1: com2/4 enable(12)  disable(23)
+jp6 : printer lpt1(12)  lpt2(23)       (378/278)
+jp7 : SIO1: com2(12)  com4(23)               (2f8/2e8)
+jp8 : game   enable(12)  disable(23)
+jp9 : SIO0: com1/3 enable(12)  disable(23)
+jp10: IDE enable(12)  disable(23)
+JP11: IRQ3  SIO1(12)  SIO0(23)
+JP12: IRQ4  SIO1(12)  SIO0(23)
+JP13: IRQ5  SIO1(12)  SIO0(23)
+JP14: IRQ2  SIO1(12)  SIO0(23)
+jp15: LPTirq  IRQ7(12)  IRQ5(23)
+

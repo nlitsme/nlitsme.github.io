@@ -1,0 +1,543 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Willem&#39;s blog</title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>Willem&#39;s blog</title>
+  
+  <link rel="alternate" type="application/rss+xml" href="https://nlitsme.github.io/tags/interrupts/index.xml" title="Willem's blog" />
+  
+  <link rel="stylesheet" href="https://nlitsme.github.io/css/style.min.13468ef5be61550fa4d002a591d5552c85369a01cbae5e2d95dc8022cab38679.css">
+  
+  <link rel="stylesheet" href="/assets/css/highlight.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="interrupts" />
+<meta property="og:description" content="" />
+<meta property="og:type" content="website" />
+<meta property="og:url" content="https://nlitsme.github.io/tags/interrupts/" />
+<meta property="og:updated_time" content="1993-06-18T00:00:00+00:00" />
+<meta itemprop="name" content="interrupts">
+<meta itemprop="description" content="">
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="interrupts"/>
+<meta name="twitter:description" content=""/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+            
+          <a href="/">
+              <h2 id="name" class="hidden-xs hidden-sm">Willem&#39;s blog</h2>
+          </a>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>The Netherlands</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+            
+            
+            <a href="https://nlitsme.github.io/tags/android/" class="tag-list-link">android</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/arm/" class="tag-list-link">arm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/benchmark/" class="tag-list-link">benchmark</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/bitcoin/" class="tag-list-link">bitcoin</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/c&#43;&#43;/" class="tag-list-link">c&#43;&#43;</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/commandline/" class="tag-list-link">commandline</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crack/" class="tag-list-link">crack</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crypto/" class="tag-list-link">crypto</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ecdsa/" class="tag-list-link">ecdsa</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/elcapitan/" class="tag-list-link">elcapitan</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/galois-field/" class="tag-list-link">galois-field</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/git/" class="tag-list-link">git</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hexdmper/" class="tag-list-link">hexdmper</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ida/" class="tag-list-link">ida</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/interrupts/" class="tag-list-link">interrupts</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/itsutils/" class="tag-list-link">itsutils</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/life/" class="tag-list-link">life</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/math/" class="tag-list-link">math</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/modular-arithmetic/" class="tag-list-link">modular-arithmetic</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/msdos/" class="tag-list-link">msdos</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/museum/" class="tag-list-link">museum</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/netware/" class="tag-list-link">netware</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx/" class="tag-list-link">osx</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx10.11/" class="tag-list-link">osx10.11</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pchardware/" class="tag-list-link">pchardware</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pdf/" class="tag-list-link">pdf</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/perl/" class="tag-list-link">perl</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/philosophy/" class="tag-list-link">philosophy</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/portability/" class="tag-list-link">portability</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/problems/" class="tag-list-link">problems</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/puzzle/" class="tag-list-link">puzzle</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/qualcomm/" class="tag-list-link">qualcomm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/reversing/" class="tag-list-link">reversing</a><span
+                    class="tag-list-count">12</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/soundblaster/" class="tag-list-link">soundblaster</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/templates/" class="tag-list-link">templates</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/thinkmaths/" class="tag-list-link">thinkmaths</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/timemachine/" class="tag-list-link">timemachine</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/tor/" class="tag-list-link">tor</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/vim/" class="tag-list-link">vim</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/wince/" class="tag-list-link">wince</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/youtube/" class="tag-list-link">youtube</a><span
+                    class="tag-list-count">1</span>
+            
+
+    </div>
+</div>
+
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="title">MPMP12 Marching band Problem</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" class="title">MPMP11 David and Anton age puzzle</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-07-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-07-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/" class="title">MPMP9 Take away triangles</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="title">MPMP8 Paper folding challenge</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/youtube-tool/" class="title">A commandline tool for youtube.</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-09</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<main class="main" role="main">
+    <article class="content article article-tags post-type-list" itemscope="">
+        <header class="article-header">
+            <h1 itemprop="name" class="hidden-xs">interrupts</h1>
+            <p class="text-muted hidden-xs">Total 43 tags</p>
+            <nav role="navigation" id="nav-main" class="okayNav">
+                <ul>
+                    <li><a href="/tags">All</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/android/">android</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/arm/">arm</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/benchmark/">benchmark</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/bitcoin/">bitcoin</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/c&#43;&#43;/">c&#43;&#43;</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/commandline/">commandline</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/crack/">crack</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/crypto/">crypto</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/ecdsa/">ecdsa</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/elcapitan/">elcapitan</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/galois-field/">galois field</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/git/">git</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/hexdmper/">hexdmper</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/hugo/">hugo</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/ida/">ida</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/interrupts/">interrupts</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/itsutils/">itsutils</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/life/">life</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/math/">math</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/modular-arithmetic/">modular arithmetic</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/msdos/">msdos</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/museum/">museum</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/netware/">netware</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/osx/">osx</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/osx10.11/">osx10.11</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/pchardware/">pchardware</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/pdf/">pdf</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/perl/">perl</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/philosophy/">philosophy</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/portability/">portability</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/problems/">problems</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/puzzle/">puzzle</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/python/">python</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/qualcomm/">qualcomm</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/reversing/">reversing</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/soundblaster/">soundblaster</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/templates/">templates</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/thinkmaths/">thinkmaths</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/timemachine/">timemachine</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/tor/">tor</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/vim/">vim</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/wince/">wince</a></li>
+                    <li><a href="https://nlitsme.github.io/tags/youtube/">youtube</a></li>
+                </ul>
+            </nav>
+        </header>
+        
+        <div class="article-body">
+            <div class="col-md-6"><article class="panel panel-default hover-shadow hover-grow" itemscope itemtype="http://schema.org/BlogPosting">
+    <div class="panel-body">
+        <div class="article-meta">
+            <time datetime="1993-06-18 00:00:00 &#43;0000 UTC"
+                itemprop="datePublished">1993-06-18</time>
+        </div>
+        <h3 class="article-title" itemprop="name">
+            <a class="article-link" href="https://nlitsme.github.io/1993/06/1993-06-18-msdos-interrupt-catcher/">MSDOS Interrupt catcher</a>
+        </h3>
+    </div>
+    <div class="panel-footer">
+        <a href="/tags/interrupts" class="label label-default mb">interrupts</a>
+        <a href="/tags/msdos" class="label label-default mb">msdos</a>
+        <a href="/tags/reversing" class="label label-default mb">reversing</a>
+        <span class="label label-default mb">···</span>
+    </div>
+</article>
+
+            </div>
+        </div>
+    </article>
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/nlitsme" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://gitlab.com/itsme" target="_blank" title="gitlab" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitlab"></i></a></li>
+    <li><a href="https://www.reddit.com/user/nlitsme1" target="_blank" title="reddit" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-reddit"></i></a></li>
+    <li><a href="/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://stackoverflow.com/users/1049677/" target="_blank" title="stackoverflow" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-stackoverflow"></i></a></li>
+    <li><a href="https://twitter.com/twitsme" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+    <li><a href="https://youtube.com/channel/UCmYzOAvL7VTpZmQXtuqJsZg" target="_blank" title="youtube" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-youtube"></i></a></li>
+</ul>
+
+  <div class="copyright">
+    &copy;2000  -
+    2020
+    <!-- based on https://github.com/xiaoheiAh/hugo-theme-pure -->
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="/assets/js/highlight.pack.js"></script>
+<script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://nlitsme.github.io/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://nlitsme.github.io/js/plugin.min.fdac970cab83e09d53dc1375262e937ce79eb7c241a1672b120c35a47a21b227.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/nlitsme.github.io\/',
+            CONTENT_URL: 'https:\/\/nlitsme.github.io\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://nlitsme.github.io/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+
+  </body>
+</html>

@@ -1,0 +1,949 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        MPMP12 Marching band Problem - Willem&#39;s blog
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="Marching Band problem In this document I describe a solution to the &amp;lsquo;marchingband&amp;rsquo; problem as stated on think-maths:
+What is the fewest number of performers you require for your marching band to have 64 marching options? (Only whole positive numbers will be accepted)  Where a &amp;lsquo;marchingband&amp;rsquo; can march only in a rectangular shape.
+Also, I present solutions in higher dimensions, and a solution with complex numbers, and a proof that the 2D case has a solution for all numbers of marching options.
+" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>MPMP12 Marching band Problem - Willem&#39;s blog</title>
+  
+  
+  <link rel="stylesheet" href="https://nlitsme.github.io/css/style.min.13468ef5be61550fa4d002a591d5552c85369a01cbae5e2d95dc8022cab38679.css">
+  
+  <link rel="stylesheet" href="/assets/css/highlight.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="MPMP12 Marching band Problem" />
+<meta property="og:description" content="Marching Band problem
+In this document I describe a solution to the &lsquo;marchingband&rsquo; problem as stated on think-maths:
+What is the fewest number of performers you require for your marching band to
+have 64 marching options? (Only whole positive numbers will be accepted)
+
+Where a &lsquo;marchingband&rsquo; can march only in a rectangular shape.
+Also, I present solutions in higher dimensions, and a solution with complex numbers, and a proof that the 2D case has a solution for all numbers of marching options." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" />
+<meta property="article:published_time" content="2020-08-07T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-08-07T00:00:00+00:00" />
+<meta itemprop="name" content="MPMP12 Marching band Problem">
+<meta itemprop="description" content="Marching Band problem
+In this document I describe a solution to the &lsquo;marchingband&rsquo; problem as stated on think-maths:
+What is the fewest number of performers you require for your marching band to
+have 64 marching options? (Only whole positive numbers will be accepted)
+
+Where a &lsquo;marchingband&rsquo; can march only in a rectangular shape.
+Also, I present solutions in higher dimensions, and a solution with complex numbers, and a proof that the 2D case has a solution for all numbers of marching options.">
+<meta itemprop="datePublished" content="2020-08-07T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-08-07T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2656">
+
+
+
+<meta itemprop="keywords" content="puzzle,thinkmaths," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MPMP12 Marching band Problem"/>
+<meta name="twitter:description" content="Marching Band problem
+In this document I describe a solution to the &lsquo;marchingband&rsquo; problem as stated on think-maths:
+What is the fewest number of performers you require for your marching band to
+have 64 marching options? (Only whole positive numbers will be accepted)
+
+Where a &lsquo;marchingband&rsquo; can march only in a rectangular shape.
+Also, I present solutions in higher dimensions, and a solution with complex numbers, and a proof that the 2D case has a solution for all numbers of marching options."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+            
+          <a href="/">
+              <h2 id="name" class="hidden-xs hidden-sm">Willem&#39;s blog</h2>
+          </a>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>The Netherlands</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+            
+            
+            <a href="https://nlitsme.github.io/tags/android/" class="tag-list-link">android</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/arm/" class="tag-list-link">arm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/benchmark/" class="tag-list-link">benchmark</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/bitcoin/" class="tag-list-link">bitcoin</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/c&#43;&#43;/" class="tag-list-link">c&#43;&#43;</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/commandline/" class="tag-list-link">commandline</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crack/" class="tag-list-link">crack</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crypto/" class="tag-list-link">crypto</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ecdsa/" class="tag-list-link">ecdsa</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/elcapitan/" class="tag-list-link">elcapitan</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/galois-field/" class="tag-list-link">galois-field</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/git/" class="tag-list-link">git</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hexdmper/" class="tag-list-link">hexdmper</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ida/" class="tag-list-link">ida</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/interrupts/" class="tag-list-link">interrupts</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/itsutils/" class="tag-list-link">itsutils</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/life/" class="tag-list-link">life</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/math/" class="tag-list-link">math</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/modular-arithmetic/" class="tag-list-link">modular-arithmetic</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/msdos/" class="tag-list-link">msdos</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/museum/" class="tag-list-link">museum</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/netware/" class="tag-list-link">netware</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx/" class="tag-list-link">osx</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx10.11/" class="tag-list-link">osx10.11</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pchardware/" class="tag-list-link">pchardware</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pdf/" class="tag-list-link">pdf</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/perl/" class="tag-list-link">perl</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/philosophy/" class="tag-list-link">philosophy</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/portability/" class="tag-list-link">portability</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/problems/" class="tag-list-link">problems</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/puzzle/" class="tag-list-link">puzzle</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/qualcomm/" class="tag-list-link">qualcomm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/reversing/" class="tag-list-link">reversing</a><span
+                    class="tag-list-count">12</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/soundblaster/" class="tag-list-link">soundblaster</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/templates/" class="tag-list-link">templates</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/thinkmaths/" class="tag-list-link">thinkmaths</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/timemachine/" class="tag-list-link">timemachine</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/tor/" class="tag-list-link">tor</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/vim/" class="tag-list-link">vim</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/wince/" class="tag-list-link">wince</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/youtube/" class="tag-list-link">youtube</a><span
+                    class="tag-list-count">1</span>
+            
+
+    </div>
+</div>
+
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="title">MPMP12 Marching band Problem</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" class="title">MPMP11 David and Anton age puzzle</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-07-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-07-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/" class="title">MPMP9 Take away triangles</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="title">MPMP8 Paper folding challenge</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/youtube-tool/" class="title">A commandline tool for youtube.</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-09</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" title="MPMP11 David and Anton age puzzle"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="twitter,email"
+                data-mobile-sites="twitter,email,whatsapp,signal"></div>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2020/08/2020-08-07-mpmp12-marching-band-problem/"
+    >MPMP12 Marching band Problem</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="article-date">
+  <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+</a>
+</span>
+  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/puzzle/"> puzzle </a>
+    <a class="article-tag-link" href="/tags/thinkmaths/"> thinkmaths </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2020/08/2020-08-07-mpmp12-marching-band-problem/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2656words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 13minutes </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <h1 id="marching-band-problem">Marching Band problem</h1>
+<p>In this document I describe a solution to the &lsquo;marchingband&rsquo; problem as stated on <a href="http://think-maths.co.uk/marchingband">think-maths</a>:</p>
+<pre><code>What is the fewest number of performers you require for your marching band to
+have 64 marching options? (Only whole positive numbers will be accepted)
+</code></pre>
+<p>Where a &lsquo;marchingband&rsquo; can march only in a rectangular shape.</p>
+<p>Also, I present solutions in higher dimensions, and a solution with complex numbers, and a proof that the 2D case has a solution for all numbers of marching options.</p>
+<h1 id="solution">Solution</h1>
+<p>Given marchingband of size  N, where the prime factorization of N is:</p>
+<pre><code>N = product( p_i ^ n_i, i=0..k-1 )
+</code></pre>
+<p>Then, since each prime <code>p_i</code> will be one of: 0, 1, .. or <code>n_i</code> times in the <code>width</code>, the number of ways you can partition this in two numbers, &lsquo;width times length&rsquo;:</p>
+<pre><code>m = product( n_i+1, i=0..k-1 )
+</code></pre>
+<p>Now finding what set of values <code>n</code> will make 64 together:</p>
+<pre><code>2*2*2*2*2*2
+4*2*2*2*2
+8*2*2*2
+4*4*2*2
+8*4*2
+4*4*4
+8*8
+64
+</code></pre>
+<p>Since we are looking for the smallest number, we use these values for exponents
+of the first couple of prime numbers from {2, 3, 5, 7, 11, 13}.</p>
+<pre><code>2*3*5*7*11*13 = 30030
+2^3*3*5*7*11  = 9240
+2^7*3*5*7     = 13440
+2^3*3^3*5*7   = 7560
+2^7*3^3*5     = 17280
+2^3*3^3*5^3   = 27000
+2^7*3^7       = 279936
+2^63          = 9223372036854775808
+</code></pre>
+<p>So the smallest number is: 7560 people in a marching band.</p>
+<p>Oeis <a href="http://oeis.org/A005179">A005179</a> lists the minimal groupsize for a specific number of arrangements, or,
+as OEIS puts it: The smallest number with exactly n divisors.</p>
+<h1 id="can-we-proof-that-a-solution-always-exists">Can we proof that a solution always exists?</h1>
+<p>In two dimensions, take a groupsize of 2^(m-1), this will give the following possible arrangements, width * length:</p>
+<pre><code>2^0 * 2^(m-1)
+2^1 * 2^(m-2)
+...
+2^(m-2) * 2^1
+2^(m-1) * 2^0
+</code></pre>
+<p>Which makes a total of <code>m</code> different marchingband arrangements. This may not be the minimal groupsize, but
+there clearly is a solution for an arbitrary <code>m</code>.</p>
+<p>For three dimensions, a group of 1 has only one arrangement, while a prime-sized group will have three arrangements,
+with the group aligned to the x, y and z axis. I think this shows that getting two arrangements is impossible in 3D.</p>
+<p>The OEIS table <a href="http://oeis.org/A007425">A007425</a> lists the number of arrangements for a given groupsize in three dimensions,
+or as OEIS puts it: The number of ordered factorizations of n as n = r s t.</p>
+<h1 id="higher-dimensional-arrangements">Higher dimensional arrangements</h1>
+<p>Higher dimensional aliens would need a lot less individuals to have 64 different arrangements for their
+marchingband, In 4 dimensions, you would need 30 individuals, and in 6 dimensions you could do with just 6.</p>
+<p>This table shows the minimum groupsize to get M different arrangements in n dimensions:
+<code>top-to-bottom</code> is the number of arrangements, `left-to-right&rsquo; is the number of dimensions.</p>
+<pre><code>M,  dim=      2     3     4     5     6     7     8     9
+0       :     0     0     0     0     0     0     0     0
+1       :     1     1     1     1     1     1     1     1
+2       :     2     -     -     -     -     -     -     -
+3       :     4     2     -     -     -     -     -     -
+4       :     6     -     2     -     -     -     -     -
+5       :    16     -     -     2     -     -     -     -
+6       :    12     4     -     -     2     -     -     -
+7       :    64     -     -     -     -     2     -     -
+8       :    24     -     -     -     -     -     2     -
+9       :    36     6     -     -     -     -     -     2
+10      :    48     8     4     -     -     -     -     -
+11      :  1024     -     -     -     -     -     -     -
+12      :    60     -     -     -     -     -     -     -
+13      :  4096     -     -     -     -     -     -     -
+14      :   192     -     -     -     -     -     -     -
+15      :   144    16     -     4     -     -     -     -
+16      :   120     -     6     -     -     -     -     -
+17      : 65536     -     -     -     -     -     -     -
+18      :   180    12     -     -     -     -     -     -
+19      :262144     -     -     -     -     -     -     -
+20      :   240     -     8     -     -     -     -     -
+21      :   576    32     -     -     4     -     -     -
+22      :  3072     -     -     -     -     -     -     -
+23      :     -     -     -     -     -     -     -     -
+24      :   360     -     -     -     -     -     -     -
+25      :  1296     -     -     6     -     -     -     -
+26      : 12288     -     -     -     -     -     -     -
+27      :   900    30     -     -     -     -     -     -
+28      :   960    64     -     -     -     4     -     -
+29      :     -     -     -     -     -     -     -     -
+30      :   720    24     -     -     -     -     -     -
+31      :     -     -     -     -     -     -     -     -
+32      :   840     -     -     -     -     -     -     -
+33      :  9216     -     -     -     -     -     -     -
+34      :196608     -     -     -     -     -     -     -
+35      :  5184     -    16     8     -     -     -     -
+36      :  1260    36     -     -     6     -     4     -
+37      :     -     -     -     -     -     -     -     -
+38      :786432     -     -     -     -     -     -     -
+39      : 36864     -     -     -     -     -     -     -
+40      :  1680     -    12     -     -     -     -     -
+41      :     -     -     -     -     -     -     -     -
+42      :  2880     -     -     -     -     -     -     -
+43      :     -     -     -     -     -     -     -     -
+44      : 15360     -     -     -     -     -     -     -
+45      :  3600    48     -     -     -     -     -     4
+46      :     -     -     -     -     -     -     -     -
+47      :     -     -     -     -     -     -     -     -
+48      :  2520     -     -     -     -     -     -     -
+49      : 46656     -     -     -     -     6     -     -
+50      :  6480     -     -     -     -     -     -     -
+51      :589824     -     -     -     -     -     -     -
+52      : 61440     -     -     -     -     -     -     -
+53      :     -     -     -     -     -     -     -     -
+54      :  6300    60     -     -     -     -     -     -
+55      : 82944   512     -     -     -     -     -     -
+56      :  6720     -    32     -     8     -     -     -
+57      :     -     -     -     -     -     -     -     -
+58      :     -     -     -     -     -     -     -     -
+59      :     -     -     -     -     -     -     -     -
+60      :  5040    72     -     -     -     -     -     -
+61      :     -     -     -     -     -     -     -     -
+62      :     -     -     -     -     -     -     -     -
+63      : 14400    96     -     -     -     -     -     -
+64      :  7560     -    30     -     -     -     6     -
+65      :331776     -     -     -     -     -     -     -
+66      : 46080  1024     -     -     -     -     -     -
+67      :     -     -     -     -     -     -     -     -
+68      :983040     -     -     -     -     -     -     -
+69      :     -     -     -     -     -     -     -     -
+70      : 25920     -     -    16     -     -     -     -
+71      :     -     -     -     -     -     -     -     -
+72      : 10080     -     -     -     -     -     -     -
+73      :     -     -     -     -     -     -     -     -
+74      :     -     -     -     -     -     -     -     -
+75      : 32400     -     -    12     -     -     -     -
+76      :     -     -     -     -     -     -     -     -
+77      :746496     -     -     -     -     -     -     -
+78      :184320  2048     -     -     -     -     -     -
+79      :     -     -     -     -     -     -     -     -
+80      : 15120     -    24     -     -     -     -     -
+81      : 44100   210     -     -     -     -     -     6
+82      :     -     -     -     -     -     -     -     -
+83      :     -     -     -     -     -     -     -     -
+84      : 20160   192    64     -     -     8     -     -
+85      :     -     -     -     -     -     -     -     -
+86      :     -     -     -     -     -     -     -     -
+87      :     -     -     -     -     -     -     -     -
+88      :107520     -     -     -     -     -     -     -
+89      :     -     -     -     -     -     -     -     -
+90      : 25200   120     -     -     -     -     -     -
+91      :     -  4096     -     -     -     -     -     -
+92      :     -     -     -     -     -     -     -     -
+93      :     -     -     -     -     -     -     -     -
+94      :     -     -     -     -     -     -     -     -
+95      :     -     -     -     -     -     -     -     -
+96      : 27720     -     -     -     -     -     -     -
+97      :     -     -     -     -     -     -     -     -
+98      :233280     -     -     -     -     -     -     -
+99      :230400     -     -     -     -     -     -     -
+100     : 45360   216    36     -     -     -     -     -
+101     :     -     -     -     -     -     -     -     -
+102     :     -     -     -     -     -     -     -     -
+103     :     -     -     -     -     -     -     -     -
+104     :430080     -     -     -     -     -     -     -
+105     :129600  8192     -     -     -     -     -     -
+106     :     -     -     -     -     -     -     -     -
+107     :     -     -     -     -     -     -     -     -
+108     : 50400   180     -     -     -     -     -     -
+109     :     -     -     -     -     -     -     -     -
+110     :414720     -     -     -     -     -     -     -
+111     :     -     -     -     -     -     -     -     -
+112     : 60480     -     -     -     -     -     -     -
+113     :     -     -     -     -     -     -     -     -
+114     :     -     -     -     -     -     -     -     -
+115     :     -     -     -     -     -     -     -     -
+116     :     -     -     -     -     -     -     -     -
+117     :921600     -     -     -     -     -     -     -
+118     :     -     -     -     -     -     -     -     -
+119     :     -     -     -     -     -     -     -     -
+120     : 55440 16384   128     -     -     -     8     -
+121     :     -     -     -     -     -     -     -     -
+122     :     -     -     -     -     -     -     -     -
+123     :     -     -     -     -     -     -     -     -
+124     :     -     -     -     -     -     -     -     -
+125     :810000     -     -    30     -     -     -     -
+126     :100800   288     -    32    12     -     -     -
+127     :     -     -     -     -     -     -     -     -
+128     : 83160     -     -     -     -     -     -     -
+129     :     -     -     -     -     -     -     -     -
+130     :     -     -     -     -     -     -     -     -
+131     :     -     -     -     -     -     -     -     -
+132     :322560     -     -     -     -     -     -     -
+133     :     -     -     -     -     -     -     -     -
+134     :     -     -     -     -     -     -     -     -
+135     :176400   240     -     -     -     -     -     -
+136     :     - 32768     -     -     -     -     -     -
+137     :     -     -     -     -     -     -     -     -
+138     :     -     -     -     -     -     -     -     -
+139     :     -     -     -     -     -     -     -     -
+140     :181440     -    48     -     -     -     -     -
+141     :     -     -     -     -     -     -     -     -
+142     :     -     -     -     -     -     -     -     -
+143     :     -     -     -     -     -     -     -     -
+144     :110880     -     -     -     -     -     -     -
+145     :     -     -     -     -     -     -     -     -
+146     :     -     -     -     -     -     -     -     -
+147     :     -     -     -     -     -     -     -     -
+148     :     -     -     -     -     -     -     -     -
+149     :     -     -     -     -     -     -     -     -
+150     :226800   432     -     -     -     -     -     -
+151     :     -     -     -     -     -     -     -     -
+152     :     -     -     -     -     -     -     -     -
+153     :     - 65536     -     -     -     -     -     -
+154     :     -     -     -     -     -     -     -     -
+155     :     -     -     -     -     -     -     -     -
+156     :     -     -     -     -     -     -     -     -
+157     :     -     -     -     -     -     -     -     -
+158     :     -     -     -     -     -     -     -     -
+159     :     -     -     -     -     -     -     -     -
+160     :166320     -    60     -     -     -     -     -
+161     :     -     -     -     -     -     -     -     -
+162     :352800   420     -     -     -     -     -     -
+163     :     -     -     -     -     -     -     -     -
+164     :     -     -     -     -     -     -     -     -
+165     :     -  1536   256     -     -     -     -     8
+166     :     -     -     -     -     -     -     -     -
+167     :     -     -     -     -     -     -     -     -
+168     :221760   576     -     -     -     -     -     -
+169     :     -     -     -     -     -     -     -     -
+170     :     -     -     -     -     -     -     -     -
+171     :     -131072     -     -     -     -     -     -
+172     :     -     -     -     -     -     -     -     -
+173     :     -     -     -     -     -     -     -     -
+174     :     -     -     -     -     -     -     -     -
+175     :     -     -     -    24     -     -     -     -
+176     :967680     -     -     -     -     -     -     -
+177     :     -     -     -     -     -     -     -     -
+178     :     -     -     -     -     -     -     -     -
+179     :     -     -     -     -     -     -     -     -
+180     :277200   360     -     -     -     -     -     -
+181     :     -     -     -     -     -     -     -     -
+182     :     -     -     -     -     -     -     -     -
+183     :     -     -     -     -     -     -     -     -
+184     :     -     -     -     -     -     -     -     -
+185     :     -     -     -     -     -     -     -     -
+186     :     -     -     -     -     -     -     -     -
+187     :     -     -     -     -     -     -     -     -
+188     :     -     -     -     -     -     -     -     -
+189     :705600   480     -     -     -     -     -     -
+190     :     -262144     -     -     -     -     -     -
+191     :     -     -     -     -     -     -     -     -
+192     :332640     -     -     -     -     -     -     -
+193     :     -     -     -     -     -     -     -     -
+194     :     -     -     -     -     -     -     -     -
+195     :     -     -     -     -     -     -     -     -
+196     :     -     -     -     -     -    12     -     -
+197     :     -     -     -     -     -     -     -     -
+198     :     -  3072     -     -     -     -     -     -
+</code></pre>
+<h1 id="complex-arrangements">Complex arrangements</h1>
+<p>There may be another, even stranger race of aliens, where their marchingbands can be arranged in rectangles
+where the sides can be measured in complex numbers:</p>
+<p>Now the minimum size, is a marching band of 150 aliens:</p>
+<pre><code>       1 x 150
+       2 x 75
+       3 x 50
+       5 x 30
+       6 x 25
+      10 x 15
+      15 x 10
+      25 x 6
+      30 x 5
+      50 x 3
+      75 x 2
+     150 x 1
+
+       i x -150i
+      2i x -75i
+      3i x -50i
+      5i x -30i
+      6i x -25i
+     10i x -15i
+     15i x -10i
+     25i x -6i
+     30i x -5i
+     50i x -3i
+     75i x -2i
+    150i x -i
+
+   3+21i x 1-7i
+  15+45i x 1-3i
+  30+60i x 1-2i
+  75+75i x 1-i
+  15+30i x 2-4i
+  60+30i x 2-i
+   5+15i x 3-9i
+  10+20i x 3-6i
+  18+24i x 3-4i
+  25+25i x 3-3i
+  45+15i x 3-i
+  24+18i x 4-3i
+  30+15i x 4-2i
+    3+9i x 5-15i
+   6+12i x 5-10i
+  15+15i x 5-5i
+   5+10i x 6-12i
+   9+12i x 6-8i
+  20+10i x 6-3i
+   21+3i x 7-i
+   12+9i x 8-6i
+    6+8i x 9-12i
+   15+5i x 9-3i
+    3+6i x 10-20i
+   12+6i x 10-5i
+    8+6i x 12-9i
+   10+5i x 12-6i
+    1+3i x 15-45i
+    2+4i x 15-30i
+    5+5i x 15-15i
+    9+3i x 15-5i
+    3+4i x 18-24i
+    6+3i x 20-10i
+    4+3i x 24-18i
+    3+3i x 25-25i
+    1+2i x 30-60i
+    4+2i x 30-15i
+     3+i x 45-15i
+     2+i x 60-30i
+     1+i x 75-75i
+</code></pre>
+<h1 id="author">Author</h1>
+<p>Willem Hengeveld <a href="mailto:itsme@xs4all.nl">itsme@xs4all.nl</a></p>
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>Permalink: </strong>
+      <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" title="MPMP12 Marching band Problem" target="_blank" rel="external">https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/nlitsme" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://nlitsme.github.io/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/nlitsme" target="_blank"><span class="text-dark">Willem Hengeveld</span><small class="ml-1x"></small></a></h3>
+        <div>Interested in taking things apart.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+<hr>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/nlitsme" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://gitlab.com/itsme" target="_blank" title="gitlab" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitlab"></i></a></li>
+    <li><a href="https://www.reddit.com/user/nlitsme1" target="_blank" title="reddit" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-reddit"></i></a></li>
+    <li><a href="/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://stackoverflow.com/users/1049677/" target="_blank" title="stackoverflow" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-stackoverflow"></i></a></li>
+    <li><a href="https://twitter.com/twitsme" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+    <li><a href="https://youtube.com/channel/UCmYzOAvL7VTpZmQXtuqJsZg" target="_blank" title="youtube" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-youtube"></i></a></li>
+</ul>
+
+  <div class="copyright">
+    &copy;2000  -
+    2020
+    <!-- based on https://github.com/xiaoheiAh/hugo-theme-pure -->
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="/assets/js/highlight.pack.js"></script>
+<script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://nlitsme.github.io/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://nlitsme.github.io/js/plugin.min.fdac970cab83e09d53dc1375262e937ce79eb7c241a1672b120c35a47a21b227.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/nlitsme.github.io\/',
+            CONTENT_URL: 'https:\/\/nlitsme.github.io\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://nlitsme.github.io/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/nlitsme.github.io\/2020\/08\/2020-08-07-mpmp12-marching-band-problem\/';
+        this.page.identifier = 'nlitsme';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nlitsme' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+  </body>
+</html>

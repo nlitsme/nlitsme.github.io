@@ -1,0 +1,1636 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        The Netware Core Protocol - Willem&#39;s blog
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="This is from way back when I was working on Novell Netware.
+A large list of all NCP functions.
+" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>The Netware Core Protocol - Willem&#39;s blog</title>
+  
+  
+  <link rel="stylesheet" href="https://nlitsme.github.io/css/style.min.13468ef5be61550fa4d002a591d5552c85369a01cbae5e2d95dc8022cab38679.css">
+  
+  <link rel="stylesheet" href="/assets/css/highlight.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="The Netware Core Protocol" />
+<meta property="og:description" content="This is from way back when I was working on Novell Netware.
+A large list of all NCP functions." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nlitsme.github.io/1996/07/1996-07-18-ncp-netwarecoreprotocol/" />
+<meta property="article:published_time" content="1996-07-18T00:00:00+00:00" />
+<meta property="article:modified_time" content="1996-07-18T00:00:00+00:00" />
+<meta itemprop="name" content="The Netware Core Protocol">
+<meta itemprop="description" content="This is from way back when I was working on Novell Netware.
+A large list of all NCP functions.">
+<meta itemprop="datePublished" content="1996-07-18T00:00:00+00:00" />
+<meta itemprop="dateModified" content="1996-07-18T00:00:00+00:00" />
+<meta itemprop="wordCount" content="4798">
+
+
+
+<meta itemprop="keywords" content="museum,netware,reversing," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Netware Core Protocol"/>
+<meta name="twitter:description" content="This is from way back when I was working on Novell Netware.
+A large list of all NCP functions."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+            
+          <a href="/">
+              <h2 id="name" class="hidden-xs hidden-sm">Willem&#39;s blog</h2>
+          </a>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>The Netherlands</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+            
+            
+            <a href="https://nlitsme.github.io/tags/android/" class="tag-list-link">android</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/arm/" class="tag-list-link">arm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/benchmark/" class="tag-list-link">benchmark</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/bitcoin/" class="tag-list-link">bitcoin</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/c&#43;&#43;/" class="tag-list-link">c&#43;&#43;</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/commandline/" class="tag-list-link">commandline</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crack/" class="tag-list-link">crack</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crypto/" class="tag-list-link">crypto</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ecdsa/" class="tag-list-link">ecdsa</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/elcapitan/" class="tag-list-link">elcapitan</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/galois-field/" class="tag-list-link">galois-field</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/git/" class="tag-list-link">git</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hexdmper/" class="tag-list-link">hexdmper</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ida/" class="tag-list-link">ida</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/interrupts/" class="tag-list-link">interrupts</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/itsutils/" class="tag-list-link">itsutils</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/life/" class="tag-list-link">life</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/math/" class="tag-list-link">math</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/modular-arithmetic/" class="tag-list-link">modular-arithmetic</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/msdos/" class="tag-list-link">msdos</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/museum/" class="tag-list-link">museum</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/netware/" class="tag-list-link">netware</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx/" class="tag-list-link">osx</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx10.11/" class="tag-list-link">osx10.11</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pchardware/" class="tag-list-link">pchardware</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pdf/" class="tag-list-link">pdf</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/perl/" class="tag-list-link">perl</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/philosophy/" class="tag-list-link">philosophy</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/portability/" class="tag-list-link">portability</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/problems/" class="tag-list-link">problems</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/puzzle/" class="tag-list-link">puzzle</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/qualcomm/" class="tag-list-link">qualcomm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/reversing/" class="tag-list-link">reversing</a><span
+                    class="tag-list-count">12</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/soundblaster/" class="tag-list-link">soundblaster</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/templates/" class="tag-list-link">templates</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/thinkmaths/" class="tag-list-link">thinkmaths</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/timemachine/" class="tag-list-link">timemachine</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/tor/" class="tag-list-link">tor</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/vim/" class="tag-list-link">vim</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/wince/" class="tag-list-link">wince</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/youtube/" class="tag-list-link">youtube</a><span
+                    class="tag-list-count">1</span>
+            
+
+    </div>
+</div>
+
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="title">MPMP12 Marching band Problem</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" class="title">MPMP11 David and Anton age puzzle</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-07-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-07-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/" class="title">MPMP9 Take away triangles</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="title">MPMP8 Paper folding challenge</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/youtube-tool/" class="title">A commandline tool for youtube.</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-09</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://nlitsme.github.io/1994/11/1994-11-30-soundblaster/" title="reverse engineering my soundblaster card"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://nlitsme.github.io/2008/03/2008-03-21-weird-bytes-in-wince-binaries/"
+                    title="Strange byte sequence in wince arm binaries"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="twitter,email"
+                data-mobile-sites="twitter,email,whatsapp,signal"></div>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/1996/07/1996-07-18-ncp-netwarecoreprotocol/"
+    >The Netware Core Protocol</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://nlitsme.github.io/1996/07/1996-07-18-ncp-netwarecoreprotocol/" class="article-date">
+  <time datetime="1996-07-18 00:00:00 &#43;0000 UTC" itemprop="datePublished">1996-07-18</time>
+</a>
+</span>
+  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/museum/"> museum </a>
+    <a class="article-tag-link" href="/tags/netware/"> netware </a>
+    <a class="article-tag-link" href="/tags/reversing/"> reversing </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/1996/07/1996-07-18-ncp-netwarecoreprotocol/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 4798words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 23minutes </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p>This is from way back when I was working on Novell Netware.</p>
+<p>A large list of all NCP functions.</p>
+<pre><code>%ph = packet hdr (3 bytes: length, subfunctioncode)
+%sh = semaphore handle (4 bytes)
+%*  = variable   (? bytes) [preceeded by length word]
+%c  = char       (1 byte)
+%fh = filehandle (6 bytes)
+%dh = dirhandle  (1 byte)
+%n  = name       (length preceeded string)
+%f  = flag       (1 byte) 
+%l  = offset     (4 bytes)
+%di = dirID      (2 bytes)
+%q  = sequence   (4 bytes)
+%nr = xactionNr  (4 bytes)
+%t  = date/time  (7 bytes)
+%i  = integer    (2 bytes)
+
+parse API: (int2f ax=7a20, bx=03) -&gt; call es:bx
+  cx = # keywords
+  ds:si = keyword table
+  es:di = header name
+
+keyword table:
+  char    *str;
+  byte   length;
+  byte   flags;    (0=need section, 1=global)
+  word   type;     (0=byte, 2=word, 4=bool, 6=string, 8=vlm, 10=dword)
+  param_t *param;
+     far *data
+     int  minval
+     int  maxval
+
+
+Table 1: NCP request packet
+    +00          6byte ETH destination address
+    +06          6byte ETH source address
+    +0c          2byte ETH type field
++0e              3byte ethernet_802.2  header : e0 e0 03
++11 +0e +00      2byte IPX checksum
++13 +10 +02      2byte IPX length
++15 +12 +04      byte  IPX transport ctl
++16 +13 +05      byte  IPX type
++17 +14 +06      12byt IPX destination address
++23 +20 +12      12byt IPX source address
++2f +2c +1e +00  word  NCP packet type
++31 +2e +20 +02  byte  NCP sequence number
++32 +2f +21 +03  byte  NCP server connection number (low)
++33 +30 +22 +04  byte  NCP client task ID
++34 +31 +23 +05  byte  NCP server connection number (high)
++35 +32 +24 +06  byte  NCP function code (type=2222)        | completion code (type=3333)
++36 +33 +25 +07  word  NCP request packet length (hi/lo)    | connection status
+                                                            | reply data
++38 +35 +27 +09  byte  NCP request code                     |
++39 +36 +28 +0a  byte  NCP request data                     |
+
+;----------------------------------------------------------------------
+
+NCP packet types
+
+0x1111 - Allocate Slot Request
+0x2222 - Request (see Table 4)
+0x3333 - Reply
+0x5555 - Deallocate Slot Request
+0x7777 - NCP Burst packet (request/reply)
+0x8888 -    private ncp ...
+0x9999 - Positive Acknowledge
+
+packet burst request:
++ 0 w sig  7777
++ 2 b conn ctl    .7=systempkt .6=sendack, .5=attn, .4=eom, .3=sysproc, .2=abort
++ 3 b ds type == 2
++ 4 d hisConnID
++ 8 w taskid
++ a w connnr
++ c d packet id
++10 d send delay
++14 w hismsgnr
++16 w mymsgnr
++18 d total length
++1c d fragment offset
++20 w fragment length
++22 w ack frag count
++24 +00 d function
++28 +04 d handle
++2c +08 d multi msg fileoffset
++30 +0c d multi msg datalength
++34 +10 d fileoffset
++38 +14 d message length
++3c  data
+
+packet burst reply:
++ 0 w sig  7777
++ 2 b conn ctl
++ 3 b ds type == 2
++ 4 w taskid
++ 6 w connnr
++ 8 d hisConnID
++ c d packet id
++10 d his last send delay
++14 w mymsgnr
++16 w ackmsgnr
++18 d total length
++1c d fragment offset
++20 w fragment length
++22 w ack frag count
++24 d result    (optional)
++28 d iolength  (optional)
+
+;----------------------------------------------------------------------
+
+NCP functions and subfunctions
+
+     Function name                                    Function  pagenr    intno
+                                                        code
+
+?Alternate Broadcast Message Handler                              80
+?Broadcast/SFT3 Inform                                            85
+?NETX Load                                                       561
+?NETX Unload                                                     563
+?VLM Call Async                                                  893
+?VLM Call [myvlmid, dstvlmid, dstfn]                             890
+?Get Current Directory                                           325      int2147
+?Get Redirection List Entry                                      462      int215f02
+?Redirect Device                                                 680      int215f03
+?Cancel Redirection                                               89      int215f04
+?Get Task Mode Pointer                                           482      int21b504
+?Number of Packet Burst Buffers                                  564      int21b507
+?Get Default Capture Flags                                       328      int21b800
+?Set Default Capture Flags                                       784      int21b801
+?Get Capture Flags/Print Job flags                               288/476  int21b802
+?Set Capture Flags                                               779/834  int21b803
+?Get Default Local Printer                                       333      int21b804
+?Set Default Local Printer                                       788      int21b805
+?Set Capture Print Queue                                         783      int21b806
+?Set Capture Print Job                                           782      int21b807
+?Get Banner User Name                                            273      int21b808
+?Set Banner User Name                                            776      int21b809
+?Set End of Job Status                                           801      int21bb
+?Set Lock Mode                                                   817      int21c6
+?Get Number of Local Drives                                      416      int21db
+?Set NetWare Error Mode                                          818      int21dd
+?Set Broadcast mode                                              777      int21de
+?Get Broadcast Mode                                              286      int21de04
+?Start LPT Capture                                               844/846  int21df04
+?End LPT Capture                                                 234/236  int21df05
+?Cancel LPT Capture                                               87/91   int21df06
+?Flush LPT Capture                                               259      int21df07
+?Map Fake Root                                                   548      int21e905
+?Delete Fake Root                                                205      int21e906
+?Get Relative Drive Depth                                        464      int21e907
+?Set Show Dots Parameter                                         833      int21e908
+?Get Shell Version And Type                                      471      int21ea00
+?Get Shell Version Information                                   472      int21ea01
+?Get Drive Handle Table                                          351      int21ef00
+?Get Drive Flag Table                                            350      int21ef01
+?Get Drive Connection ID                                         349      int21ef02
+?Get Connection ID                                               291      int21ef03
+?Set Preferred Connection ID                                     823      int21f000
+?Get Preferred Connection ID                                     446      int21f001
+?Get Default Connection ID                                       331      int21f002
+?Get LPT Capture Status                                          401      int21f003
+?Set Primary Connection ID                                       824      int21f004
+?Get Primary Connection ID                                       448      int21f005
+?Logout From File Server                                         545      int21f102
+?Remote Copy                                                     695      int2f1127
+?VLM Statistics                                                  898      VLM0001-03
+?VLM ?                                                                    VLM0001-04
+?VLM Int 2f Handler                                              896      VLM0001-7a20
+?CONN Statistics                                                 165      VLM0010-03
+?CONN Alloc Handle                                               153      VLM0010-04
+?CONN Validate Handle                                            167      VLM0010-05
+?CONN Free Handle                                                154      VLM0010-06
+?CONN Get Entry Field                                            155      VLM0010-07
+?CONN Set Entry Field                                            163      VLM0010-08
+?CONN Reset Entry Field                                          162      VLM0010-09
+?CONN Lookup Handle                                              158      VLM0010-0a
+?CONN ?                                                                   VLM0010-0b
+?CONN ?                                                                   VLM0010-0c
+?CONN Name Lookup                                                160      VLM0010-0d
+?CONN Name To Handle                                             161      VLM0010-0e
+?CONN Get Num Connections                                                 VLM0010-0f
+?CONN ?                                                                   VLM0010-10
+?TRAN ?                                                                   VLM0020-04
+?TRAN ?                                                                   VLM0020-05
+?TRAN Request Reply                                              861      VLM0020-06
+?TRAN ?                                                                   VLM0020-07
+?TRAN Schedule Event                                             863      VLM0020-08 00
+?TRAN Cancel Event                                               858      VLM0020-08 01
+?TRAN Get Max Size                                               859      VLM0020-09 00/01/02
+?TRAN Broadcast Mux                                              856      VLM0020-0a
+?IPXNCP Statistics                                               508      VLM0021-03
+?IPXNCP ?                                                                 VLM0021-04
+?IPXNCP ?                                                                 VLM0021-05
+?IPXNCP ?                                                                 VLM0021-06
+?IPXNCP ?                                                                 VLM0021-07
+?IPXNCP ?                                                                 VLM0021-08
+?IPXNCP ?                                                                 VLM0021-09
+?IPXNCP ?                                                                 VLM0021-0a
+ TCPNCP                                                                   VLM0022
+?NWP Statistics                                                  595      VLM0030-03
+?NWP Connect                                                              VLM0030-04
+?NWP DisConnect                                                  579      VLM0030-05
+?NWP Attach                                                      565      VLM0030-06
+?NWP ?                                                                    VLM0030-07
+?NWP Login                                                       583      VLM0030-08
+?NWP Logout                                                      585      VLM0030-09
+?NWP Message handler                                             586      VLM0030-0a 02/05
+?NWP Get Bindery Object                                          581      VLM0030-0a 03/04
+ NWP ?==BIND(0b)                                                          VLM0030-0b
+ NWP NDS Fragment Request                                                 VLM0030-0c 08
+ NWP Get Internet Address                                                 VLM0030-0d
+?NWP Ordered Send To All                                         589      VLM0030-0e
+?NWP Preferred Handler                                           591      VLM0030-0f
+ NWP ? subfn AL 00-06 signature options                                   VLM0030-10  int21b3
+ BIND ?                                                                   VLM0031-04
+ BIND ?                                                                   VLM0031-05
+ BIND ?                                                                   VLM0031-06
+ BIND ?                                                                   VLM0031-07
+ BIND ?                                                                   VLM0031-08
+ BIND ?                                                                   VLM0031-09
+ BIND ?                                                                   VLM0031-0a
+ BIND ?                                                                   VLM0031-0a
+ BIND ?                                                                   VLM0031-0b
+ BIND ?                                                                   VLM0031-0c
+ BIND ?                                                                   VLM0031-0d
+ BIND ?                                                                   VLM0031-0e
+ BIND ?                                                                   VLM0031-0f
+ NDS ?                                                                    VLM0032-04
+ NDS ?                                                                    VLM0032-05
+ NDS ?                                                                    VLM0032-06
+ NDS ?                                                                    VLM0032-07
+?NDS Fragment Request                                            557      VLM0032-08
+ NDS ?                                                                    VLM0032-09
+ NDS ?                                                                    VLM0032-0a
+ NDS ?                                                                    VLM0032-0a
+ NDS ?                                                                    VLM0032-0b
+ NDS Get Default name Context                                             VLM0032-0c bx00
+ NDS Read From TDS (Tag Data Storage)                                     VLM0032-0c bx02
+ NDS Write To TDS                                                         VLM0032-0c bx03
+ NDS NWDSChangeResourceConnection                                         VLM0032-0c bx05 dl04
+ NDS NWDSChangeResourceConnection                                         VLM0032-0c bx05 dl07
+ NDS NWDSLockConnection                                                   VLM0032-0c bx05 dl08
+ NDS NWDSSetMonitoredConnection                                           VLM0032-0c bx07
+ NDS set NDS CEI Info                                                     VLM0032-0c bx0a
+ NDS ?                                                                    VLM0032-0d
+ NDS ?                                                                    VLM0032-0e
+ NDS ?                                                                    VLM0032-0f
+ PNW ?                                                                    VLM0033-04
+ PNW ?                                                                    VLM0033-05
+ PNW ?                                                                    VLM0033-06
+ PNW ?                                                                    VLM0033-07
+ PNW ?                                                                    VLM0033-08
+ PNW ?                                                                    VLM0033-09
+ PNW ?                                                                    VLM0033-0a
+ PNW ?                                                                    VLM0033-0a
+ PNW ?                                                                    VLM0033-0b
+ PNW ?                                                                    VLM0033-0c
+ PNW ?                                                                    VLM0033-0d
+ PNW ?                                                                    VLM0033-0e
+ PNW ?                                                                    VLM0033-0f
+ RSA ?                                                                    VLM0034-04
+?REDIR Statistics                                                679      VLM0040-03
+?REDIR Build SFT                                                 673      VLM0040-04
+?REDIR DOS To NW Handle                                          675      VLM0040-05
+ REDIR ?                                                                  VLM0040-06
+ REDIR ?                                                                  VLM0040-07
+ REDIR Redir Specific -bx=0: getitem                                      VLM0040-08
+?FIO Statistics                                                  257      VLM0041-03
+?FIO Remote Copy                                                          VLM0041-04
+?FIO ?                                                                    VLM0041-05
+?FIO ?                                                                    VLM0041-06
+?FIO ?                                                                    VLM0041-07
+?FIO ?                                                                    VLM0041-08
+?FIO ?                                                                    VLM0041-09
+?FIO ?                                                                    VLM0041-0a
+?PRINT Statistics                                                625      VLM0042-03
+?PRINT Set Data                                                  623      VLM0042-04 00/02
+?PRINT Get Data                                                  615      VLM0042-04 01/03
+?PRINT Open Cap File                                             618      VLM0042-05
+?PRINT ?                                                                  VLM0042-06
+?PRINT Get Num of Printers                                       617      VLM0042-07
+?PRINT Redirection                                               619      VLM0042-08
+?PRINT Flush &amp; Close Job                                         612      VLM0042-09
+?PRINT ?                                                                  VLM0042-0a
+?PRINT ?                                                                  VLM0042-0b
+?PRINT Set Banner Name                                           622      VLM0042-0c 00
+?PRINT Get Banner Name                                           614      VLM0042-0c 01
+?PRINT ?                                                                  VLM0042-0d
+?PRINT ?                                                                  VLM0042-0e
+?GENERAL Statistics                                              268      VLM0043-03
+?GENERAL Get Primary                                             261      VLM0043-04 01
+?GENERAL Set Primary                                             263      VLM0043-04 02
+?GENERAL ?                                                                VLM0043-05
+?GENERAL Specific                                                264      VLM0043-06 00/04
+?GENERAL ?                                                                VLM0043-07
+?GENERAL ?                                                                VLM0043-08
+?GENERAL Return Drive Info                                       262      VLM0043-09 00/01
+?NETX Statistics                                                 562      VLM0050-03
+?NETX ?                                                                   VLM0050-04
+?NETX ?                                                                   VLM0050-05
+?NETX ?                                                                   VLM0050-06
+?AUTO ?                                                                   VLM0060-04
+?AUTO ?called when auto reconnect needed                                  VLM0060-05-bx=0-4
+ SECURITY   al=01: compute session key                                    VLM0061-04
+ NMR                                                                      VLM0100
+ WSDRVPRN                                                                 VLM09f2
+ PNWMIB                                                                   VLM09f7
+ PNWTRAP                                                                  VLM09f8
+ MIB2PROT                                                                 VLM09f9
+ MIB2IF                                                                   VLM09fa
+ WSTRAP                                                                   VLM09fc
+ WSREG                                                                    VLM09fd
+ WSASN1                                                                   VLM09fe
+ WSSNMP                                                                   VLM09ff
+
+ Initialize VLM                                                           VLMxx-00
+?Get VLM Version                                                 488      VLMxx-01
+ unload VLM                                                               VLMxx-02
+?Get VLM Statistics                                              488      VLMxx-03
+
+*                                                       0x00
+*File Set Lock                                          0x01              int21c8
+*File Release Lock                                      0x02              int21c9
+ Log File(old)                                          0x03     530      int21ca  int21eb      [%dh%f%i%n]
+ Lock File Set(old)                                     0x04     518      int21cb               [%i]
+ Release File                                           0x05     683      int21cc  int21ec      [%dh%n]
+ Release File Set                                       0x06     685      int21cd               [%f]
+ Clear File                                             0x07     125      int21ce  int21ed      [%dh%n]
+ Clear File Set                                         0x08     127      int21cf               [%f]
+ Log Logical Record(old)                                0x09     534      int21d0               [%f%i%n]
+ Lock Logical Record Set(old)                           0x0a     522      int21d1               [%f%i]
+ Clear Logical Record                                   0x0b     129      int21d4               [%n]
+ Release Logical Record                                 0x0c     687      int21d2               [%n]
+ Release Logical Record Set                             0x0d     689      int21d3               [%f]
+ Clear Logical Record Set                               0x0e     131      int21d5               [%f]
+*Allocate Resource                                      0x0f              int21d8
+*Deallocate Resource                                    0x10              int21d9
+--- Print Services                                     !0x11----                                [%ph...]
+_Write To A Spool File                                  0x1100            int21e000
+_Close Spool File                                       0x1101            int21e001
+_Set Spool File Flags                                   0x1102            int21e002
+_Spool A Disk File                                      0x1103            int21e003
+*Scan Spool Queue Entry                                 0x1104            int21e004
+*Remove Entry From Spool Queue                          0x1105            int21e005
+*Get Printer Status                                     0x1106   450/452  int21e006             [%ph%c]
+*                                                       0x1107            int21e001
+*                                                       0x1108            int21e001
+_Specify Capture File                                   0x1109   842      int21e009
+_Get Printer Queue                                      0x110a
+*                                                       0x110b-ff
+ Get Volume Info with Number                            0x12     497      int21da               [%c]
+ Get Station Number                                     0x13     480      int21dc               -
+ Get File Server Date And Time                          0x14     359      int21e7               [%t]
+--- Message Services                                   !0x15----                                [%ph...]
+_Send Broadcast Message(old)                            0x1500   765
+_Get Broadcast Message(old)                             0x1501   284                            [%ph]
+_Disable Station Broadcasts                             0x1502   214                            [%ph]
+_Enable Station Broadcasts                              0x1503   228                            [%ph]
+*Send Personal Message                                  0x1504
+*Get Personal Message                                   0x1505
+*Open Message Pipe                                      0x1506
+*Close Message Pipe                                     0x1507
+*Check Pipe Status                                      0x1508
+_Broadcast to Console                                   0x1509    83
+_Send Broadcast Message(new)                            0x150a   763
+_Get Broadcast Message(new)                             0x150b   282
+*                                                       0x150c-ff
+--- Directory Services                                 !0x16----                                [%ph...]
+_Set Directory Handle                                   0x1600   795
+_Get Directory Path                                     0x1601   338                            [%ph%dh]
+_Scan Directory Information                             0x1602   736
+_Get Effective Directory Rights(old)                    0x1603   357                            [%ph%dh%n]
+_Modify Maximum Rights Mask                             0x1604   551
+_Get Volume Number                                      0x1605   504
+_Get Volume Name                                        0x1606   502
+*                                                       0x1607
+*                                                       0x1608
+*                                                       0x1609
+_Create Directory                                       0x160a   174      (int2139)
+_Delete Directory                                       0x160b   203
+_Scan Directory For Trustees                            0x160c   733
+_Add Trustee to Directory                               0x160d    10
+_Delete Trustee From Directory                          0x160e   208
+_Rename Directory                                       0x160f   707      (int2156)
+*Purge Erased Files(old)                                0x1610   628
+*Restore Erased File                                    0x1611
+_Allocate Permanent Directory Handle                    0x1612    62/70
+_Allocate Temporary Directory Handle                    0x1613    67/75
+_Deallocate Directory Handle                            0x1614   197
+_Get Volume Info With Handle                            0x1615   495
+_Allocate Special Temporary Directory Handle            0x1616    65
+*Save Directory Handle                                  0x1617   721
+*Restore Directory Handle                               0x1618   717
+_Set Directory Information                              0x1619   798
+*Get Path From Directory Entry                          0x161a   427
+_Scan Salvageable Files(old)                            0x161b   752
+_Recover Salvageable File(old)                          0x161c   671
+_Purge Salvageable File(old)                            0x161d   632
+_Scan Dir Entry                                         0x161e   723
+_Get Dir Entry                                          0x161f
+_Scan Volume For Restrictions                           0x1620   754
+_Add User Disk Space Restriction                        0x1621    12
+_Clear Volume Restrictions                              0x1622   703
+_Get Dir Restrictions                                   0x1623   334
+_Set Dir Space Restriction                              0x1624   789
+_Set Directory Entry Information                        0x1625   791
+_Scan File or Dir for Extended Trustees                 0x1626   743
+_Add Extended Trustee to File/Dir                       0x1627     6
+_Scan Directory Disk Space                              0x1628   730
+_Get Object Disk Restrictions                           0x1629   421
+_Get Effective Rights By Dir Entry                      0x162a
+_Delete Extended Trustee From Directory or File         0x162b   697
+_Get Volume Usage                                       0x162c   490
+_Get Dir Info                                           0x162d   336
+_Move Entry                                             0x162e   712
+_Get Name Space Buffer Information                      0x162f   408
+_Get Name Space Directory Entry                         0x1630   404
+_Open Data Stream                                       0x1631   606
+_Get Object Effective Rights                            0x1632
+!Get Extended Volume Info                               0x1633
+*                                                       0x1634-ff
+--- Bindery And Misc Services                          !0x17----                                [%ph...]
+_Login User Object                                      0x1700
+_Change User Password                                   0x1701   117                            [%ph%n%n%n]
+_Get User Connection List(old)                          0x1702   486
+*Map Object To Number                                   0x1703
+*Map Number To Object                                   0x1704
+*Get Connection Information(new)/Station Logged Info    0x1705
+*                                                       0x1706
+*getgroupobjid                                          0x1707
+*Map Number To Group Name                               0x1708
+*Get Member Set M of Group G                            0x1709
+*Enter Login Area                                       0x170a
+*                                                       0x170b
+_Verify Network Serial Number                           0x170c   888
+*Log Network Message                                    0x170d
+_Get Disk Utilization for Trustee                       0x170e   347
+_Scan File Information                                  0x170f   739
+_Set File Information                                   0x1710   808
+_Get File Server Information                            0x1711   366
+?Recover Erased File(old)                               0x1711   666
+_Get Network Serial Number                              0x1712   412
+_Get Internet Address(old)                              0x1713   386
+_Login Object                                           0x1714   540
+_Get Object Connection List(old)                        0x1715   419
+_Get Connection Information(old)                        0x1716   295
+_Get Encryption Key                                     0x1717
+_Login Object Encrypted                                 0x1718
+*                                                       0x1719
+_Get Internet Address(new)                              0x171a   384
+_Get Object Connection List(new)                        0x171b   417
+_Get Connection Information(new)/Station Logged Info    0x171c   293
+_Change Connection State                                0x171d
+_Set Watchdog Delay Interval                            0x171e
+_Get Connection List From Object                        0x171f
+*                                                       0x1720-31
+_Create Bindery Object                                  0x1732   172
+_Delete Bindery Object                                  0x1733   199
+_Rename Bindery Object                                  0x1734   705
+_Get Bindery Object ID                                  0x1735   278
+_Get Bindery Object Name                                0x1736   280
+_Scan Bindery Object                                    0x1737   726
+_Change Bindery Object Security                         0x1738    95
+_Create Property                                        0x1739   182
+_Delete Property                                        0x173a   206
+_Change Property Security                               0x173b    99
+_Scan Property                                          0x173c   747
+_Read Property Value                                    0x173d   644
+_Write Property Value                                   0x173e   908
+_Verify Bindery Object Password                         0x173f   886
+_Change Bindery Object Password                         0x1740    93
+_Add Bindery Object to Set                              0x1741     4
+_Delete Bindery Object From Set                         0x1742   201
+_Is Bindery Object In Set                               0x1743   510
+_Close Bindery                                          0x1744   137
+_Open Bindery                                           0x1745   598
+_Get Bindery Access Level                               0x1746   274
+_Scan Bindery Object Trustee Paths                      0x1747   728
+_Get Bindery Object Access Level                        0x1748   276
+_Is Station A Manager                                   0x1749   512
+_Verify Bindery Object Password Encrypted               0x174a
+_Change Bindery Object Password Encrypted               0x174b
+_Get Relations of an Object                             0x174c   514
+*                                                       0x174d-5f
+_PNW Specific                                           0x1760
+*                                                       0x1761
+*                                                       0x1762
+*                                                       0x1763
+_Create Queue                                           0x1764   184
+_Destroy Queue                                          0x1765   210
+_Read Queue Current Status(old)                         0x1766   649
+_Set Queue Current Status(old)                          0x1767   827
+_Create Queue Job And File(old)                         0x1768   192
+_Close File And Start Queue Job(old)                    0x1769   145
+_Remove Job From Queue(old)                             0x176a   701
+_Get Queue Job List(old)                                0x176b   460
+_Read Queue Job Entry(old)                              0x176c   657
+_Change Queue Job Entry(old)                            0x176d   106
+_Change Queue Job Position                              0x176e   111
+_Attach Queue Server To Queue                           0x176f    81
+_Detach Queue Server From Queue                         0x1770   212
+_Service Queue Job And Open File(old)                   0x1771   773
+_Finish Servicing Queue Job(old)                        0x1772   255
+_Abort Servicing Queue Job(old)                         0x1773     2
+_Change To Client Rights(old)                           0x1774   115
+_Restore Queue Server Rights                            0x1775   719
+_Read Queue Server Current Status(old)                  0x1776   664
+_Set Queue Server Current Status                        0x1777   829
+_Get Queue Job File Size(old)                           0x1778   456
+_Create Queue Job And File(new)                         0x1779   187
+_Read Queue Job Entry(new)                              0x177a   652
+_Change Queue Job Entry(new)                            0x177b   101
+_Service Queue Job(new)                                 0x177c   771
+_Read Queue Current Status(new)                         0x177d   647
+_Set Queue Current Status(new)                          0x177e   825
+_Close File And Start Queue Job(new)                    0x177f   143
+_Remove Job From Queue(new)                             0x1780   699
+_Get Queue Job List(new)                                0x1781   458
+_Change Queue Job Order/Priority                        0x1782    97
+_Finish Servicing Queue Job(new)                        0x1783   253
+_Abort Servicing Queue Job(new)                         0x1784     1
+_Change To Client Rights(new)                           0x1785   113
+_Read Queue Server Current Status(new)                  0x1786   662
+_Get Queue Job File Size(new)                           0x1787   454
+_Move Queue Job From SrcQ to DstQ                       0x1788
+_Get Q Jobs From Form List                              0x1789
+_Service Q Job By Form List                             0x178a
+*                                                       0x178b-95
+_Get Account Status                                     0x1796   271
+_Submit Account Charge                                  0x1797   848
+_Submit Account Hold                                    0x1798   851
+_Submit Account Note                                    0x1799   854
+*                                                       0x179a-c7
+_Check Console Privileges                               0x17c8   119
+_Get File Server Description Strings                    0x17c9   361
+_Set File Server Date And Time                          0x17ca   811
+_Disable File Server Login                              0x17cb   216
+_Enable File Server Login                               0x17cc   230
+_Get File Server Login Status                           0x17cd   372
+*Purge Erased Files(new)                                0x17ce   626
+_Disable Transaction Tracking                           0x17cf   218
+_Enable Transaction Tracking                            0x17d0   232
+_Send Console Broadcast(old)                            0x17d1   769
+_Clear Connection Number(old)                           0x17d2   121
+_Down File Server                                       0x17d3   224
+*Get File System Statistics                             0x17d4   377
+*TTS Get Statistics                                     0x17d5   483
+*Get Disk Cache Statistics                              0x17d6   340/636
+*Get Drive Mapping Table                                0x17d7   352
+*Get Physical Disk Statistics                           0x17d8   431
+*Get Disk Channel Statistics                            0x17d9   344
+*Get Connection's Task Information(old)                 0x17da   313
+*Get Connection's Open Files(old)                       0x17db   302
+*Get Connections Using A File(old)                      0x17dc   321
+*Get Physical Record Locks By Connection And File(old)  0x17dd   437
+*Get Physical Record Locks By File(old)                 0x17de   443
+*Get Logical Records By Connection(old)                 0x17df   399
+*Get Logical Record Information(old)                    0x17e0   394
+*Get Connection's Semaphores(old)                       0x17e1   308
+*Get Semaphore Information(old)                         0x17e2   468
+*Get LAN Driver's Configuration Information             0x17e3   388
+*                                                       0x17e4
+*Get Connection's Usage Statistics                      0x17e5   316
+_Get Bindery Object Disk Space Left                     0x17e6   423
+*Get File Server LAN I/O Statistics                     0x17e7   368
+*Get File Server Misc Information                       0x17e8   374
+_Get Volume Information                                 0x17e9   499
+?Get Connection's Task Information(new)                 0x17ea   310
+?Get Connection's Open Files(new)                       0x17eb   298
+?Get Connections Using A File(new)                      0x17ec   318
+?Get Physical Record Locks By Connection And File(new)  0x17ed   434
+?Get Physical Record Locks By File(new)                 0x17ee   440
+?Get Logical Records By Connection(new)                 0x17ef   397
+?Get Logical Record Information(new)                    0x17f0   391
+?Get Connection's Semaphores(new)                       0x17f1   305
+?Get Semaphore Information(new)                         0x17f2   465
+?Map Directory Number to Path                           0x17f3   546
+_Convert Path To Dir Entry                              0x17f4   168
+?Get File Server Extended Misc Information              0x17f5   363
+_Get Volume Extended Information                        0x17f6   492
+*                                                       0x17f7
+*                                                       0x17f8
+*                                                       0x17f9
+*                                                       0x17fa
+*                                                       0x17fb
+*releasearesource                                       0x17fc
+_Send Console Broadcast(new)                            0x17fd   767
+_Clear Connection Number(new)                           0x17fe   123
+*                                                       0x17ff
+ End Of Job                                             0x18     235      int21d6               -
+ Logout                                                 0x19     543/544  int21d7               -
+ Log Physical Record(old)                               0x1a     538      int21bc  (int215c)    [%f%fh%o%o%i]
+ Lock Physical Record Set(old)                          0x1b     526      int21c2               [%f%i]
+ Release Physical Record                                0x1c     691      int21bd               [%c%fh%o%o]
+ Release Physical Record Set                            0x1d     693      int21c3               [%f]
+ Clear Physical Record                                  0x1e     133      int21be  (int215c)    [%c%fh%l%l]
+ Clear Physical Record Set                              0x1f     135      int21c4               [%f]
+--- Semaphore Services(old)                            !0x20----                                [%c...]
+_Open Semaphore(old)                                    0x2000   610      int21c500             [%c%c%n]
+_Examine Semaphore(old)                                 0x2001   245      int21c501             [%c%sh]
+_Wait On Semaphore(old)                                 0x2002   904      int21c502             [%c%sh%i]
+_Signal Semaphore(old)                                  0x2003   840      int21c503             [%c%sh]
+_Close Semaphore(old)                                   0x2004   149      int21c504             [%c%sh]
+*                                                       0x2005
+*                                                       0x2006-ff
+ Negotiate Buffer Size                                  0x21     559                            [%i]
+--- Transaction Tracking Services                      !0x22----                                [%c...]
+_TTS Is Available                                       0x2200   877      int21c702             [%c]
+!TTS Begin Transaction                                  0x2201   867      int21c700             [%c]
+!TTS End Transaction                                    0x2202   869      int21c701             [%c]
+!TTS Abort Transaction                                  0x2203   865      int21c703             [%c]
+!TTS Transaction Status                                 0x2204   884      int21c704             [%c%nr]
+!TTS Get Application Thresholds                         0x2205   871      int21c705             [%c]
+!TTS Set Application Thresholds                         0x2206   878      int21c706             [%c%c%c]
+!TTS Get Workstation Thresholds                         0x2207   875      int21c707             [%c]
+!TTS Set Workstation Thresholds                         0x2208   882      int21c708             [%c%c%c]
+!TTS Get Control Flags                                  0x2209   873                            [%c]
+!TTS Set Control Flags                                  0x220a   880                            [%c%c]
+*                                                       0x220b-ff
+--- AFP Services                                       !0x23----                                [%ph...]
+*                                                       0x2300
+_AFP Create Directory                                   0x2301    29                            [%ph%c%nr%c...]
+_AFP Create File                                        0x2302    31
+_AFP Delete                                             0x2303    33
+_AFP Get Entry ID From Name                             0x2304    37
+_AFP Get File Information                               0x2305    43
+_AFP Get Entry ID From Netware Handle                   0x2306    39
+_AFP Rename                                             0x2307    51
+_AFP Open File Fork                                     0x2308    49
+_AFP Set File Information                               0x2309    59
+_AFP Scan File Information                              0x230a    54
+_AFP Alloc Temporary Dir Handle                         0x230b    27
+_AFP Get Entry ID From Path Name                        0x230c    41
+_AFP New Create Directory                               0x230d    14
+_AFP New Create File                                    0x230e    16
+_AFP New Get File Information                           0x230f
+_AFP New Set File Information                           0x2310    24
+_AFP New Scan File Information                          0x2311    19
+_AFP Map MacID To DOS Name                              0x2312    35
+_AFP Get Deleted File Info                              0x2313    47
+*                                                       0x2314-ff
+*Clear Record                                           0x24              int21c1
+--- NCP Extensions                                     !0x25----
+*scanloadedncpexts                                      0x2500
+*scanloadedextsbyname                                   0x2502
+*getnumncpexts                                          0x2503
+*getncpextslist                                         0x2504
+*getncpextinfo                                          0x2505
+*                                                       0x26
+*                                                       0x27
+*                                                       0x28
+*                                                       0x29
+*                                                       0x2a
+*                                                       0x2b
+*                                                       0x2c
+*                                                       0x2d
+*                                                       0x2e
+*                                                       0x2f
+*                                                       0x30
+*                                                       0x31
+*                                                       0x32
+*                                                       0x33
+*                                                       0x34
+*                                                       0x35
+*                                                       0x36
+*                                                       0x37
+*                                                       0x38
+*                                                       0x39
+*                                                       0x3a
+*commitfile                                             0x3b
+ Dup Handle                                             0x3c
+ Commit File                                            0x3d     151                            [%c%fh]
+ File Search Initialize                                 0x3e     250      (int214e)             [%dh%n]
+ File Search Continue                                   0x3f     247      (int214e/4f)          [%c%di%q%c%n]
+ Search For A File                                      0x40     756                            [%i%dh%c%n]
+ Open File OLD                                          0x41
+ Close File                                             0x42     141                            [%c%fh]
+ Create File                                            0x43     176      (int213c)             [%dh%c%n]
+ Erase File                                             0x44     241      int21f244             [%dh%c%n]
+ Rename File                                            0x45     709      (int2156)             [%dh%c%n%dh%n]
+ Set File Attributes                                    0x46     802      int21e4               [%c%dh%c%n]
+ Get Current File Size                                  0x47     326      (int2142)             [%c%fh]
+ Read File                                              0x48     642      (int213f)             [%c%fh%o%i]
+ Write File                                             0x49     910      (int2140)             [%c%fh%o%i%*]
+ Server File Copy                                       0x4a     170      int21e6 int21f3       [%c%fh%fh%o%o%o]
+ Set File Time Date Stamp                               0x4b     813                            [%c%fh%i%i]
+ Open File                                              0x4c
+ Create New File                                        0x4d     179      (int216c)             [%dh%c%n]
+*Allow Task Access To File                              0x4e      78                            [%c%fh]
+ Set File Extended Attributes                           0x4f     805      int21b601             [%c%dh%c%n]
+*                                                       0x50
+*                                                       0x51
+*                                                       0x52
+*                                                       0x53
+ Open Create File                                       0x54     600      (int216c)             [%dh%c%n]
+ Get Sparse File Bit Map                                0x55     474                            [%4fh%o] ??
+--- Extended Attribute Services                        !0x56----                                [%c...]
+*                                                       0x5600
+_Close Extended Attribute Handle                        0x5601   139                            [%c%i%nr]
+_Write Extended Attribute                               0x5602   906
+_Read Extended Attribute                                0x5603   640
+_Enumerate Extended Attribute                           0x5604   237                            [%c%i%8c%o%i%i%c]
+_Duplicate Extended Attribute                           0x5605   226
+*                                                       0x5606
+*                                                       0x5607-ff
+--- Enhanced NCP Services                              !0x57----                                [%c...]
+*                                                       0x5700
+_Open Create File or Directory                          0x5701   603
+_Initialize Search                                      0x5702   506
+_Search For File Or Directory                           0x5703   759
+_Rename or Move a File or Directory                     0x5704   715
+_Scan File or Dir for Trustees                          0x5705   745
+_Obtain File Or Sub Dir Information                     0x5706   596
+_Modify File Or Sub Dir DOS Information                 0x5707   549
+_Delete File Or Directory                               0x5708
+_Set Short Directory Handle                             0x5709   831
+?Add Trustee Set To File or Directory                   0x570a     8
+_Delete Trustee Set                                     0x570b
+_Allocate Short Directory Handle                        0x570c    73                            [%c%c...]
+*                                                       0x570d
+*                                                       0x570e
+*                                                       0x570f
+_Scan Salvageable Files(new)                            0x5710   750
+_Recover Salvageable File(new)                          0x5711   669
+_Purge Salvageable File(new)                            0x5712   630
+_Get NS Information                                     0x5713   414
+_Search For File Or Directory Set                       0x5714   761
+_Get A Directory Path From Handle                       0x5715   429
+_Generate Dir Base And Vol Number                       0x5716   269
+_Query NS Info Format                                   0x5717   634
+_Get Name Space Loaded List                             0x5718   410
+_Set NS Information                                     0x5719   821
+_Get Huge NS Information                                0x571a   382
+_Set Huge NS Information                                0x571b   815
+_Get Full Path String                                   0x571c   380
+_Get Effective Directory Rights(new)                    0x571d   355
+_Open Create File                                       0x571e
+                                                        0x571f-ff
+--- NetWare Auditing (4.x only)                        !0x58----                                [%c...]
+*                                                       0x5800
+_Get Volume Audit Statistics                            0x5801
+_Add Audit Property                                     0x5802
+_Login As Volume Editor                                 0x5803
+_Change Auditor Password                                0x5804
+_Check Audit Access                                     0x5805
+_Remove Audit Property                                  0x5806
+_Disable Auditing On Volume                             0x5807
+_Enable Auditing On Volume                              0x5808
+_Is User Audited                                        0x5809
+_Read Auditing Bit Map                                  0x580a
+_Read Audit Config Header                               0x580b
+_Read Auditing File                                     0x580c
+_Logout As Volume Auditor                               0x580d
+_Reset Auditing File                                    0x580e
+_Reset Audit History File                               0x580f
+_Write Auditing Bit Map                                 0x5810
+_Write Audit Config Header                              0x5811
+_Change Audit Password 2                                0x5812
+_Get Auditing Flags                                     0x5813
+_Close Old Auditing File                                0x5814
+_Delete Old Auditing File                               0x5815
+_Check Audit Level Two Access                           0x5816
+_returnauditfilelist                                    0x5817
+_initauditfileread                                      0x5818
+_readauditingfile                                       0x5819
+_deleteoldauditfile                                     0x581a
+*                                                       0x581b
+*                                                       0x581b
+*                                                       0x581d
+_restartvolumeauditing                                  0x581e
+_setauditpassword                                       0x581f
+*                                                       0x5820-ff
+*                                                       0x59
+--- Migration Services (4.x only)                      !0x5a----                                [%ph...]
+*                                                       0x5a00
+!Get DM Info                                            0x5a01
+*                                                       0x5a02-09
+!getrefcntfromdirnum                                    0x5a0a
+!getrefcntfromdirhnd                                    0x5a0b
+!setcompfilesize                                        0x5a0c
+*                                                       0x5a0d-7f
+!Move File Data To DM                                   0x5a80   555
+!DM File Information                                    0x5a81   220                            [%ph%nr%nr%nr]
+_Volume DM Status                                       0x5a82   900
+_Migrate Stat Info                                      0x5a83   402
+!DM Support Module Information                          0x5a84   222                            [%ph%nr%nr]
+!Move File Data From DM                                 0x5a85   553
+!Get or Set Volume DM Status                            0x5a86
+!Get or Set Default Support Module                      0x5a87   425
+*                                                       0x5a88-95
+!filemigrationreq                                       0x5a96
+*                                                       0x5a97-ff
+*                                                       0x5b
+*                                                       0x5c
+*                                                       0x5d
+*                                                       0x5e
+*                                                       0x5f
+--- PNW Specific                                       !0x60---- ?
+*                                                       0x6000
+_Get File Server Stats                                  0x6001
+_Get File Server TTS                                    0x6002
+_Get File Server Sync                                   0x6003
+*                                                       0x6004
+*                                                       0x6005-ff
+ Get Big Packet NCP Max Packet Size                     0x61
+*   Data Echo                                           0x62
+*   Native: Next Big Write                              0x63
+*   Native: Big Read                                    0x64
+ Packet Burst Connection                                0x65
+*   Native: Big ReRead                                  0x66
+*   Native: Big Write                                   0x67
+ NetWare Directory Services (4.x only)                 !0x68----                                [%c...]
+_Old Fragger Protocol                                   0x6800
+_Ping Request     // get tree name ??                   0x6801
+_New Fragger Protocol                                   0x6802
+_New Fragger Protocol                                   0x6802
+ NDS resolve name                                         6802 01  (sub at +11)
+ NDS read property                                        6802 03
+ NDS List Partitions                                      6802 16
+ NDS get server address                                   6802 35
+ NDS set keys                                             6802 36
+ NDS begin login                                          6802 39
+ NDS finish login                                         6802 3A
+ NDS begin authenticate                                   6802 3B
+ NDS finish authenticate                                  6802 3C
+ NDS Logout                                               6802 3D
+ Get DS Auditing Statistics                             0x68c8
+_Fragment Close                                         0x6803
+_Bindery Context                                        0x6804
+_Monitor Connection                                     0x6805
+_getndsstatistics                                       0x6806
+_resetndsstatistics                                     0x6807
+_reloadds                                               0x6808
+*                                                       0x6809-c7
+_Reserved for Auditing                                  0x68c8-ff
+_getcontauditstatus                                     0x68c8
+*                                                       0x68c9
+_addauditoraccess                                       0x68ca
+_chgauditorcontpass                                     0x68cb
+_checkauditoraccess                                     0x68cc
+*                                                       0x68cd
+_disablecontauditing                                    0x68ce
+_enablecontauditing                                     0x68cf
+*                                                       0x68d0
+_readauditfilecfghdr                                    0x68d1
+_readauditingfiles                                      0x68d2
+_remcontauditaccess                                     0x68d3
+_resetauditfile                                         0x68d4
+_resetaudithistfile                                     0x68d5
+_writeauditfilcfghdr                                    0x68d6
+_chgauditpass                                           0x68d7
+_getauditflags                                          0x68d8
+_closeoldauditfile                                      0x68d9
+_deloldauditfile                                        0x68da
+_chklvltwoaccess                                        0x68db
+_isobjectaudited                                        0x68dc
+_chgobjauditstatus                                      0x68dd
+_returnauditfilelist                                    0x68de
+_initauditfileread                                      0x68df
+_readauditingfile                                       0x68e0
+_deleteoldauditfile                                     0x68e1
+*                                                       0x68e2
+*                                                       0x68e3
+*                                                       0x68e4
+_setauditpassword                                       0x68e5
+*Log File(new)                                          0x69     528                            [%dh%f%i%n]
+*Lock File Set(new)                                     0x6a     516                            [%i]
+*Log Logical Record(new)                                0x6b     532                            [%f%i%n]
+*Lock Logical Record Set(new)                           0x6c     520                            [%f%i]
+*Log Physical Record(new)                               0x6d     536      (int215c)             [%f%fh%o%o%i]
+*Lock Physical Record Set(new)                          0x6e     524                            [%f%i]
+--- Semaphore services(new)                            !0x6f----                                [%c...]
+*Open Semaphore(new)                                    0x6f00   608
+*Examine Semaphore(new)                                 0x6f01   243                            [%c%sh]
+*Wait On Semaphore(new)                                 0x6f02   902
+*Signal Semaphore(new)                                  0x6f03   838
+*Close Semaphore(new)                                   0x6f04   147                            [%c%sh]
+*                                                       0x6f05-ff
+ Clear And Get Wait Lock Comp                           0x70
+*                                                       0x71
+ Time Sync Request (4.x only)                           0x72
+*                                                       0x73
+*                                                       0x74
+*                                                       0x75
+*                                                       0x76
+*                                                       0x77
+*                                                       0x78
+*                                                       0x79
+*                                                       0x7a
+!-- NetWare 4.0 only                                   !0x7b----                                [%ph...]
+*                                                       0x7b00
+!Get Cache Information                                  0x7b01
+!Get File Server Information                            0x7b02
+!Get NetWare File Systems Information                   0x7b03
+!Get User Information                                   0x7b04
+!Get Packet Burst Information                           0x7b05
+!Get IPX/SPX Information                                0x7b06
+!Get Garbage Collection Information                     0x7b07
+!Get CPU Information                                    0x7b08
+!Get Volume Switch Information                          0x7b09
+!Get NLM Loaded List                                    0x7b0a
+!Get NLM Information                                    0x7b0b
+!Get Directory Cache Information                        0x7b0c
+!Get OS Version Information                             0x7b0d
+!Get Active Connection List By Type                   ....  0x7b0e  {conn:4, type:4}
+   type = 1: CLIB, 2:NCP, 3:NLM, 4:AFP, 5:FTAM, 6:ANCP
+!Get NLM's Resource Tag List                            0x7b0f
+*                                                       0x7b10-13
+!Get Active LAN Board List                              0x7b14
+!Get LAN Configuration Information                      0x7b15
+!Get LAN Common Counters Information                    0x7b16
+!Get LAN Custom Counters Information                    0x7b17
+!Get LAN Config Strings                                 0x7b18
+!Get LSL Information                                    0x7b19
+!Get LSL Logical Board Statistics                       0x7b1a
+*                                                       0x7b1b
+*                                                       0x7b1c
+*                                                       0x7b1d
+!Get Media Manager Object Information                   0x7b1e  {objNum:4} -&gt; {info:0xd0}
+!Get Media Manager Object List                          0x7b1f  {start:4, type:4} -&gt; {list:0x210}
+!Get Media Manager Object Children List                 0x7b20  {start:4,type:4,parent:4}-&gt;{list:0x210}
+!Get Volume Segment List                                0x7b21
+!getvolinfobylevel                                      0x7b22
+*                                                       0x7b22-27
+!Get Active Protocol Stacks                             0x7b28
+!Get Protocol Stack Configuration Information           0x7b29
+!Get Protocol Stack Statistics Information              0x7b2a
+!Get Protocol Stack Custom Information                  0x7b2b
+!Get Protocol Stack Numbers By Media Number             0x7b2c
+!Get Protocol Stack Numbers By LAN Board Number         0x7b2d
+!Get Media Name By Media Number                         0x7b2e  {mediaNum:4}-&gt;{name:8,list:..}
+!Get Loaded Media Number List                           0x7b2f
+*                                                       0x7b30
+*                                                       0x7b31
+!Get General Router And SAP Information                 0x7b32
+!Get Network Router Information                         0x7b33
+!Get Network Routers Information                        0x7b34
+!Get Known Networks Information                         0x7b35
+!Get Server Information                                 0x7b36
+*getserversourcesinfo                                   0x7b37
+!Get Known Servers Information                          0x7b38
+*                                                       0x7b39
+*                                                       0x7b3a
+*                                                       0x7b3b
+!Get Server Set Commands Information                    0x7b3c
+!Get Server Set Categories                              0x7b3d
+*                                                       0x7b3e-ff
+*                                                       0x7c
+*                                                       0x7d
+*                                                       0x7e
+*                                                       0x7f
+ rpcloadanlm                                            0x8300
+ rpcunloadanlm                                          0x8301
+ rpcmountvolume                                         0x8302
+ rpcdismountvolume                                      0x8303
+ rpcaddnamespacetovol                                   0x8304
+ rpcsetsetcommandvalue                                  0x8305
+ rpcexecutencffile                                      0x8306
+*                                                       ...
+*?? does something (3.x)                                0xfd
+*?? does something (3.x)                                0xfe
+*?? does something (3.x)                                0xff
+
+
+?? page 247 asmSDK docu: (reply packet file search continue)
+offset 2 directory ID
+offset 4 reserved
+  observation of packets on net : one of 'm is not there
+
+
+ nwncpds  1 0 resolvename
+ nwncpds  2 2 readobjectinfo
+ nwncpds  3 1 read
+ nwncpds  3 2 read
+ nwncpds  4 0 compare
+ nwncpds  5 1 list
+ nwncpds  5 2 list
+ nwncpds  6 3 search
+ nwncpds  6 4 search
+ nwncpds  7 0 addobject
+ nwncpds  8 0 removeobject
+ nwncpds  9 0 modifyobject
+ nwncpds 10 0 modifyrdn
+ nwncpds 11 0 defineattr
+ nwncpds 12 0 readattrdef
+ nwncpds 13 0 removeattrdef
+ nwncpds 14 0 defineclass
+ nwncpds 15 0 readclassdef
+ nwncpds 16 0 modifyclassdef
+ nwncpds 17 0 removeclassdef
+ nwncpds 18 0 listcontclasses
+ nwncpds 19 0 geteffrights
+ nwncpds 20 0 addpartition
+ nwncpds 21 0 removepartition
+ nwncpds 22 0 listpartitions
+ nwncpds 23 0 splitpartition
+ nwncpds 24 0 joinpartitions
+ nwncpds 25 0 addreplica
+ nwncpds 26 0 removereplica
+ nwncpds 27 0 openstream
+ nwncpds 31 0 changereplicatype
+ nwncpds 38 0 syncpartition
+ nwncpds 38 1 syncpartition
+ nwncpds 39 0 syncschema
+ nwncpds 41 0 getreplicarootid
+ nwncpds 42 0 beginmoveentry
+ nwncpds 43 0 finishmoveentry
+ nwncpds 45 0 backupobject
+ nwncpds 46 0 restoreobject
+ nwncpds 48 0 11 addskulkaction
+ nwncpds 50 0 closeiteration
+ nwncpds 53 0 getserveraddr
+ nwncpds 54 0 setkeys
+ nwncpds 55 0 changepassword
+ nwncpds 56 1 verifypassword
+ nwncpds 57 0 beginlogin
+ nwncpds 58 2 finishlogin
+ nwncpds 59 0 beginauthen
+ nwncpds 60 0 finishauthen
+ nwncpds 61 logout
+ nwncpds 63 0 repairtimestamp
+ nwncpds 76 3 abortpartoperation
+ nwncpds 78 0  1 partfuncrcvupd
+ nwncpds 78 0  2 partfuncsndupd
+ nwncpds 79 0 readreferences
+ nwncpds 80 0 inspectentry
+ nwncpds 88 0 checksev
+</code></pre>
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>Permalink: </strong>
+      <a href="https://nlitsme.github.io/1996/07/1996-07-18-ncp-netwarecoreprotocol/" title="The Netware Core Protocol" target="_blank" rel="external">https://nlitsme.github.io/1996/07/1996-07-18-ncp-netwarecoreprotocol/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/nlitsme" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://nlitsme.github.io/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/nlitsme" target="_blank"><span class="text-dark">Willem Hengeveld</span><small class="ml-1x"></small></a></h3>
+        <div>Interested in taking things apart.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+<hr>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/nlitsme" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://gitlab.com/itsme" target="_blank" title="gitlab" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitlab"></i></a></li>
+    <li><a href="https://www.reddit.com/user/nlitsme1" target="_blank" title="reddit" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-reddit"></i></a></li>
+    <li><a href="/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://stackoverflow.com/users/1049677/" target="_blank" title="stackoverflow" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-stackoverflow"></i></a></li>
+    <li><a href="https://twitter.com/twitsme" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+    <li><a href="https://youtube.com/channel/UCmYzOAvL7VTpZmQXtuqJsZg" target="_blank" title="youtube" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-youtube"></i></a></li>
+</ul>
+
+  <div class="copyright">
+    &copy;2000  -
+    2020
+    <!-- based on https://github.com/xiaoheiAh/hugo-theme-pure -->
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="/assets/js/highlight.pack.js"></script>
+<script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://nlitsme.github.io/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://nlitsme.github.io/js/plugin.min.fdac970cab83e09d53dc1375262e937ce79eb7c241a1672b120c35a47a21b227.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/nlitsme.github.io\/',
+            CONTENT_URL: 'https:\/\/nlitsme.github.io\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://nlitsme.github.io/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/nlitsme.github.io\/1996\/07\/1996-07-18-ncp-netwarecoreprotocol\/';
+        this.page.identifier = 'nlitsme';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nlitsme' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+  </body>
+</html>

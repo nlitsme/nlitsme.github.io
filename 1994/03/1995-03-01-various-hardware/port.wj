@@ -1,0 +1,29 @@
+
+clock chip MM58167A at 377/277, register nr in a14-a10 -> reg 09 : 2777
+00   1/10000 seconds
+01   1/100   seconds
+02   seconds
+03   minutes
+04   hours
+05   day of week
+06   day of month
+07   month
+08   RAM
+09   RAM year
+0a   RAM flags
+0b   RAM minute
+0c   RAM hours
+0d   RAM day of week
+0e   RAM day of month
+0f   RAM last month
+10   irq status
+11   irq control
+12   counters reset
+13   ram reset
+14   status
+15   go command
+16   standby irq
+1f   test mode
+
+
+

@@ -1,0 +1,853 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        MPMP8 Paper folding challenge - Willem&#39;s blog
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="This post describes my solution to Matt Parker&amp;rsquo;s puzzle #8:
+ The think-maths foldingchallenge. Matt Parker&amp;rsquo;s youtube channel.  My solution involves looking at the pattern of folds when viewing the folded stack from the sides. And then using some python code to generate all possible ways the folds can match up in a way that you will still end up with two rows of 4 sheets.
+" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>MPMP8 Paper folding challenge - Willem&#39;s blog</title>
+  
+  
+  <link rel="stylesheet" href="https://nlitsme.github.io/css/style.min.13468ef5be61550fa4d002a591d5552c85369a01cbae5e2d95dc8022cab38679.css">
+  
+  <link rel="stylesheet" href="/assets/css/highlight.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="MPMP8 Paper folding challenge" />
+<meta property="og:description" content="This post describes my solution to Matt Parker&rsquo;s puzzle #8:
+
+The think-maths foldingchallenge.
+Matt Parker&rsquo;s youtube channel.
+
+My solution involves looking at the pattern of folds when viewing the folded stack from the sides.
+And then using some python code to generate all possible ways the folds can match up in a way
+that you will still end up with two rows of 4 sheets." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" />
+<meta property="article:published_time" content="2020-06-11T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-06-11T00:00:00+00:00" />
+<meta itemprop="name" content="MPMP8 Paper folding challenge">
+<meta itemprop="description" content="This post describes my solution to Matt Parker&rsquo;s puzzle #8:
+
+The think-maths foldingchallenge.
+Matt Parker&rsquo;s youtube channel.
+
+My solution involves looking at the pattern of folds when viewing the folded stack from the sides.
+And then using some python code to generate all possible ways the folds can match up in a way
+that you will still end up with two rows of 4 sheets.">
+<meta itemprop="datePublished" content="2020-06-11T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-06-11T00:00:00+00:00" />
+<meta itemprop="wordCount" content="2251">
+
+
+
+<meta itemprop="keywords" content="puzzle,thinkmaths," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="MPMP8 Paper folding challenge"/>
+<meta name="twitter:description" content="This post describes my solution to Matt Parker&rsquo;s puzzle #8:
+
+The think-maths foldingchallenge.
+Matt Parker&rsquo;s youtube channel.
+
+My solution involves looking at the pattern of folds when viewing the folded stack from the sides.
+And then using some python code to generate all possible ways the folds can match up in a way
+that you will still end up with two rows of 4 sheets."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+            
+          <a href="/">
+              <h2 id="name" class="hidden-xs hidden-sm">Willem&#39;s blog</h2>
+          </a>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>The Netherlands</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+            
+            
+            <a href="https://nlitsme.github.io/tags/android/" class="tag-list-link">android</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/arm/" class="tag-list-link">arm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/benchmark/" class="tag-list-link">benchmark</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/bitcoin/" class="tag-list-link">bitcoin</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/c&#43;&#43;/" class="tag-list-link">c&#43;&#43;</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/commandline/" class="tag-list-link">commandline</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crack/" class="tag-list-link">crack</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crypto/" class="tag-list-link">crypto</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ecdsa/" class="tag-list-link">ecdsa</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/elcapitan/" class="tag-list-link">elcapitan</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/galois-field/" class="tag-list-link">galois-field</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/git/" class="tag-list-link">git</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hexdmper/" class="tag-list-link">hexdmper</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ida/" class="tag-list-link">ida</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/interrupts/" class="tag-list-link">interrupts</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/itsutils/" class="tag-list-link">itsutils</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/life/" class="tag-list-link">life</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/math/" class="tag-list-link">math</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/modular-arithmetic/" class="tag-list-link">modular-arithmetic</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/msdos/" class="tag-list-link">msdos</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/museum/" class="tag-list-link">museum</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/netware/" class="tag-list-link">netware</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx/" class="tag-list-link">osx</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx10.11/" class="tag-list-link">osx10.11</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pchardware/" class="tag-list-link">pchardware</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pdf/" class="tag-list-link">pdf</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/perl/" class="tag-list-link">perl</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/philosophy/" class="tag-list-link">philosophy</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/portability/" class="tag-list-link">portability</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/problems/" class="tag-list-link">problems</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/puzzle/" class="tag-list-link">puzzle</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/qualcomm/" class="tag-list-link">qualcomm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/reversing/" class="tag-list-link">reversing</a><span
+                    class="tag-list-count">12</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/soundblaster/" class="tag-list-link">soundblaster</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/templates/" class="tag-list-link">templates</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/thinkmaths/" class="tag-list-link">thinkmaths</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/timemachine/" class="tag-list-link">timemachine</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/tor/" class="tag-list-link">tor</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/vim/" class="tag-list-link">vim</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/wince/" class="tag-list-link">wince</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/youtube/" class="tag-list-link">youtube</a><span
+                    class="tag-list-count">1</span>
+            
+
+    </div>
+</div>
+
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="title">MPMP12 Marching band Problem</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" class="title">MPMP11 David and Anton age puzzle</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-07-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-07-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/" class="title">MPMP9 Take away triangles</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="title">MPMP8 Paper folding challenge</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/youtube-tool/" class="title">A commandline tool for youtube.</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-09</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://nlitsme.github.io/2020/06/youtube-tool/" title="A commandline tool for youtube."><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/"
+                    title="MPMP9 Take away triangles"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="twitter,email"
+                data-mobile-sites="twitter,email,whatsapp,signal"></div>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2020/06/2020-06-11-mpmp8-paper-folding/"
+    >MPMP8 Paper folding challenge</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="article-date">
+  <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+</a>
+</span>
+  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/puzzle/"> puzzle </a>
+    <a class="article-tag-link" href="/tags/thinkmaths/"> thinkmaths </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2020/06/2020-06-11-mpmp8-paper-folding/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 2251words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 11minutes </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p>This post describes my solution to Matt Parker&rsquo;s puzzle #8:</p>
+<ul>
+<li>The <a href="http://think-maths.co.uk/foldingchallenge">think-maths</a> foldingchallenge.</li>
+<li>Matt Parker&rsquo;s <a href="https://www.youtube.com/watch?v=GpClxF41ugg">youtube</a> channel.</li>
+</ul>
+<p>My solution involves looking at the pattern of folds when viewing the folded stack from the sides.
+And then using some python code to generate all possible ways the folds can match up in a way
+that you will still end up with two rows of 4 sheets.</p>
+<p>The list below shows all ways to fold a piece of paper, including ways where the top-left ends up
+on the inside of the folded stack.</p>
+<p>Here I made some ascii drawings for the examples Matt showed in his video:</p>
+<pre><code>---------
+ A D E H
+ B C F G
+---------
+
+view from bottom      view from left
+    -A----\                 -A--\
+    -B--\ |                 -B--/
+/----C--/ |                 -C--\  
+| /--D----/                 -D--/  
+| \--E----\                 -E--\  
+\----F--\ |                 -F--/  
+    -G--/ |                 -G--\  
+    -H----/                 -H--/  
+
+
+---------
+ A H G D
+ B C F E
+---------
+
+view from bottom      view from left
+  -A------\               -A--\
+  -B--\   |               -B--/
+/--C--/   |               -C----\
+| -D----\ |               -D--\ |
+| -E--\ | |               -E--/ |
+\--F--/ | |               -F--\ |
+/--G----/ |               -G--/ |
+\--H------/               -H----/
+
+
+---------
+ A H B G
+ D E C F
+---------
+
+ view from bottom      view from left
+    -A--------\          -A----\
+/----B------\ |          -B--\ |
+| /--C----\ | |          -C--/ | 
+| | -D--\ | | |          -D----/
+| \--E--/ | | |          -E----\ 
+|   -F----/ | |          -F--\ | 
+|   -G------/ |          -G--/ | 
+\----H--------/          -H----/ 
+</code></pre>
+<p>This is a list of all ways to pair up sheets, and still have a valid folding.</p>
+<p>40 with the &lsquo;A&rsquo; on one of the outer corners of the sheet.</p>
+<pre><code>(AD, BC, EH, FG) (CF, DE) --&gt; (AB, CD, EF, GH)    (A, D, E, H) (B, C, F, G)    &lt;&lt; #0      
+(AH, BC, DG, EF) (CF, GH) --&gt; (AB, CH, DE, FG)    (E, F, C, B) (D, G, H, A)    &lt;&lt; #1      
+(AH, BG, CF, DE) (BH, CE) --&gt; (AD, BC, EH, FG)    (D, E, C, F) (A, H, B, G)    &lt;&lt; #2      
+(AB, CH, DG, EF) (BE, CD) --&gt; (AH, BC, DE, FG)    (A, B, E, F) (H, C, D, G)               
+(AB, CH, DE, FG) (BG, CD) --&gt; (AH, BC, DG, EF)    (A, B, G, F) (H, C, D, E)               
+(AB, CH, DE, FG) (BF, CE) --&gt; (AH, BC, DG, EF)    (A, B, F, G) (H, C, E, D)               
+(AB, CD, EH, FG) (BF, CE) --&gt; (AD, BC, EF, GH)    (A, B, F, G) (D, C, E, H)               
+(AB, CD, EF, GH) (BH, CE) --&gt; (AD, BC, EH, FG)    (D, C, E, F) (A, B, H, G)               
+(AB, CH, DG, EF) (BG, CF) --&gt; (AH, BC, DE, FG)    (E, F, C, H) (D, G, B, A)               
+(AF, BE, CD, GH) (BG, CF) --&gt; (AH, BC, DE, FG)    (A, F, C, D) (H, G, B, E)               
+(AB, CD, EF, GH) (BG, CF) --&gt; (AD, BC, EH, FG)    (D, C, F, E) (A, B, G, H)               
+(AH, BE, CD, FG) (BH, CG) --&gt; (AF, BC, DE, GH)    (D, C, G, F) (E, B, H, A)               
+(AB, CD, EH, FG) (BH, CG) --&gt; (AD, BC, EF, GH)    (D, C, G, F) (A, B, H, E)               
+(AB, CH, DG, EF) (BC, DE) --&gt; (AF, BE, CD, GH)    (F, E, D, G) (A, B, C, H)               
+(AB, CF, DE, GH) (BC, DG) --&gt; (AH, BG, CD, EF)    (H, G, D, E) (A, B, C, F)               
+(AB, CD, EF, GH) (BC, FG) --&gt; (AH, BG, CF, DE)    (H, G, F, E) (A, B, C, D)               
+(AF, BC, DE, GH) (BG, EF) --&gt; (AH, BE, CD, FG)    (A, F, E, D) (H, G, B, C)               
+(AB, CH, DG, EF) (BH, EG) --&gt; (AF, BE, CD, GH)    (D, G, E, F) (C, H, B, A)               
+(AH, BC, DE, FG) (BH, EG) --&gt; (AF, BE, CD, GH)    (D, E, G, F) (C, B, H, A)               
+(AB, CD, EF, GH) (BD, EG) --&gt; (AH, BG, CF, DE)    (C, D, B, A) (F, E, G, H)               
+(AD, BC, EH, FG) (BD, EG) --&gt; (AH, BG, CF, DE)    (A, D, B, C) (H, E, G, F)               
+(AB, CF, DE, GH) (BE, FG) --&gt; (AH, BG, CD, EF)    (D, E, B, A) (C, F, G, H)               
+(AD, BC, EF, GH) (CH, DE) --&gt; (AB, CD, EH, FG)    (B, C, H, G) (A, D, E, F)               
+(AF, BC, DE, GH) (CG, DF) --&gt; (AH, BE, CD, FG)    (A, F, D, E) (H, G, C, B)               
+(AD, BC, EF, GH) (CG, DF) --&gt; (AB, CD, EH, FG)    (A, D, F, E) (B, C, G, H)               
+(AH, BC, DE, FG) (CH, DG) --&gt; (AF, BE, CD, GH)    (E, D, G, F) (B, C, H, A)               
+(AD, BC, EH, FG) (CH, DG) --&gt; (AB, CD, EF, GH)    (A, D, G, F) (B, C, H, E)               
+(AH, BG, CF, DE) (CH, DG) --&gt; (AB, CD, EF, GH)    (B, G, D, E) (A, H, C, F)               
+(AD, BC, EH, FG) (CD, EF) --&gt; (AH, BG, CF, DE)    (G, F, E, H) (B, C, D, A)               
+(AH, BC, DG, EF) (CD, EH) --&gt; (AB, CH, DE, FG)    (A, H, E, F) (B, C, D, G)               
+(AH, BC, DE, FG) (CD, GH) --&gt; (AB, CH, DG, EF)    (A, H, G, F) (B, C, D, E)               
+(AH, BG, CD, EF) (CH, FG) --&gt; (AB, CF, DE, GH)    (A, H, C, D) (B, G, F, E)               
+(AF, BE, CD, GH) (CE, FH) --&gt; (AB, CH, DG, EF)    (G, H, F, A) (D, C, E, B)               
+(AH, BC, DE, FG) (CE, FH) --&gt; (AB, CH, DG, EF)    (A, H, F, G) (B, C, E, D)               
+(AF, BE, CD, GH) (DG, EF) --&gt; (AH, BC, DE, FG)    (C, D, G, H) (B, E, F, A)               
+(AH, BE, CD, FG) (DH, EG) --&gt; (AF, BC, DE, GH)    (B, E, G, F) (C, D, H, A)               
+(AH, BG, CD, EF) (DH, EG) --&gt; (AB, CF, DE, GH)    (B, G, E, F) (A, H, D, C)               
+(AF, BE, CD, GH) (DE, FG) --&gt; (AB, CH, DG, EF)    (B, E, D, C) (A, F, G, H)               
+(AH, BG, CF, DE) (EH, FG) --&gt; (AB, CD, EF, GH)    (A, H, E, D) (B, G, F, C)               
+(AH, BG, CF, DE) (EF, GH) --&gt; (AD, BC, EH, FG)    (C, F, E, D) (B, G, H, A)               
+</code></pre>
+<p>40 with the &lsquo;A&rsquo; somewhere in the center squares.</p>
+<pre><code>(AH, BG, CF, DE) (AD, BC) --&gt; (AB, CD, EF, GH)    (E, D, A, H) (F, C, B, G)               
+(AH, BG, CD, EF) (AF, BC) --&gt; (AB, CF, DE, GH)    (E, F, A, H) (D, C, B, G)               
+(AF, BE, CD, GH) (AH, BC) --&gt; (AB, CH, DG, EF)    (D, C, B, E) (G, H, A, F)               
+(AH, BC, DG, EF) (AE, BD) --&gt; (AB, CH, DE, FG)    (F, E, A, H) (G, D, B, C)               
+(AH, BG, CD, EF) (AE, BD) --&gt; (AB, CF, DE, GH)    (F, E, A, H) (C, D, B, G)               
+(AF, BE, CD, GH) (AG, BD) --&gt; (AB, CH, DG, EF)    (F, A, G, H) (E, B, D, C)               
+(AH, BC, DE, FG) (AG, BD) --&gt; (AB, CH, DG, EF)    (F, G, A, H) (E, D, B, C)               
+(AH, BC, DE, FG) (AF, BE) --&gt; (AB, CH, DG, EF)    (G, F, A, H) (D, E, B, C)               
+(AD, BC, EH, FG) (AF, BE) --&gt; (AB, CD, EF, GH)    (D, A, F, G) (C, B, E, H)               
+(AH, BG, CF, DE) (AF, BE) --&gt; (AB, CD, EF, GH)    (C, F, A, H) (D, E, B, G)               
+(AD, BC, EF, GH) (AH, BE) --&gt; (AB, CD, EH, FG)    (C, B, E, F) (D, A, H, G)               
+(AH, BC, DG, EF) (AG, BF) --&gt; (AB, CH, DE, FG)    (C, B, F, E) (H, A, G, D)               
+(AD, BC, EF, GH) (AG, BF) --&gt; (AB, CD, EH, FG)    (C, B, F, E) (D, A, G, H)               
+(AD, BC, EH, FG) (AH, BG) --&gt; (AB, CD, EF, GH)    (C, B, G, F) (D, A, H, E)               
+(AH, BG, CF, DE) (AB, CD) --&gt; (AD, BC, EH, FG)    (E, D, C, F) (H, A, B, G)               
+(AH, BE, CD, FG) (AB, CF) --&gt; (AF, BC, DE, GH)    (G, F, C, D) (H, A, B, E)               
+(AF, BE, CD, GH) (AB, CH) --&gt; (AH, BC, DE, FG)    (G, H, C, D) (F, A, B, E)               
+(AH, BC, DE, FG) (AB, EF) --&gt; (AF, BE, CD, GH)    (G, F, E, D) (H, A, B, C)               
+(AF, BC, DE, GH) (AB, EH) --&gt; (AH, BE, CD, FG)    (G, H, E, D) (F, A, B, C)               
+(AD, BC, EH, FG) (AB, GH) --&gt; (AH, BG, CF, DE)    (E, H, G, F) (D, A, B, C)               
+(AB, CD, EH, FG) (AF, DE) --&gt; (AD, BC, EF, GH)    (B, A, F, G) (C, D, E, H)               
+(AB, CD, EF, GH) (AH, DE) --&gt; (AD, BC, EH, FG)    (C, D, E, F) (B, A, H, G)               
+(AB, CD, EF, GH) (AG, DF) --&gt; (AD, BC, EH, FG)    (B, A, G, H) (C, D, F, E)               
+(AH, BG, CF, DE) (AG, DF) --&gt; (AD, BC, EH, FG)    (B, G, A, H) (C, F, D, E)               
+(AB, CD, EH, FG) (AH, DG) --&gt; (AD, BC, EF, GH)    (C, D, G, F) (B, A, H, E)               
+(AB, CH, DG, EF) (AC, DF) --&gt; (AF, BE, CD, GH)    (E, F, D, G) (B, A, C, H)               
+(AH, BC, DE, FG) (AC, DF) --&gt; (AF, BE, CD, GH)    (G, F, D, E) (H, A, C, B)               
+(AB, CF, DE, GH) (AC, DH) --&gt; (AH, BG, CD, EF)    (F, C, A, B) (E, D, H, G)               
+(AF, BC, DE, GH) (AC, DH) --&gt; (AH, BE, CD, FG)    (B, C, A, F) (E, D, H, G)               
+(AB, CD, EF, GH) (AC, FH) --&gt; (AH, BG, CF, DE)    (G, H, F, E) (B, A, C, D)               
+(AD, BC, EH, FG) (AC, FH) --&gt; (AH, BG, CF, DE)    (E, H, F, G) (D, A, C, B)               
+(AH, BE, CD, FG) (AD, EF) --&gt; (AF, BC, DE, GH)    (C, D, A, H) (B, E, F, G)               
+(AB, CD, EF, GH) (AD, EH) --&gt; (AH, BG, CF, DE)    (G, H, E, F) (B, A, D, C)               
+(AB, CH, DG, EF) (AD, EH) --&gt; (AH, BC, DE, FG)    (C, H, E, F) (B, A, D, G)               
+(AF, BE, CD, GH) (AD, EH) --&gt; (AH, BC, DE, FG)    (G, H, E, B) (F, A, D, C)               
+(AB, CH, DE, FG) (AD, GH) --&gt; (AH, BC, DG, EF)    (E, D, A, B) (F, G, H, C)               
+(AB, CH, DG, EF) (AH, FG) --&gt; (AF, BE, CD, GH)    (D, G, F, E) (C, H, A, B)               
+(AB, CF, DE, GH) (AE, FH) --&gt; (AH, BG, CD, EF)    (G, H, F, C) (B, A, E, D)               
+(AB, CH, DE, FG) (AE, FH) --&gt; (AH, BC, DG, EF)    (C, H, F, G) (B, A, E, D)               
+(AB, CH, DG, EF) (AF, GH) --&gt; (AH, BC, DE, FG)    (E, F, A, B) (D, G, H, C)               
+</code></pre>
+<p>Here in a slightly different notation, using brackets to indicate which sheets are connected together.</p>
+<p>40 with the &lsquo;A&rsquo; on one of the outer corners of the sheet.</p>
+<pre><code>&lt;(A(BC)D)(E(FG)H)&gt; + &lt;AB(C(DE)F)GH&gt; -&gt; &lt;(AB)(CD)(EF)(GH)&gt;    &lt;&lt; #0      
+&lt;(A(BC)(D(EF)G)H)&gt; + &lt;AB(CDEF)(GH)&gt; -&gt; &lt;(AB)(C(DE)(FG)H)&gt;    &lt;&lt; #1      
+&lt;(A(B(C(DE)F)G)H)&gt; + &lt;A(B(CDE)FGH)&gt; -&gt; &lt;(A(BC)D)(E(FG)H)&gt;    &lt;&lt; #2      
+&lt;(AB)(C(D(EF)G)H)&gt; + &lt;A(B(CD)E)FGH&gt; -&gt; &lt;(A(BC)(DE)(FG)H)&gt;
+&lt;(AB)(C(DE)(FG)H)&gt; + &lt;A(B(CD)EFG)H&gt; -&gt; &lt;(A(BC)(D(EF)G)H)&gt;
+&lt;(AB)(C(DE)(FG)H)&gt; + &lt;A(B(CDE)F)GH&gt; -&gt; &lt;(A(BC)(D(EF)G)H)&gt;
+&lt;(AB)(CD)(E(FG)H)&gt; + &lt;A(B(CDE)F)GH&gt; -&gt; &lt;(A(BC)D)(EF)(GH)&gt;
+&lt;(AB)(CD)(EF)(GH)&gt; + &lt;A(B(CDE)FGH)&gt; -&gt; &lt;(A(BC)D)(E(FG)H)&gt;
+&lt;(AB)(C(D(EF)G)H)&gt; + &lt;A(B(CDEF)G)H&gt; -&gt; &lt;(A(BC)(DE)(FG)H)&gt;
+&lt;(A(B(CD)E)F)(GH)&gt; + &lt;A(B(CDEF)G)H&gt; -&gt; &lt;(A(BC)(DE)(FG)H)&gt;
+&lt;(AB)(CD)(EF)(GH)&gt; + &lt;A(B(CDEF)G)H&gt; -&gt; &lt;(A(BC)D)(E(FG)H)&gt;
+&lt;(A(B(CD)E)(FG)H)&gt; + &lt;A(B(CDEFG)H)&gt; -&gt; &lt;(A(BC)(DE)F)(GH)&gt;
+&lt;(AB)(CD)(E(FG)H)&gt; + &lt;A(B(CDEFG)H)&gt; -&gt; &lt;(A(BC)D)(EF)(GH)&gt;
+&lt;(AB)(C(D(EF)G)H)&gt; + &lt;A(BC)(DE)FGH&gt; -&gt; &lt;(A(B(CD)E)F)(GH)&gt;
+&lt;(AB)(C(DE)F)(GH)&gt; + &lt;A(BC)(DEFG)H&gt; -&gt; &lt;(A(B(CD)(EF)G)H)&gt;
+&lt;(AB)(CD)(EF)(GH)&gt; + &lt;A(BC)DE(FG)H&gt; -&gt; &lt;(A(B(C(DE)F)G)H)&gt;
+&lt;(A(BC)(DE)F)(GH)&gt; + &lt;A(BCD(EF)G)H&gt; -&gt; &lt;(A(B(CD)E)(FG)H)&gt;
+&lt;(AB)(C(D(EF)G)H)&gt; + &lt;A(BCD(EFG)H)&gt; -&gt; &lt;(A(B(CD)E)F)(GH)&gt;
+&lt;(A(BC)(DE)(FG)H)&gt; + &lt;A(BCD(EFG)H)&gt; -&gt; &lt;(A(B(CD)E)F)(GH)&gt;
+&lt;(AB)(CD)(EF)(GH)&gt; + &lt;A(BCD)(EFG)H&gt; -&gt; &lt;(A(B(C(DE)F)G)H)&gt;
+&lt;(A(BC)D)(E(FG)H)&gt; + &lt;A(BCD)(EFG)H&gt; -&gt; &lt;(A(B(C(DE)F)G)H)&gt;
+&lt;(AB)(C(DE)F)(GH)&gt; + &lt;A(BCDE)(FG)H&gt; -&gt; &lt;(A(B(CD)(EF)G)H)&gt;
+&lt;(A(BC)D)(EF)(GH)&gt; + &lt;AB(C(DE)FGH)&gt; -&gt; &lt;(AB)(CD)(E(FG)H)&gt;
+&lt;(A(BC)(DE)F)(GH)&gt; + &lt;AB(C(DEF)G)H&gt; -&gt; &lt;(A(B(CD)E)(FG)H)&gt;
+&lt;(A(BC)D)(EF)(GH)&gt; + &lt;AB(C(DEF)G)H&gt; -&gt; &lt;(AB)(CD)(E(FG)H)&gt;
+&lt;(A(BC)(DE)(FG)H)&gt; + &lt;AB(C(DEFG)H)&gt; -&gt; &lt;(A(B(CD)E)F)(GH)&gt;
+&lt;(A(BC)D)(E(FG)H)&gt; + &lt;AB(C(DEFG)H)&gt; -&gt; &lt;(AB)(CD)(EF)(GH)&gt;
+&lt;(A(B(C(DE)F)G)H)&gt; + &lt;AB(C(DEFG)H)&gt; -&gt; &lt;(AB)(CD)(EF)(GH)&gt;
+&lt;(A(BC)D)(E(FG)H)&gt; + &lt;AB(CD)(EF)GH&gt; -&gt; &lt;(A(B(C(DE)F)G)H)&gt;
+&lt;(A(BC)(D(EF)G)H)&gt; + &lt;AB(CD)(EFGH)&gt; -&gt; &lt;(AB)(C(DE)(FG)H)&gt;
+&lt;(A(BC)(DE)(FG)H)&gt; + &lt;AB(CD)EF(GH)&gt; -&gt; &lt;(AB)(C(D(EF)G)H)&gt;
+&lt;(A(B(CD)(EF)G)H)&gt; + &lt;AB(CDE(FG)H)&gt; -&gt; &lt;(AB)(C(DE)F)(GH)&gt;
+&lt;(A(B(CD)E)F)(GH)&gt; + &lt;AB(CDE)(FGH)&gt; -&gt; &lt;(AB)(C(D(EF)G)H)&gt;
+&lt;(A(BC)(DE)(FG)H)&gt; + &lt;AB(CDE)(FGH)&gt; -&gt; &lt;(AB)(C(D(EF)G)H)&gt;
+&lt;(A(B(CD)E)F)(GH)&gt; + &lt;ABC(D(EF)G)H&gt; -&gt; &lt;(A(BC)(DE)(FG)H)&gt;
+&lt;(A(B(CD)E)(FG)H)&gt; + &lt;ABC(D(EFG)H)&gt; -&gt; &lt;(A(BC)(DE)F)(GH)&gt;
+&lt;(A(B(CD)(EF)G)H)&gt; + &lt;ABC(D(EFG)H)&gt; -&gt; &lt;(AB)(C(DE)F)(GH)&gt;
+&lt;(A(B(CD)E)F)(GH)&gt; + &lt;ABC(DE)(FG)H&gt; -&gt; &lt;(AB)(C(D(EF)G)H)&gt;
+&lt;(A(B(C(DE)F)G)H)&gt; + &lt;ABCD(E(FG)H)&gt; -&gt; &lt;(AB)(CD)(EF)(GH)&gt;
+&lt;(A(B(C(DE)F)G)H)&gt; + &lt;ABCD(EF)(GH)&gt; -&gt; &lt;(A(BC)D)(E(FG)H)&gt;
+</code></pre>
+<p>40 with the &lsquo;A&rsquo; somewhere in the center squares.</p>
+<pre><code>&lt;(A(B(C(DE)F)G)H)&gt; + &lt;(A(BC)D)EFGH&gt; -&gt; &lt;(AB)(CD)(EF)(GH)&gt;
+&lt;(A(B(CD)(EF)G)H)&gt; + &lt;(A(BC)DEF)GH&gt; -&gt; &lt;(AB)(C(DE)F)(GH)&gt;
+&lt;(A(B(CD)E)F)(GH)&gt; + &lt;(A(BC)DEFGH)&gt; -&gt; &lt;(AB)(C(D(EF)G)H)&gt;
+&lt;(A(BC)(D(EF)G)H)&gt; + &lt;(A(BCD)E)FGH&gt; -&gt; &lt;(AB)(C(DE)(FG)H)&gt;
+&lt;(A(B(CD)(EF)G)H)&gt; + &lt;(A(BCD)E)FGH&gt; -&gt; &lt;(AB)(C(DE)F)(GH)&gt;
+&lt;(A(B(CD)E)F)(GH)&gt; + &lt;(A(BCD)EFG)H&gt; -&gt; &lt;(AB)(C(D(EF)G)H)&gt;
+&lt;(A(BC)(DE)(FG)H)&gt; + &lt;(A(BCD)EFG)H&gt; -&gt; &lt;(AB)(C(D(EF)G)H)&gt;
+&lt;(A(BC)(DE)(FG)H)&gt; + &lt;(A(BCDE)F)GH&gt; -&gt; &lt;(AB)(C(D(EF)G)H)&gt;
+&lt;(A(BC)D)(E(FG)H)&gt; + &lt;(A(BCDE)F)GH&gt; -&gt; &lt;(AB)(CD)(EF)(GH)&gt;
+&lt;(A(B(C(DE)F)G)H)&gt; + &lt;(A(BCDE)F)GH&gt; -&gt; &lt;(AB)(CD)(EF)(GH)&gt;
+&lt;(A(BC)D)(EF)(GH)&gt; + &lt;(A(BCDE)FGH)&gt; -&gt; &lt;(AB)(CD)(E(FG)H)&gt;
+&lt;(A(BC)(D(EF)G)H)&gt; + &lt;(A(BCDEF)G)H&gt; -&gt; &lt;(AB)(C(DE)(FG)H)&gt;
+&lt;(A(BC)D)(EF)(GH)&gt; + &lt;(A(BCDEF)G)H&gt; -&gt; &lt;(AB)(CD)(E(FG)H)&gt;
+&lt;(A(BC)D)(E(FG)H)&gt; + &lt;(A(BCDEFG)H)&gt; -&gt; &lt;(AB)(CD)(EF)(GH)&gt;
+&lt;(A(B(C(DE)F)G)H)&gt; + &lt;(AB)(CD)EFGH&gt; -&gt; &lt;(A(BC)D)(E(FG)H)&gt;
+&lt;(A(B(CD)E)(FG)H)&gt; + &lt;(AB)(CDEF)GH&gt; -&gt; &lt;(A(BC)(DE)F)(GH)&gt;
+&lt;(A(B(CD)E)F)(GH)&gt; + &lt;(AB)(CDEFGH)&gt; -&gt; &lt;(A(BC)(DE)(FG)H)&gt;
+&lt;(A(BC)(DE)(FG)H)&gt; + &lt;(AB)CD(EF)GH&gt; -&gt; &lt;(A(B(CD)E)F)(GH)&gt;
+&lt;(A(BC)(DE)F)(GH)&gt; + &lt;(AB)CD(EFGH)&gt; -&gt; &lt;(A(B(CD)E)(FG)H)&gt;
+&lt;(A(BC)D)(E(FG)H)&gt; + &lt;(AB)CDEF(GH)&gt; -&gt; &lt;(A(B(C(DE)F)G)H)&gt;
+&lt;(AB)(CD)(E(FG)H)&gt; + &lt;(ABC(DE)F)GH&gt; -&gt; &lt;(A(BC)D)(EF)(GH)&gt;
+&lt;(AB)(CD)(EF)(GH)&gt; + &lt;(ABC(DE)FGH)&gt; -&gt; &lt;(A(BC)D)(E(FG)H)&gt;
+&lt;(AB)(CD)(EF)(GH)&gt; + &lt;(ABC(DEF)G)H&gt; -&gt; &lt;(A(BC)D)(E(FG)H)&gt;
+&lt;(A(B(C(DE)F)G)H)&gt; + &lt;(ABC(DEF)G)H&gt; -&gt; &lt;(A(BC)D)(E(FG)H)&gt;
+&lt;(AB)(CD)(E(FG)H)&gt; + &lt;(ABC(DEFG)H)&gt; -&gt; &lt;(A(BC)D)(EF)(GH)&gt;
+&lt;(AB)(C(D(EF)G)H)&gt; + &lt;(ABC)(DEF)GH&gt; -&gt; &lt;(A(B(CD)E)F)(GH)&gt;
+&lt;(A(BC)(DE)(FG)H)&gt; + &lt;(ABC)(DEF)GH&gt; -&gt; &lt;(A(B(CD)E)F)(GH)&gt;
+&lt;(AB)(C(DE)F)(GH)&gt; + &lt;(ABC)(DEFGH)&gt; -&gt; &lt;(A(B(CD)(EF)G)H)&gt;
+&lt;(A(BC)(DE)F)(GH)&gt; + &lt;(ABC)(DEFGH)&gt; -&gt; &lt;(A(B(CD)E)(FG)H)&gt;
+&lt;(AB)(CD)(EF)(GH)&gt; + &lt;(ABC)DE(FGH)&gt; -&gt; &lt;(A(B(C(DE)F)G)H)&gt;
+&lt;(A(BC)D)(E(FG)H)&gt; + &lt;(ABC)DE(FGH)&gt; -&gt; &lt;(A(B(C(DE)F)G)H)&gt;
+&lt;(A(B(CD)E)(FG)H)&gt; + &lt;(ABCD)(EF)GH&gt; -&gt; &lt;(A(BC)(DE)F)(GH)&gt;
+&lt;(AB)(CD)(EF)(GH)&gt; + &lt;(ABCD)(EFGH)&gt; -&gt; &lt;(A(B(C(DE)F)G)H)&gt;
+&lt;(AB)(C(D(EF)G)H)&gt; + &lt;(ABCD)(EFGH)&gt; -&gt; &lt;(A(BC)(DE)(FG)H)&gt;
+&lt;(A(B(CD)E)F)(GH)&gt; + &lt;(ABCD)(EFGH)&gt; -&gt; &lt;(A(BC)(DE)(FG)H)&gt;
+&lt;(AB)(C(DE)(FG)H)&gt; + &lt;(ABCD)EF(GH)&gt; -&gt; &lt;(A(BC)(D(EF)G)H)&gt;
+&lt;(AB)(C(D(EF)G)H)&gt; + &lt;(ABCDE(FG)H)&gt; -&gt; &lt;(A(B(CD)E)F)(GH)&gt;
+&lt;(AB)(C(DE)F)(GH)&gt; + &lt;(ABCDE)(FGH)&gt; -&gt; &lt;(A(B(CD)(EF)G)H)&gt;
+&lt;(AB)(C(DE)(FG)H)&gt; + &lt;(ABCDE)(FGH)&gt; -&gt; &lt;(A(BC)(D(EF)G)H)&gt;
+&lt;(AB)(C(D(EF)G)H)&gt; + &lt;(ABCDEF)(GH)&gt; -&gt; &lt;(A(BC)(DE)(FG)H)&gt;
+</code></pre>
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>Permalink: </strong>
+      <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" title="MPMP8 Paper folding challenge" target="_blank" rel="external">https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/nlitsme" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://nlitsme.github.io/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/nlitsme" target="_blank"><span class="text-dark">Willem Hengeveld</span><small class="ml-1x"></small></a></h3>
+        <div>Interested in taking things apart.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+<hr>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/nlitsme" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://gitlab.com/itsme" target="_blank" title="gitlab" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitlab"></i></a></li>
+    <li><a href="https://www.reddit.com/user/nlitsme1" target="_blank" title="reddit" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-reddit"></i></a></li>
+    <li><a href="/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://stackoverflow.com/users/1049677/" target="_blank" title="stackoverflow" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-stackoverflow"></i></a></li>
+    <li><a href="https://twitter.com/twitsme" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+    <li><a href="https://youtube.com/channel/UCmYzOAvL7VTpZmQXtuqJsZg" target="_blank" title="youtube" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-youtube"></i></a></li>
+</ul>
+
+  <div class="copyright">
+    &copy;2000  -
+    2020
+    <!-- based on https://github.com/xiaoheiAh/hugo-theme-pure -->
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="/assets/js/highlight.pack.js"></script>
+<script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://nlitsme.github.io/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://nlitsme.github.io/js/plugin.min.fdac970cab83e09d53dc1375262e937ce79eb7c241a1672b120c35a47a21b227.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/nlitsme.github.io\/',
+            CONTENT_URL: 'https:\/\/nlitsme.github.io\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://nlitsme.github.io/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/nlitsme.github.io\/2020\/06\/2020-06-11-mpmp8-paper-folding\/';
+        this.page.identifier = 'nlitsme';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nlitsme' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+  </body>
+</html>

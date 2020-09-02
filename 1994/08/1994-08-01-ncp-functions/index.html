@@ -1,0 +1,866 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        The Netware Core Protocol - Willem&#39;s blog
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="An early version of the 1996 document
+Listing functions available in the Novell Netware Core Protocol.
+" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>The Netware Core Protocol - Willem&#39;s blog</title>
+  
+  
+  <link rel="stylesheet" href="https://nlitsme.github.io/css/style.min.13468ef5be61550fa4d002a591d5552c85369a01cbae5e2d95dc8022cab38679.css">
+  
+  <link rel="stylesheet" href="/assets/css/highlight.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="The Netware Core Protocol" />
+<meta property="og:description" content="An early version of the 1996 document
+Listing functions available in the Novell Netware Core Protocol." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nlitsme.github.io/1994/08/1994-08-01-ncp-functions/" />
+<meta property="article:published_time" content="1994-08-01T00:00:00+00:00" />
+<meta property="article:modified_time" content="1994-08-01T00:00:00+00:00" />
+<meta itemprop="name" content="The Netware Core Protocol">
+<meta itemprop="description" content="An early version of the 1996 document
+Listing functions available in the Novell Netware Core Protocol.">
+<meta itemprop="datePublished" content="1994-08-01T00:00:00+00:00" />
+<meta itemprop="dateModified" content="1994-08-01T00:00:00+00:00" />
+<meta itemprop="wordCount" content="1163">
+
+
+
+<meta itemprop="keywords" content="museum,netware,reversing," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The Netware Core Protocol"/>
+<meta name="twitter:description" content="An early version of the 1996 document
+Listing functions available in the Novell Netware Core Protocol."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+            
+          <a href="/">
+              <h2 id="name" class="hidden-xs hidden-sm">Willem&#39;s blog</h2>
+          </a>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>The Netherlands</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+            
+            
+            <a href="https://nlitsme.github.io/tags/android/" class="tag-list-link">android</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/arm/" class="tag-list-link">arm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/benchmark/" class="tag-list-link">benchmark</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/bitcoin/" class="tag-list-link">bitcoin</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/c&#43;&#43;/" class="tag-list-link">c&#43;&#43;</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/commandline/" class="tag-list-link">commandline</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crack/" class="tag-list-link">crack</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crypto/" class="tag-list-link">crypto</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ecdsa/" class="tag-list-link">ecdsa</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/elcapitan/" class="tag-list-link">elcapitan</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/galois-field/" class="tag-list-link">galois-field</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/git/" class="tag-list-link">git</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hexdmper/" class="tag-list-link">hexdmper</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ida/" class="tag-list-link">ida</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/interrupts/" class="tag-list-link">interrupts</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/itsutils/" class="tag-list-link">itsutils</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/life/" class="tag-list-link">life</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/math/" class="tag-list-link">math</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/modular-arithmetic/" class="tag-list-link">modular-arithmetic</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/msdos/" class="tag-list-link">msdos</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/museum/" class="tag-list-link">museum</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/netware/" class="tag-list-link">netware</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx/" class="tag-list-link">osx</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx10.11/" class="tag-list-link">osx10.11</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pchardware/" class="tag-list-link">pchardware</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pdf/" class="tag-list-link">pdf</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/perl/" class="tag-list-link">perl</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/philosophy/" class="tag-list-link">philosophy</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/portability/" class="tag-list-link">portability</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/problems/" class="tag-list-link">problems</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/puzzle/" class="tag-list-link">puzzle</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/qualcomm/" class="tag-list-link">qualcomm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/reversing/" class="tag-list-link">reversing</a><span
+                    class="tag-list-count">12</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/soundblaster/" class="tag-list-link">soundblaster</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/templates/" class="tag-list-link">templates</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/thinkmaths/" class="tag-list-link">thinkmaths</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/timemachine/" class="tag-list-link">timemachine</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/tor/" class="tag-list-link">tor</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/vim/" class="tag-list-link">vim</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/wince/" class="tag-list-link">wince</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/youtube/" class="tag-list-link">youtube</a><span
+                    class="tag-list-count">1</span>
+            
+
+    </div>
+</div>
+
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="title">MPMP12 Marching band Problem</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" class="title">MPMP11 David and Anton age puzzle</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-07-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-07-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/" class="title">MPMP9 Take away triangles</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="title">MPMP8 Paper folding challenge</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/youtube-tool/" class="title">A commandline tool for youtube.</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-09</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://nlitsme.github.io/1994/03/1995-03-01-various-hardware/" title="My ancient IBM PC research"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://nlitsme.github.io/1994/08/1994-08-23-novell-bindery-format/"
+                    title="The Novell Netware bindery format"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="twitter,email"
+                data-mobile-sites="twitter,email,whatsapp,signal"></div>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/1994/08/1994-08-01-ncp-functions/"
+    >The Netware Core Protocol</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://nlitsme.github.io/1994/08/1994-08-01-ncp-functions/" class="article-date">
+  <time datetime="1994-08-01 00:00:00 &#43;0000 UTC" itemprop="datePublished">1994-08-01</time>
+</a>
+</span>
+  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/museum/"> museum </a>
+    <a class="article-tag-link" href="/tags/netware/"> netware </a>
+    <a class="article-tag-link" href="/tags/reversing/"> reversing </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/1994/08/1994-08-01-ncp-functions/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 1163words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 6minutes </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p>An early version of the 1996 document</p>
+<p>Listing functions available in the Novell Netware Core Protocol.</p>
+<pre><code>types:
+  name = [len:1, data:len]
+object = [type:2, name:name]
+
+ncp14-00  spool data to a capture file
+ncp14-01  close and queue capture file
+ncp14-02  set spool flags
+ncp14-03  spool existing file
+ncp14-04  get spool queue entry
+ncp14-05  remove entry from spool queue
+ncp14-06  get printer status for printer N (0-4)
+      [N:1] -&gt; [status:4]
+ncp14-09  specify capture file  (h=dirhandle)
+      [h:1  fn:Lstring]
+
+ncp15-00  send broadcast message
+      [N:1 connlist:N  msg:Lstring]  -&gt; [N:1 result:N]
+ncp15-01  get broadcast message
+      []  -&gt; [msg:Lstring]
+ncp15-02  enable broadcast messages
+ncp15-03  disable broadcast messages
+ncp15-04  send personal message
+      [N:1 connlist:N  msg:Lstring]  -&gt; [N:1 result:N]
+ncp15-05  get personal message
+      []  -&gt; [conn:1 msg:Lstring]
+ncp15-06  open message pipe
+      [N:1  connList:N]  -&gt; [N:1 result:N]
+ncp15-07  close message pipe
+      [N:1  connList:N]  -&gt; [N:1 result:N]
+ncp15-08  check pipe status
+      [N:1  connList:N]  -&gt; [N:1 result:N]
+ncp15-09  broadcast to console
+      [msg:Lstring]
+
+ncp16-00  set directory handle
+      [src:1  dst:1  path:Lstring]
+ncp16-01  get directory path
+      [dirh:1] -&gt; [path:Lstring]
+ncp16-02  scan directory information
+      [dirh:1  seq:2  path:Lstring]
+      -&gt;  [name:16 datetime:4 owner:4 maxrights:1 x:1 seq:2]
+
+ncp16-03  get effective directory rights
+      [dirh:1 path:Lstring]  -&gt;  [rights:1]
+ncp16-04  modify maximum rights mask
+      [dirh:1 grant:1 revoke:1 path:Lstring]
+ncp16-05  get volume number
+      [vol:Lstring] -&gt; [num:1]
+ncp16-06  get volume name
+      [num:1] -&gt; [vol:16]
+ncp16-0A  create directory
+      [dirh:1  maxrights:1  path:Lstring]
+ncp16-0B  delete directory
+      [dirh:1  x:1  path:Lstring]
+ncp16-0C  scan directory for trustees
+      [dirh:1  seq:1  path:Lstring]
+      -&gt;   [dir:16 datetime:4 owner:4  trustees:4*5  rights:1*5]
+ncp16-0D  add trustee to directory
+      [dirh:1  trustee:4 rights:1  path:Lstring]
+ncp16-0E  delete trustee from directory
+      [dirh:1  trustee:4 x:1  path:Lstring]
+ncp16-0F  rename directory
+      [dirh:1  path:Lstring  newname:Lstring]
+ncp16-10  purge erased files
+      []
+ncp16-11  restore erased file
+      [dirh:1 volname:Lstring]  -&gt; [orgname:15  newname:15]
+ncp16-12  alloc permanent directory handle
+      [dirh:1 drive:1 path:Lstring] -&gt; [newh:1 rigths:1]
+ncp16-13  alloc temporary directory haNDLE
+      [dirh:1 drive:1 path:Lstring]
+ncp16-14  deallocate directory handle
+      [dirh:1]
+ncp16-15  get volume info with handle
+      [dirh:1]
+      -&gt;  [blksct:2  volblk:2  avail:2 dirslot:2 availslot:2 volname:16 rm:2]
+ncp16-16  alloc special temp dir handle
+ncp16-17  save directory handle
+      [dirh:1]  -&gt;  [buf:16]
+ncp16-18  restore directory handle
+      [buf:16]  -&gt;  [dirh:1 rights:1]
+ncp16-19  set directory information
+      [dirh:1 datetime:4 owner:4 maxrights:1 path:Lstring]
+ncp16-1A  get path from directory entry
+      [volnr:1 direntry:2] -&gt; [path]
+
+ncp17-00 Login User Object
+ncp17-01 Change User Password
+ncp17-02 Map User To Station Set
+ncp17-03 Map Object To Number
+ncp17-04 Map Number To Object
+ncp17-05 Get Station's Logged Information
+ncp17-06  get station's root mask (obsolete)
+ncp17-07  map group name to number
+ncp17-08 Map Number To Group Name
+ncp17-09 Get Member Set M of Group G
+ncp17-0A Enter Login Area
+ncp17-0B
+ncp17-0C Verify Network Serial Number
+ncp17-0D Log Network Message
+ncp17-0E Get Disk Utilization
+ncp17-0F Scan File Information
+ncp17-10 Set File Information
+ncp17-11 Get File Server Information
+ncp17-12 Get Network Serial Number
+ncp17-13 Get Internet Address
+ncp17-14 Login Object
+ncp17-15 Get Object Connection Numbers
+ncp17-16 Get Connection Information
+ncp17-17 Get Encryption Key
+ncp17-18 Login Object Encrypted
+ncp17- 19 -
+ncp17-1a Get Internet Address
+      [connid:4]
+ncp17-1b Get Object Connection List
+      [lastcon:4  object:object] -&gt; [len:1 connid:4*len]
+ncp17-1c Get Station Logged Info
+      [connid:4]
+ncp17-1d Change Connection State
+ncp17-1e Set Watchdog Delay Interval
+ncp17-1F Get Connection List From Object
+ncp17- 20/31
+ncp17-32 Create Bindery Object
+      [obflg:1 obsec:1 object:object], obflg=0(static) 1(dynamic)
+ncp17-33 Delete Bindery Object
+      [object:object]
+ncp17-34 Rename Bindery Object
+      [object:object new:name]
+ncp17-35 Get Bindery Object ID
+      [object:object]
+ncp17-36 Get Bindery Object Name
+      [objid:4]
+ncp17-37 Scan Bindery Object
+      [lastobjid:4 object:object], ffffffff ffff 1:'*' for all
+ncp17-38 Change Bindery Object Security
+      [obsec:1 object:object]
+ncp17-39 Create Property
+      [object:object propflg:1 propsec:1 property:name]
+ncp17-3A Delete Property
+      [object:object property:name]
+ncp17-3B Change Property Security
+      [object:object propsec:1 property:name]
+ncp17-3C Scan Property
+      [object:object p_seq:4 property:name], start with p_seq=ffffffff
+      [prop:16 flag:1 sec:1 seq:4 val:1 more:1]
+ncp17-3D Read Property Value
+      [object:object v_seq:1 property:name], start with v_seq=01
+ncp17-3E Write Property Value
+      [object:object v_seq:1 delold:1 property:name data:128]
+ncp17-3F Verify Bindery Object Password
+      [object:object passwd:name]
+ncp17-40 Change Bindery Object Password
+      [object:object oldpw:name newpw:name]
+ncp17-41 Add Bindery Object to Set
+      [object:object prop:name member:object]
+ncp17-42 Delete Bindery Object From Set
+      [object:object prop:name member:object]
+ncp17-43 Is Bindery Object In Set
+      [object:object prop:name member:object]
+ncp17-44 Close Bindery
+ncp17-45 Open Bindery
+ncp17-46 Get Bindery Access Level
+ncp17-47 Scan Bindery Object Trustee Paths
+      [volume:1 seq:2 objID:4]   start: seq=00
+ncp17-48 Get Bindery Object Access Level
+ncp17-49 Is Station A Manager
+ncp17-4A Verify Bindery Object Password Encrypted
+ncp17-4B Change Bindery Object Password Encrypted
+ncp17-4C Get RelationOf An Object
+ncp17- 4d/63
+ncp17-64 Create Queue
+ncp17-65 Destroy Queue
+ncp17-66 Read Queue Current Status
+ncp17-67 Set Queue Current Status
+ncp17-68 Create Queue Job And File
+ncp17-69 Close File And Start Job Queue
+ncp17-6A Remove Job From Queue
+ncp17-6B Get Queue Job List
+ncp17-6C Read Queue Job Entry
+ncp17-6D Change Queue Job Entry
+ncp17-6E Change Queue Job Position
+ncp17-6F Attach Queue Server To Queue
+ncp17-70 Detach Queue Server From Queue
+ncp17-71 Service Queue Job And Open File
+ncp17-72 Finish Servicing Queue Job And File
+ncp17-73 Abort Servicing Queue Job And File
+ncp17-74 Change To Client Rights
+ncp17-75 Restore Queue Server Rights
+ncp17-76 Read Queue Server Current Status
+ncp17-77 Set Queue Server Current Status
+ncp17-78 Get Queue Job's File Size
+ncp17- 79/95
+ncp17-96 Get Account Status
+ncp17-97 Submit Account Charge
+ncp17-98 Submit Account Hold
+ncp17-99 Submit Account Note
+ncp17- 9a/c7
+ncp17-C8 Check Console Privileges
+ncp17-C9 Get File Server Description Strings
+ncp17-CA Set File Server Date And Time
+ncp17-CB Disable File Server Login
+ncp17-CC Enable File Server Login
+ncp17-CD Get File Server Login Status
+ncp17-CE Purge All Erased Files
+ncp17-CF Disable Transaction Tracking
+ncp17-D0 Enable Transaction Tracking
+ncp17-D1 Send Console Broadcast
+ncp17-D2 Clear Connection Number
+ncp17-D3 Down File Server
+ncp17-D4 Get File System Statistics
+ncp17-D5 TTS Get Statistics
+ncp17-D6 Get Disk Cache Statistics
+ncp17-D7 Get Drive Mapping Table
+ncp17-D8 Get Physical Disk Statistics
+ncp17-D9 Get Disk Channel Statistics
+ncp17-DA Get Connection's Task Information
+ncp17-DB Get Connection's Open Files
+ncp17-DC Get Connections Using A File
+ncp17-DD Get Physical Record Locks By Connection And File
+ncp17-DE Get Physical Record Locks By File
+ncp17-DF Get Logical Records By Connection
+ncp17-E0 Get Logical Record Information
+ncp17-E1 Get Connection's Semaphores
+ncp17-E2 Get Semaphore Information
+ncp17-E3 Get LAN Driver's Configuration Information
+ncp17-E5 Get Connection's Usage Statistics
+ncp17-E6 Get Bindery Object Disk Space Left
+ncp17-E7 Get File Server LAN I/O Statistics
+ncp17-E8 Get File Server Misc Information
+ncp17-E9 Get Volume Information
+   16-27 Add Extended Trustee to File/Dir      [dirhandle:1, objID:4, trust:2, path]
+   16-0d Add Trustee to Directory              [dirhandle:1, trustID:4, trustmask:1, path]
+   57-0a Add Trustee Set To File or Directory  [namespace:1, ?:0, srchatt:2, trust:2, cnt:2, ...]
+   17-73 Abort Servicing Queue Job(old)        [qID:4 jobNum:2]
+   17-84 Abort Servicing Queue Job(new)        [qID:4 jobNum:4]
+   17-41 Add Bindery Object to Set             [set, propname, member]
+   16-21 Add User Disk Space Restriction       [vol:1, objID:4, limit:4]
+ncp17- ea/ff
+
+int21ef00  get drive handle table  : 32 dirhandles
+int21ef01  get drive flag table    : 32 flags: local/net, mapped/not mapped
+int21ef02  get drive connection id : 32 svrConID
+int21ef03  get connection table
+int21ef04  get file server name table
+
+int21f000  set preferred connection id
+int21f001  get preferred connection id
+int21f002  get default connection id
+int21f003  get lpt capture status
+int21f004  set primary connection id
+int21f005  get primary connection id
+
+int21f100  attach to file server
+int21f101  dettach to file server
+int21f102  logout from file server
+</code></pre>
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>Permalink: </strong>
+      <a href="https://nlitsme.github.io/1994/08/1994-08-01-ncp-functions/" title="The Netware Core Protocol" target="_blank" rel="external">https://nlitsme.github.io/1994/08/1994-08-01-ncp-functions/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/nlitsme" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://nlitsme.github.io/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/nlitsme" target="_blank"><span class="text-dark">Willem Hengeveld</span><small class="ml-1x"></small></a></h3>
+        <div>Interested in taking things apart.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+<hr>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/nlitsme" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://gitlab.com/itsme" target="_blank" title="gitlab" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitlab"></i></a></li>
+    <li><a href="https://www.reddit.com/user/nlitsme1" target="_blank" title="reddit" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-reddit"></i></a></li>
+    <li><a href="/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://stackoverflow.com/users/1049677/" target="_blank" title="stackoverflow" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-stackoverflow"></i></a></li>
+    <li><a href="https://twitter.com/twitsme" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+    <li><a href="https://youtube.com/channel/UCmYzOAvL7VTpZmQXtuqJsZg" target="_blank" title="youtube" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-youtube"></i></a></li>
+</ul>
+
+  <div class="copyright">
+    &copy;2000  -
+    2020
+    <!-- based on https://github.com/xiaoheiAh/hugo-theme-pure -->
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="/assets/js/highlight.pack.js"></script>
+<script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://nlitsme.github.io/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://nlitsme.github.io/js/plugin.min.fdac970cab83e09d53dc1375262e937ce79eb7c241a1672b120c35a47a21b227.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/nlitsme.github.io\/',
+            CONTENT_URL: 'https:\/\/nlitsme.github.io\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://nlitsme.github.io/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/nlitsme.github.io\/1994\/08\/1994-08-01-ncp-functions\/';
+        this.page.identifier = 'nlitsme';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nlitsme' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+  </body>
+</html>

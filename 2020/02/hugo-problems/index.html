@@ -1,0 +1,749 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        Several problems I ran in to while trying out gohugo - Willem&#39;s blog
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="Several problems I ran into as a novice gohugo user.
+ the quickstart example does not work. some content fails to render without any error message don&amp;rsquo;t name your post &amp;lsquo;index.md&amp;rsquo; posts without a frontmatter are not clickable, but do show in the index. the &amp;lsquo;more&amp;rsquo; looks like another post, while it is intended as a summary of &amp;lsquo;other&amp;rsquo; posts. no date in frontmatter the year 1 is assumed. Overly complicated error messages: it was not clear to me at first that you do need the extra subdirectory level under contents. how do i select what part of my post i want in the summary. The summaries are not always rendered properly, creating an ugly index page. " />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>Several problems I ran in to while trying out gohugo - Willem&#39;s blog</title>
+  
+  
+  <link rel="stylesheet" href="https://nlitsme.github.io/css/style.min.13468ef5be61550fa4d002a591d5552c85369a01cbae5e2d95dc8022cab38679.css">
+  
+  <link rel="stylesheet" href="/assets/css/highlight.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="Several problems I ran in to while trying out gohugo" />
+<meta property="og:description" content="Several problems I ran into as a novice gohugo user.
+
+the quickstart example does not work.
+some content fails to render without any error message
+don&rsquo;t name your post &lsquo;index.md&rsquo;
+posts without a frontmatter are not clickable, but do show in the index.
+the &lsquo;more&rsquo; looks like another post, while it is intended as a summary of &lsquo;other&rsquo; posts.
+no date in frontmatter the year 1 is assumed.
+Overly complicated error messages:
+it was not clear to me at first that you do need the extra subdirectory level under contents.
+how do i select what part of my post i want in the summary.
+The summaries are not always rendered properly, creating an ugly index page.
+" />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nlitsme.github.io/2020/02/hugo-problems/" />
+<meta property="article:published_time" content="2020-02-04T00:00:00+00:00" />
+<meta property="article:modified_time" content="2020-02-04T00:00:00+00:00" />
+<meta itemprop="name" content="Several problems I ran in to while trying out gohugo">
+<meta itemprop="description" content="Several problems I ran into as a novice gohugo user.
+
+the quickstart example does not work.
+some content fails to render without any error message
+don&rsquo;t name your post &lsquo;index.md&rsquo;
+posts without a frontmatter are not clickable, but do show in the index.
+the &lsquo;more&rsquo; looks like another post, while it is intended as a summary of &lsquo;other&rsquo; posts.
+no date in frontmatter the year 1 is assumed.
+Overly complicated error messages:
+it was not clear to me at first that you do need the extra subdirectory level under contents.
+how do i select what part of my post i want in the summary.
+The summaries are not always rendered properly, creating an ugly index page.
+">
+<meta itemprop="datePublished" content="2020-02-04T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2020-02-04T00:00:00+00:00" />
+<meta itemprop="wordCount" content="609">
+
+
+
+<meta itemprop="keywords" content="hugo,problems," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="Several problems I ran in to while trying out gohugo"/>
+<meta name="twitter:description" content="Several problems I ran into as a novice gohugo user.
+
+the quickstart example does not work.
+some content fails to render without any error message
+don&rsquo;t name your post &lsquo;index.md&rsquo;
+posts without a frontmatter are not clickable, but do show in the index.
+the &lsquo;more&rsquo; looks like another post, while it is intended as a summary of &lsquo;other&rsquo; posts.
+no date in frontmatter the year 1 is assumed.
+Overly complicated error messages:
+it was not clear to me at first that you do need the extra subdirectory level under contents.
+how do i select what part of my post i want in the summary.
+The summaries are not always rendered properly, creating an ugly index page.
+"/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+            
+          <a href="/">
+              <h2 id="name" class="hidden-xs hidden-sm">Willem&#39;s blog</h2>
+          </a>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>The Netherlands</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+            
+            
+            <a href="https://nlitsme.github.io/tags/android/" class="tag-list-link">android</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/arm/" class="tag-list-link">arm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/benchmark/" class="tag-list-link">benchmark</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/bitcoin/" class="tag-list-link">bitcoin</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/c&#43;&#43;/" class="tag-list-link">c&#43;&#43;</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/commandline/" class="tag-list-link">commandline</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crack/" class="tag-list-link">crack</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crypto/" class="tag-list-link">crypto</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ecdsa/" class="tag-list-link">ecdsa</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/elcapitan/" class="tag-list-link">elcapitan</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/galois-field/" class="tag-list-link">galois-field</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/git/" class="tag-list-link">git</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hexdmper/" class="tag-list-link">hexdmper</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ida/" class="tag-list-link">ida</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/interrupts/" class="tag-list-link">interrupts</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/itsutils/" class="tag-list-link">itsutils</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/life/" class="tag-list-link">life</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/math/" class="tag-list-link">math</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/modular-arithmetic/" class="tag-list-link">modular-arithmetic</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/msdos/" class="tag-list-link">msdos</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/museum/" class="tag-list-link">museum</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/netware/" class="tag-list-link">netware</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx/" class="tag-list-link">osx</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx10.11/" class="tag-list-link">osx10.11</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pchardware/" class="tag-list-link">pchardware</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pdf/" class="tag-list-link">pdf</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/perl/" class="tag-list-link">perl</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/philosophy/" class="tag-list-link">philosophy</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/portability/" class="tag-list-link">portability</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/problems/" class="tag-list-link">problems</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/puzzle/" class="tag-list-link">puzzle</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/qualcomm/" class="tag-list-link">qualcomm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/reversing/" class="tag-list-link">reversing</a><span
+                    class="tag-list-count">12</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/soundblaster/" class="tag-list-link">soundblaster</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/templates/" class="tag-list-link">templates</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/thinkmaths/" class="tag-list-link">thinkmaths</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/timemachine/" class="tag-list-link">timemachine</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/tor/" class="tag-list-link">tor</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/vim/" class="tag-list-link">vim</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/wince/" class="tag-list-link">wince</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/youtube/" class="tag-list-link">youtube</a><span
+                    class="tag-list-count">1</span>
+            
+
+    </div>
+</div>
+
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="title">MPMP12 Marching band Problem</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" class="title">MPMP11 David and Anton age puzzle</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-07-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-07-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/" class="title">MPMP9 Take away triangles</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="title">MPMP8 Paper folding challenge</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/youtube-tool/" class="title">A commandline tool for youtube.</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-09</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://nlitsme.github.io/2020/02/needlesly-large-gitrepos/" title="List of git repositories which have an unreasonably large .git directory"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://nlitsme.github.io/2020/02/2020-02-07-ancient-tools/"
+                    title="Ancient MSDOS tools"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="twitter,email"
+                data-mobile-sites="twitter,email,whatsapp,signal"></div>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2020/02/hugo-problems/"
+    >Several problems I ran in to while trying out gohugo</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://nlitsme.github.io/2020/02/hugo-problems/" class="article-date">
+  <time datetime="2020-02-04 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-02-04</time>
+</a>
+</span>
+  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/hugo/"> hugo </a>
+    <a class="article-tag-link" href="/tags/problems/"> problems </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2020/02/hugo-problems/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 609words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 3minutes </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p>Several problems I ran into as a novice <a href="https://gohugo.io">gohugo</a> user.</p>
+<ul>
+<li>the quickstart example does not work.</li>
+<li>some content fails to render without any error message</li>
+<li>don&rsquo;t name your post &lsquo;index.md&rsquo;</li>
+<li>posts without a frontmatter are not clickable, but do show in the index.</li>
+<li>the &lsquo;more&rsquo; looks like another post, while it is intended as a summary of &lsquo;other&rsquo; posts.</li>
+<li>no date in frontmatter the year 1 is assumed.</li>
+<li>Overly complicated error messages:</li>
+<li>it was not clear to me at first that you do need the extra subdirectory level under contents.</li>
+<li>how do i select what part of my post i want in the summary.</li>
+<li>The summaries are not always rendered properly, creating an ugly index page.</li>
+</ul>
+<h2 id="the-quickstart-example-does-not-work">the quickstart example does not work.</h2>
+<pre><code>hugo new posts/my-first-post.md
+</code></pre>
+<p>EITHER Mentions the wrong directory.
+In that case, it should read:</p>
+<pre><code>hugo new contents/mycategory/my-first-post.md
+</code></pre>
+<p>OR &hellip; <code>hugo new</code> should create the &lsquo;posts&rsquo; directory as a subdirectory of &lsquo;content&rsquo;</p>
+<p>Another issue, is that with the default <code>archetypes/default.md</code> posts don&rsquo;t get ordered by date,
+it seems that the date should be quoted. Strange thing, later, using another theme, this problem sort
+of went away.</p>
+<h2 id="contents-fails-to-render-without-any-error-message">contents fails to render without any error message</h2>
+<p>&hellip;TODO &hellip; post an example here.</p>
+<h2 id="dont-name-your-post-indexmd">don&rsquo;t name your post &lsquo;index.md&rsquo;</h2>
+<p>Your post will instead be the new main page.</p>
+<h2 id="posts-without-a-frontmatter-are-not-clickable-but-do-show">posts without a frontmatter are not clickable, but do show</h2>
+<p>There is no warning.</p>
+<h2 id="the-more-looks-like-another-post-while-it-is-intended-as-a-summary-of-other-posts">the &lsquo;more&rsquo; looks like another post, while it is intended as a summary of &lsquo;other&rsquo; posts.</h2>
+<p>This was with the ananke theme.</p>
+<h2 id="when-there-is-no-date-in-frontmatter-the-year-1-is-assumed">when there is no date in frontmatter the year 1 is assumed.</h2>
+<p>Better would be to use the file date.</p>
+<h2 id="overly-complicated-error-messages">Overly complicated error messages:</h2>
+<pre><code>Building sites … panic: no source found, 0
+
+goroutine 195 [running]:
+github.com/gohugoio/hugo/hugolib.(*pagesCollector).addToBundle.func2(0x58e1260, 0x2, 0x5902e57)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/pages_capture.go:360 +0x2c7
+github.com/gohugoio/hugo/hugolib.(*pagesCollector).addToBundle(0xc0008647d0, 0x5d542a0, 0xc0009ef720, 0x1, 0xc0009c5f20, 0x20300000000000, 0x7dfffff)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/pages_capture.go:395 +0x6b3
+github.com/gohugoio/hugo/hugolib.(*pagesCollector).handleBundleLeaf.func1(0xc0009fa0e9, 0x32, 0x5d542a0, 0xc0009ef720, 0x0, 0x0, 0xc000a65400, 0xc000a00b98)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/pages_capture.go:477 +0xa6
+github.com/gohugoio/hugo/hugofs.(*Walkway).walk(0xc000874a20, 0xc0009fa0e9, 0x32, 0x5d542a0, 0xc0009ef720, 0x0, 0x0, 0x0, 0xc000af66c0, 0xc000a00d60, ...)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugofs/walk.go:175 +0x7a
+github.com/gohugoio/hugo/hugofs.(*Walkway).walk(0xc000874a20, 0x0, 0x0, 0x5d542a0, 0xc0009eeaa0, 0xc0004f4dc0, 0x29, 0x29, 0xc000af66c0, 0x400e6d8, ...)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugofs/walk.go:298 +0x765
+github.com/gohugoio/hugo/hugofs.(*Walkway).Walk(0xc000874a20, 0xc0003753a0, 0x0)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugofs/walk.go:136 +0x1cd
+github.com/gohugoio/hugo/hugolib.(*pagesCollector).handleBundleLeaf(0xc0008647d0, 0x5d542a0, 0xc0009eeaa0, 0x0, 0x0, 0xc0004f4dc0, 0x29, 0x29, 0x1, 0xc00084eae0)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/pages_capture.go:490 +0x193
+github.com/gohugoio/hugo/hugolib.(*pagesCollector).collectDir.func1(0x1, 0x5d542a0, 0xc0009eeaa0, 0x0, 0x0, 0xc0004f4dc0, 0x29, 0x29, 0xc000a01268, 0x4825f56)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/pages_capture.go:177 +0xae
+github.com/gohugoio/hugo/hugolib.(*pagesCollector).collectDir.func3(0x5d542a0, 0xc0009eeaa0, 0x0, 0x0, 0xc0004f4dc0, 0x29, 0x29, 0x0, 0x567ed00, 0x5577040, ...)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/pages_capture.go:276 +0x50e
+github.com/gohugoio/hugo/hugofs.(*Walkway).walk(0xc000874990, 0x0, 0x0, 0x5d542a0, 0xc0009eeaa0, 0xc0004f4dc0, 0x29, 0x29, 0x59dc110, 0x4825a7f, ...)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugofs/walk.go:281 +0x891
+github.com/gohugoio/hugo/hugofs.(*Walkway).Walk(0xc000874990, 0xc0003753a0, 0x0)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugofs/walk.go:136 +0x1cd
+github.com/gohugoio/hugo/hugolib.(*pagesCollector).collectDir(0xc0008647d0, 0x0, 0x0, 0x5d3f100, 0x0, 0x40fce60, 0xc00084e9c0)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/pages_capture.go:319 +0x34e
+github.com/gohugoio/hugo/hugolib.(*pagesCollector).Collect(0xc0008647d0, 0xc0008647d0, 0xc0003753a0)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/pages_capture.go:115 +0x45b
+github.com/gohugoio/hugo/hugolib.(*Site).readAndProcessContent(0xc0003f4e00, 0x0, 0x0, 0x0, 0x0, 0x0)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/site.go:1238 +0x188
+github.com/gohugoio/hugo/hugolib.(*Site).process(0xc0003f4e00, 0x0, 0x0, 0x0, 0x0, 0xc000939730, 0x0, 0x0, 0x0, 0x0, ...)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/site.go:1061 +0x61
+github.com/gohugoio/hugo/hugolib.(*HugoSites).process(0xc0004f7080, 0xc0009b45c0, 0xc000071bf0, 0x0, 0x0, 0x0, 0x402f84a, 0x7c4fd01)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/hugo_sites_build.go:230 +0x127
+github.com/gohugoio/hugo/hugolib.(*HugoSites).Build.func2.2()
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/hugo_sites_build.go:105 +0x64
+runtime/trace.WithRegion(0x5d3f1e0, 0xc0009c4c00, 0x58f2930, 0x7, 0xc000071c18)
+    /usr/local/Cellar/go/1.13.7/libexec/src/runtime/trace/annotation.go:137 +0x115
+github.com/gohugoio/hugo/hugolib.(*HugoSites).Build.func2(0x402f84a, 0x1)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/hugo_sites_build.go:107 +0x162
+github.com/gohugoio/hugo/hugolib.(*HugoSites).Build.func3()
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/hugo_sites_build.go:124 +0x2f
+runtime/trace.WithRegion(0x5d3f1e0, 0xc0009c4c00, 0x58f28ce, 0x7, 0xc000071e48)
+    /usr/local/Cellar/go/1.13.7/libexec/src/runtime/trace/annotation.go:137 +0x115
+github.com/gohugoio/hugo/hugolib.(*HugoSites).Build(0xc0004f7080, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, 0x0, ...)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/hugolib/hugo_sites_build.go:126 +0x820
+github.com/gohugoio/hugo/commands.(*commandeer).buildSites(...)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/commands/hugo.go:710
+github.com/gohugoio/hugo/commands.(*commandeer).fullBuild.func3(0xc0008f7768, 0x2)
+    /private/tmp/hugo-20200204-77776-1t93oty/hugo-0.64.0/src/github.com/gohugoio/hugo/commands/hugo.go:322 +0x96
+golang.org/x/sync/errgroup.(*Group).Go.func1(0xc0009c4bd0, 0xc000939700)
+    /Users/brew/Library/Caches/Homebrew/go_cache/pkg/mod/golang.org/x/sync@v0.0.0-20190911185100-cd5d95a43a6e/errgroup/errgroup.go:57 +0x64
+created by golang.org/x/sync/errgroup.(*Group).Go
+    /Users/brew/Library/Caches/Homebrew/go_cache/pkg/mod/golang.org/x/sync@v0.0.0-20190911185100-cd5d95a43a6e/errgroup/errgroup.go:54 +0x66
+</code></pre>
+<h1 id="how-do-i-select-what-part-of-my-post-i-want-in-the-summary">how do i select what part of my post i want in the summary.</h1>
+<ul>
+<li>
+<p>does hugo have a &lsquo;more&rsquo; or &lsquo;teaser&rsquo; tag?</p>
+<p>like: <!-- raw HTML omitted --></p>
+</li>
+</ul>
+<p>Yes:</p>
+<pre><code>&lt;!--more--&gt;
+</code></pre>
+<h1 id="is-the-subdir-under-contents-mandatory">is the subdir under &lsquo;contents&rsquo; mandatory?</h1>
+<p>Apparently it is.
+this was not clear to me at first.</p>
+<h2 id="the-summaries-are-not-always-rendered-properly-creating-an-ugly-index-page">The summaries are not always rendered properly, creating an ugly index page.</h2>
+<p>for instance check out my posts: &lsquo;a simple fix for the missing mipsel error&rsquo;, which is
+not rendered properly, and &lsquo;Hexdumper for C++ IOStreams&rsquo;, which also has a code section,
+but that is rendered correctlu in the summary view.</p>
+<p>The problem seems to be that when there is no &lsquo;more&rsquo; tag, then
+the summary is rendeder differently than whan it is there.</p>
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>Permalink: </strong>
+      <a href="https://nlitsme.github.io/2020/02/hugo-problems/" title="Several problems I ran in to while trying out gohugo" target="_blank" rel="external">https://nlitsme.github.io/2020/02/hugo-problems/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/nlitsme" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://nlitsme.github.io/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/nlitsme" target="_blank"><span class="text-dark">Willem Hengeveld</span><small class="ml-1x"></small></a></h3>
+        <div>Interested in taking things apart.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+<hr>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/nlitsme" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://gitlab.com/itsme" target="_blank" title="gitlab" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitlab"></i></a></li>
+    <li><a href="https://www.reddit.com/user/nlitsme1" target="_blank" title="reddit" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-reddit"></i></a></li>
+    <li><a href="/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://stackoverflow.com/users/1049677/" target="_blank" title="stackoverflow" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-stackoverflow"></i></a></li>
+    <li><a href="https://twitter.com/twitsme" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+    <li><a href="https://youtube.com/channel/UCmYzOAvL7VTpZmQXtuqJsZg" target="_blank" title="youtube" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-youtube"></i></a></li>
+</ul>
+
+  <div class="copyright">
+    &copy;2000  -
+    2020
+    <!-- based on https://github.com/xiaoheiAh/hugo-theme-pure -->
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="/assets/js/highlight.pack.js"></script>
+<script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://nlitsme.github.io/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://nlitsme.github.io/js/plugin.min.fdac970cab83e09d53dc1375262e937ce79eb7c241a1672b120c35a47a21b227.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/nlitsme.github.io\/',
+            CONTENT_URL: 'https:\/\/nlitsme.github.io\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://nlitsme.github.io/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/nlitsme.github.io\/2020\/02\/hugo-problems\/';
+        this.page.identifier = 'nlitsme';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nlitsme' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+  </body>
+</html>

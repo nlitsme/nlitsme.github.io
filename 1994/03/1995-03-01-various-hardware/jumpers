@@ -1,0 +1,22 @@
+ide vlb kaart DC2000
+notatie:
+  1   1+2 = 0
+  2   2+3 = 1
+  3    -  = -
+
+jp6 :  [AB]
+       00  = speed 0  (floppy drive speed)
+       10          1
+       11          2
+
+jp3 :  ABCDEFGH
+
+AB = com1/3    01 = 3f8(com1)   10 = 3e8(com3)  11=none
+CD = com2/4    01 = 2f8(com2)   10= 2e8(com4)   11=none
+
+lpt1 :  EFH=000  3bc int7
+lpt2 :  EFH=011  378 int5
+lpt3 :  EFH=100  278 int7
+
+floppy enable  : G=0
+floppy disable : G=1

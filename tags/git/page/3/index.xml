@@ -1,0 +1,75 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Willem&#39;s blog</title>
+    <link>https://nlitsme.github.io/tags/git/</link>
+    <description>Recent content in git on Willem&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://nlitsme.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>The Netware Core Protocol</title>
+      <link>https://nlitsme.github.io/1994/08/1994-08-01-ncp-functions/</link>
+      <pubDate>Mon, 01 Aug 1994 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1994/08/1994-08-01-ncp-functions/</guid>
+      <description>&lt;p&gt;An early version of the 1996 document&lt;/p&gt;
+&lt;p&gt;Listing functions available in the Novell Netware Core Protocol.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>My ancient IBM PC research</title>
+      <link>https://nlitsme.github.io/1994/03/1995-03-01-various-hardware/</link>
+      <pubDate>Tue, 01 Mar 1994 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1994/03/1995-03-01-various-hardware/</guid>
+      <description>&lt;p&gt;These are some very old notes I found on my old IBM PC.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;1995-03-01 15:21:52  &lt;a href=&#34;connecto.rs&#34;&gt;connecto.rs&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1995-05-01 13:14:14  &lt;a href=&#34;hardware.nfo&#34;&gt;hardware.nfo&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1994-05-16 15:28:18  &lt;a href=&#34;jumpers&#34;&gt;jumpers&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;1994-03-01 13:55:34  &lt;a href=&#34;port.wj&#34;&gt;port.wj&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;As you can see, back then I did not really care about file extensions.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>MSDOS Interrupt catcher</title>
+      <link>https://nlitsme.github.io/1993/06/1993-06-18-msdos-interrupt-catcher/</link>
+      <pubDate>Fri, 18 Jun 1993 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1993/06/1993-06-18-msdos-interrupt-catcher/</guid>
+      <description>&lt;p&gt;I wrote this tool to be able to create traces of DOS interrupt invocations. A bit like strace or ltrace on linux.&lt;/p&gt;
+&lt;p&gt;Now available on &lt;a href=&#34;https://github.com/nlitsme/MSDOS_interrupt_catcher&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Demon dialer control program</title>
+      <link>https://nlitsme.github.io/1992/12/1992-12-16-msdos-demon-dialer-tool/</link>
+      <pubDate>Wed, 16 Dec 1992 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1992/12/1992-12-16-msdos-demon-dialer-tool/</guid>
+      <description>&lt;p&gt;The demon dialer was a blue-box, sold by &lt;a href=&#34;https://hacktic.nl/magazine/1448.htm&#34;&gt;hacktic&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;I wrote these tools to be able to dialing lots of phonenumbers relatively
+quickly, while recording information about whatever answered. I used to do this
+in order to find some way of accessing the early internet.&lt;/p&gt;
+&lt;p&gt;Now available on &lt;a href=&#34;https://github.com/nlitsme/MSDOS_demon_dialer_tool&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Game of Life</title>
+      <link>https://nlitsme.github.io/1992/10/1992-10-17-msdos-game-of-life/</link>
+      <pubDate>Sat, 17 Oct 1992 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1992/10/1992-10-17-msdos-game-of-life/</guid>
+      <description>&lt;p&gt;One of my early &lt;a href=&#34;https://en.wikipedia.org/wiki/Conway%27s_Game_of_Life&#34;&gt;LIFE&lt;/a&gt; implementations.&lt;/p&gt;
+&lt;p&gt;I think I implemented this on almost every computer I owned, I remember writing my first version
+in Basic on my PET-2001.&lt;/p&gt;
+&lt;p&gt;Now available on &lt;a href=&#34;https://github.com/nlitsme/MSDOS_game_of_life&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>

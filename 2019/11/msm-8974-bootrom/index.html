@@ -1,0 +1,768 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+    <title>
+        The MSM 8974 bootrom - Willem&#39;s blog
+      </title>
+    <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+  <meta name="viewport"
+    content="width=device-width, initial-scale=1, maximum-scale=1, minimum-scale=1, user-scalable=no, minimal-ui">
+  <meta name="renderer" content="webkit">
+  <meta http-equiv="Cache-Control" content="no-transform" />
+  <meta http-equiv="Cache-Control" content="no-siteapp" />
+  <meta name="apple-mobile-web-app-capable" content="yes">
+  <meta name="apple-mobile-web-app-status-bar-style" content="black">
+  <meta name="format-detection" content="telephone=no,email=no,adress=no">
+  
+  <meta name="theme-color" content="#000000" />
+  
+  <meta http-equiv="window-target" content="_top" />
+  
+  
+  <meta name="description" content="Analyzing the Qualcomm MSM 8974 bootrom.
+The bootrom is 192k byte in size. It has bootcode for the three main subsystems of the 8974:
+ the modem - qdsp4 / hexagon code RPM - the power manager - ARM code The Application cpu - ARM code  All devices I have inspected have the same bootrom. But a facitlity exists to apply patches to the bootrom via the use of special fuses.
+Unfortunately the fuses in my device are configured in a way that the &amp;lsquo;patch&amp;rsquo; area is not readable.
+" />
+  <meta name="generator" content="Hugo 0.74.3 with theme pure" />
+  <title>The MSM 8974 bootrom - Willem&#39;s blog</title>
+  
+  
+  <link rel="stylesheet" href="https://nlitsme.github.io/css/style.min.13468ef5be61550fa4d002a591d5552c85369a01cbae5e2d95dc8022cab38679.css">
+  
+  <link rel="stylesheet" href="/assets/css/highlight.css" async>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.css" async>
+  <meta property="og:title" content="The MSM 8974 bootrom" />
+<meta property="og:description" content="Analyzing the Qualcomm MSM 8974 bootrom.
+The bootrom is 192k byte in size. It has bootcode for the three main subsystems of the 8974:
+
+the modem - qdsp4 / hexagon code
+RPM - the power manager - ARM code
+The Application cpu - ARM code
+
+All devices I have inspected have the same bootrom. But a facitlity exists to apply patches
+to the bootrom via the use of special fuses.
+Unfortunately the fuses in my device are configured in a way that the &lsquo;patch&rsquo; area is not readable." />
+<meta property="og:type" content="article" />
+<meta property="og:url" content="https://nlitsme.github.io/2019/11/msm-8974-bootrom/" />
+<meta property="article:published_time" content="2019-11-08T00:00:00+00:00" />
+<meta property="article:modified_time" content="2019-11-08T00:00:00+00:00" />
+<meta itemprop="name" content="The MSM 8974 bootrom">
+<meta itemprop="description" content="Analyzing the Qualcomm MSM 8974 bootrom.
+The bootrom is 192k byte in size. It has bootcode for the three main subsystems of the 8974:
+
+the modem - qdsp4 / hexagon code
+RPM - the power manager - ARM code
+The Application cpu - ARM code
+
+All devices I have inspected have the same bootrom. But a facitlity exists to apply patches
+to the bootrom via the use of special fuses.
+Unfortunately the fuses in my device are configured in a way that the &lsquo;patch&rsquo; area is not readable.">
+<meta itemprop="datePublished" content="2019-11-08T00:00:00+00:00" />
+<meta itemprop="dateModified" content="2019-11-08T00:00:00+00:00" />
+<meta itemprop="wordCount" content="360">
+
+
+
+<meta itemprop="keywords" content="reversing,qualcomm," />
+<meta name="twitter:card" content="summary"/>
+<meta name="twitter:title" content="The MSM 8974 bootrom"/>
+<meta name="twitter:description" content="Analyzing the Qualcomm MSM 8974 bootrom.
+The bootrom is 192k byte in size. It has bootcode for the three main subsystems of the 8974:
+
+the modem - qdsp4 / hexagon code
+RPM - the power manager - ARM code
+The Application cpu - ARM code
+
+All devices I have inspected have the same bootrom. But a facitlity exists to apply patches
+to the bootrom via the use of special fuses.
+Unfortunately the fuses in my device are configured in a way that the &lsquo;patch&rsquo; area is not readable."/>
+
+  <!--[if lte IE 9]>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/classlist/1.1.20170427/classList.min.js"></script>
+    <![endif]-->
+
+  <!--[if lt IE 9]>
+      <script src="https://cdn.jsdelivr.net/npm/html5shiv@3.7.3/dist/html5shiv.min.js"></script>
+      <script src="https://cdn.jsdelivr.net/npm/respond.js@1.4.2/dest/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+  </head>
+
+  
+  
+
+  <body class="main-center theme-black" itemscope itemtype="http://schema.org/WebPage"><header class="header" itemscope itemtype="http://schema.org/WPHeader">
+    <div class="slimContent">
+      <div class="navbar-header">
+        <div class="profile-block text-center">
+            
+          <a href="/">
+              <h2 id="name" class="hidden-xs hidden-sm">Willem&#39;s blog</h2>
+          </a>
+          <h3 id="title" class="hidden-xs hidden-sm hidden-md"></h3>
+          <small id="location" class="text-muted hidden-xs hidden-sm"><i class="icon icon-map-marker"></i>The Netherlands</small>
+        </div><div class="search" id="search-form-wrap">
+    <form class="search-form sidebar-form">
+        <div class="input-group">
+            <input type="text" class="search-form-input form-control" placeholder="Search" />
+            <span class="input-group-btn">
+                <button type="submit" class="search-form-submit btn btn-flat" onclick="return false;"><i
+                        class="icon icon-search"></i></button>
+            </span>
+        </div>
+        <div class="ins-search">
+            <div class="ins-search-mask"></div>
+            <div class="ins-search-container">
+                <div class="ins-input-wrapper">
+                    <input type="text" class="ins-search-input" placeholder="Type something..."
+                        x-webkit-speech />
+                    <button type="button" class="close ins-close ins-selectable" data-dismiss="modal"
+                        aria-label="Close"><span aria-hidden="true">×</span></button>
+                </div>
+                <div class="ins-section-wrapper">
+                    <div class="ins-section-container"></div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+        <button class="navbar-toggle collapsed" type="button" data-toggle="collapse" data-target="#main-navbar" aria-controls="main-navbar" aria-expanded="false">
+          <span class="sr-only">Toggle navigation</span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+          <span class="icon-bar"></span>
+        </button>
+      </div>
+      <nav id="main-navbar" class="collapse navbar-collapse" itemscope itemtype="http://schema.org/SiteNavigationElement" role="navigation">
+        <ul class="nav navbar-nav main-nav">
+            <li class="menu-item menu-item-home">
+                <a href="/">
+                    <i class="icon icon-home-fill"></i>
+                  <span class="menu-title">Home</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-archives">
+                <a href="/posts/">
+                    <i class="icon icon-archives-fill"></i>
+                  <span class="menu-title">Archives</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-tags">
+                <a href="/tags/">
+                    <i class="icon icon-tags"></i>
+                  <span class="menu-title">Tags</span>
+                </a>
+            </li>
+            <li class="menu-item menu-item-about">
+                <a href="/about/">
+                    <i class="icon icon-cup-fill"></i>
+                  <span class="menu-title">About</span>
+                </a>
+            </li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+
+<aside class="sidebar" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    
+      <div class="widget">
+    <h3 class="widget-title"> Tags</h3>
+    <div class="widget-body">
+            
+            
+            <a href="https://nlitsme.github.io/tags/android/" class="tag-list-link">android</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/arm/" class="tag-list-link">arm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/benchmark/" class="tag-list-link">benchmark</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/bitcoin/" class="tag-list-link">bitcoin</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/c&#43;&#43;/" class="tag-list-link">c&#43;&#43;</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/commandline/" class="tag-list-link">commandline</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crack/" class="tag-list-link">crack</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/crypto/" class="tag-list-link">crypto</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ecdsa/" class="tag-list-link">ecdsa</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/elcapitan/" class="tag-list-link">elcapitan</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/galois-field/" class="tag-list-link">galois-field</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/git/" class="tag-list-link">git</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hexdmper/" class="tag-list-link">hexdmper</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/hugo/" class="tag-list-link">hugo</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/ida/" class="tag-list-link">ida</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/interrupts/" class="tag-list-link">interrupts</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/itsutils/" class="tag-list-link">itsutils</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/life/" class="tag-list-link">life</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/math/" class="tag-list-link">math</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/modular-arithmetic/" class="tag-list-link">modular-arithmetic</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/msdos/" class="tag-list-link">msdos</a><span
+                    class="tag-list-count">3</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/museum/" class="tag-list-link">museum</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/netware/" class="tag-list-link">netware</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx/" class="tag-list-link">osx</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/osx10.11/" class="tag-list-link">osx10.11</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pchardware/" class="tag-list-link">pchardware</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/pdf/" class="tag-list-link">pdf</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/perl/" class="tag-list-link">perl</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/philosophy/" class="tag-list-link">philosophy</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/portability/" class="tag-list-link">portability</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/problems/" class="tag-list-link">problems</a><span
+                    class="tag-list-count">4</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/puzzle/" class="tag-list-link">puzzle</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/python/" class="tag-list-link">python</a><span
+                    class="tag-list-count">10</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/qualcomm/" class="tag-list-link">qualcomm</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/reversing/" class="tag-list-link">reversing</a><span
+                    class="tag-list-count">12</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/soundblaster/" class="tag-list-link">soundblaster</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/templates/" class="tag-list-link">templates</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/thinkmaths/" class="tag-list-link">thinkmaths</a><span
+                    class="tag-list-count">5</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/timemachine/" class="tag-list-link">timemachine</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/tor/" class="tag-list-link">tor</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/vim/" class="tag-list-link">vim</a><span
+                    class="tag-list-count">1</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/wince/" class="tag-list-link">wince</a><span
+                    class="tag-list-count">2</span>
+            
+            
+            <a href="https://nlitsme.github.io/tags/youtube/" class="tag-list-link">youtube</a><span
+                    class="tag-list-count">1</span>
+            
+
+    </div>
+</div>
+
+      
+<div class="widget">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget-body">
+        <ul class="recent-post-list list-unstyled no-thumbnail">
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/" class="title">MPMP12 Marching band Problem</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-08-07 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-08-07</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/" class="title">MPMP11 David and Anton age puzzle</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-07-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-07-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/" class="title">MPMP9 Take away triangles</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-27 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-27</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/" class="title">MPMP8 Paper folding challenge</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-11 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-11</time>
+                    </p>
+                </div>
+            </li>
+            <li>
+                <div class="item-inner">
+                    <p class="item-title">
+                        <a href="https://nlitsme.github.io/2020/06/youtube-tool/" class="title">A commandline tool for youtube.</a>
+                    </p>
+                    <p class="item-date">
+                        <time datetime="2020-06-09 00:00:00 &#43;0000 UTC" itemprop="datePublished">2020-06-09</time>
+                    </p>
+                </div>
+            </li>
+        </ul>
+    </div>
+</div>
+  </div>
+</aside>
+
+    
+    
+<aside class="sidebar sidebar-toc collapse" id="collapseToc" itemscope itemtype="http://schema.org/WPSideBar">
+  <div class="slimContent">
+    <h4 class="toc-title">Catalogue</h4>
+    <nav id="toc" class="js-toc toc">
+
+    </nav>
+  </div>
+</aside>
+<main class="main" role="main"><nav class="bar bar-footer clearfix" data-stick-bottom>
+    <div class="bar-inner">
+        <ul class="pager pull-left">
+            <li class="prev">
+                <a href="https://nlitsme.github.io/2019/10/osx-backup-problem/" title="A problem I had with my timemachine backups"><i
+                        class="icon icon-angle-left"
+                        aria-hidden="true"></i><span>&nbsp;&nbsp;Older</span></a>
+            </li>
+            <li class="next">
+                <a href="https://nlitsme.github.io/2020/01/c-wannahaves/"
+                    title="features which I would like to see in c&#43;&#43;"><span>Newer&nbsp;&nbsp;</span><i
+                        class="icon icon-angle-right" aria-hidden="true"></i></a>
+            </li>
+            
+            <li class="toggle-toc">
+                <a class="toggle-btn collapsed" data-toggle="collapse" href="#collapseToc" aria-expanded="false"
+                    title="Catalogue" role="button">
+                    <span>[&nbsp;</span><span>Catalogue</span>
+                    <i class="text-collapsed icon icon-anchor"></i>
+                    <i class="text-in icon icon-close"></i>
+                    <span>]</span>
+                </a>
+            </li>
+        </ul>
+        <div class="bar-right">
+            <div class="share-component" data-sites="twitter,email"
+                data-mobile-sites="twitter,email,whatsapp,signal"></div>
+        </div>
+    </div>
+</nav>
+
+<div class="content">
+  <article id="-" class="article article-type-" itemscope
+    itemtype="http://schema.org/BlogPosting">
+    
+    <div class="article-header">
+      <h1 itemprop="name">
+  <a
+    class="article-title"
+    href="/2019/11/msm-8974-bootrom/"
+    >The MSM 8974 bootrom</a
+  >
+</h1>
+
+      <div class="article-meta">
+        
+<span class="article-date">
+  <i class="icon icon-calendar-check"></i>&nbsp;
+<a href="https://nlitsme.github.io/2019/11/msm-8974-bootrom/" class="article-date">
+  <time datetime="2019-11-08 00:00:00 &#43;0000 UTC" itemprop="datePublished">2019-11-08</time>
+</a>
+</span>
+  
+  <span class="article-tag">
+    <i class="icon icon-tags"></i>&nbsp;
+    <a class="article-tag-link" href="/tags/reversing/"> reversing </a>
+    <a class="article-tag-link" href="/tags/qualcomm/"> qualcomm </a>
+  </span>
+
+        <span class="post-comment"><i class="icon icon-comment"></i>&nbsp;<a href="/2019/11/msm-8974-bootrom/#comments"
+            class="article-comment-link">Comments</a></span>
+		<span class="post-wordcount hidden-xs" itemprop="wordCount">Word Count: 360words</span>
+		<span class="post-readcount hidden-xs" itemprop="timeRequired">Read Count: 2minutes </span>
+      </div>
+    </div>
+    <div class="article-entry marked-body js-toc-content" itemprop="articleBody">
+      <p>Analyzing the Qualcomm MSM 8974 bootrom.</p>
+<p>The bootrom is 192k byte in size. It has bootcode for the three main subsystems of the 8974:</p>
+<ul>
+<li>the modem - qdsp4 / hexagon code</li>
+<li>RPM - the power manager - ARM code</li>
+<li>The Application cpu - ARM code</li>
+</ul>
+<p>All devices I have inspected have the same bootrom. But a facitlity exists to apply patches
+to the bootrom via the use of special fuses.</p>
+<p>Unfortunately the fuses in my device are configured in a way that the &lsquo;patch&rsquo; area is not readable.</p>
+<h2 id="memory-layout">memory layout</h2>
+<pre><code>f8002000 - app bootrom struct
+fc000000-fc002c28 - RPM bootrom
+fc004000-fc010000 - Modem bootrom
+fc010000-fc02f800 - APP bootrom
+fc02f800-fc02fa08 - RPM bootrom part2
+fc100080 - bootrom error stack
+</code></pre>
+<p>There is a event log buffer at <code>0xFC102144</code>, and a fatal error buffer at <code>0xFC102084</code>
+which can be interrogated using the sahara protocol.</p>
+<h2 id="call-tree">call tree</h2>
+<pre><code>clear_bufs
+    apps_pbl_mc_run_init1+8
+         seg010:off_FC010AEC     [ data for APPS_reset_entry_point ]
+         APPS_reset_entry_point+F0
+             j_APPS_reset_entry_point
+                 init_tlb        [ adding subpage ]
+                 sub_FC020D90    [ set VBAR ]
+
+
+apps_pbl_flash_init_sahara_bootloader
+    init0[4]
+        apps_pbl_mc_run_init0+30
+            fatal_error2+bc
+    init1[7]
+        apps_pbl_mc_run_init1+20
+</code></pre>
+<h2 id="certificates">certificates</h2>
+<p>list of trusted roots:</p>
+<pre><code>CC3153A80293939B90D02D3BF8B23E0292E452FEF662C74998421ADAD42A380F
+0AF165B16752D3F9F751606F6D6D0D43043B8A25B25B977911089CDFCFC37005
+CB4EFE595E4903B4929F221A5DBB3AD6AFF2AF4F370027A0D666F1BD0433AF2E
+C291795806E362C3A3816F7C011EE1FDE07206FA38AB1ACF6DC26408525BB235
+0CD8A0A587632F7F2EB2835A9125780A21BFA069C496B9017C7DA4EE2A97C380
+0F43240892D02F0DC96313C81351B40FD5029ED98FF9EC7074DDAE8B05CDC8E1
+67FC423CD9599E909BA9E7CA0B77AFE2682A94796697DC8C9B407A341E36EF1C
+A298D1DD4E14A40FAB85653BFC2770DEB9F41B605456C298AF2324F4803EB91D
+E604F8E7E1CA5492734DD84A965FE2141F7EDB09FEED5385FB11406BF4940211
+AE9E52B186913CF1F19198620697C7774E0C9E1E5EA7B9C98A261186E73E437C
+9985AA32F4B114C2733DB4BAD4B1E0283E92A21D06D5D665EA1D5260BA311634
+563D9CC7748BC24709AF9D2C8E49489AE749F6FBBC0FA92F10A20C3551B04D20
+</code></pre>
+<p>And a sha1 of a qualcomm CA:</p>
+<pre><code>AEBE6BF063261DBC7A387D8C3A1CE2395EE0CE1A
+</code></pre>
+<p>I know  only the first of that certificate list.
+BTW, I wonder what will happen 4 years from now, when this expires.</p>
+<pre><code>-----BEGIN CERTIFICATE-----
+MIIDljCCAn6gAwIBAgIBATANBgkqhkiG9w0BAQUFADB9MQswCQYDVQQGEwJVUzET
+MBEGA1UECBMKQ2FsaWZvcm5pYTESMBAGA1UEBxMJU2FuIERpZWdvMRowGAYDVQQL
+ExFDRE1BIFRlY2hub2xvZ2llczERMA8GA1UEChMIUVVBTENPTU0xFjAUBgNVBAMT
+DVFDVCBSb290IENBIDEwHhcNMDQwNTE5MTgzMDQ0WhcNMjQwODE5MTgzMDQ0WjB9
+MQswCQYDVQQGEwJVUzETMBEGA1UECBMKQ2FsaWZvcm5pYTESMBAGA1UEBxMJU2Fu
+IERpZWdvMRowGAYDVQQLExFDRE1BIFRlY2hub2xvZ2llczERMA8GA1UEChMIUVVB
+TENPTU0xFjAUBgNVBAMTDVFDVCBSb290IENBIDEwggEgMA0GCSqGSIb3DQEBAQUA
+A4IBDQAwggEIAoIBAQCxG8VDbYwM8m5opIkMPQuhZKleBFeegbwM1o/Kaf/Aj1V0
+q25rUg/aoGG5TxpGTGmJ8qfQMD9vFj23F+KreJHNRPotXHcy+ZjU4F6pZBgP/FOh
++qqnX6NODEm5DWJI1vxDnOiXn3lYcpKz2yAxGeguutNLDzlf4NNlgr4m5r/+t63I
+yvucOBFhCPQXgRnjOzGp8a68fhQ6+Zv+NhEx3XfxByWbuYJPDP+uZXSK0o/i9G3y
+BOM2QUAj4hNu5PGwaVEUKhh7jUSpGPl1lYiyYeBZxAko6Tz1UQ4gzkXzxX0fJEuC
+5GYyd28HzRJzAPXyJVyMy/AH5PaN3NsFn1HIjoDNAgEDoyMwITAPBgNVHRMBAf8E
+BTADAQH/MA4GA1UdDwEB/wQEAwIBBjANBgkqhkiG9w0BAQUFAAOCAQEAdqZG5vOO
+jGsW2sM5Q4MK314dHYp64BMHPi1sJlFH4gIuLg6jqIcw9fIgr+FiSJRkNyX2Z4Zi
+v48VhDh91+4K1mEENjVA9QJkJlrpwoUIpmsG+Y/pq4GHc0MNJOvC2x6O6Hachpch
+B5cgG/DaspLE/zeYvwB5pAMtHD/z5phLLmzz2PwETNgq/TGV9kA+Dgz1iZ5xs68I
+UQR5wiUxMIKd2YWgxUYIeLGwvxkW254bEhegr4w/mVfhMpSLavfEnDo+BegM5F5s
+wQJZeKxRWyAam22W4GEazCwcRTnht1R1K6kA/Qaf/253bg3J015jV1mX1roSphWM
+oPMttea9VyIzjQ==
+-----END CERTIFICATE-----
+</code></pre>
+<p>decoded with openssl:</p>
+<p>Certificate:
+Data:
+Version: 3 (0x2)
+Serial Number: 1 (0x1)
+Signature Algorithm: sha1WithRSAEncryption
+Issuer: C=US, ST=California, L=San Diego, OU=CDMA Technologies, O=QUALCOMM, CN=QCT Root CA 1
+Validity
+Not Before: May 19 18:30:44 2004 GMT
+Not After : Aug 19 18:30:44 2024 GMT
+Subject: C=US, ST=California, L=San Diego, OU=CDMA Technologies, O=QUALCOMM, CN=QCT Root CA 1
+Subject Public Key Info:
+Public Key Algorithm: rsaEncryption
+Public-Key: (2048 bit)
+Modulus:
+00:b1:1b:c5:43:6d:8c:0c:f2:6e:68:a4:89:0c:3d:
+0b:a1:64:a9:5e:04:57:9e:81:bc:0c:d6:8f:ca:69:
+ff:c0:8f:55:74🆎6e:6b:52:0f:da:a0:61:b9:4f:
+1a:46:4c:69:89:f2:a7:d0:30:3f:6f:16:3d:b7:17:
+e2🆎78:91:cd:44:fa:2d:5c:77:32:f9:98:d4:e0:
+5e:a9:64:18:0f:fc:53:a1:fa:aa:a7:5f:a3:4e:0c:
+49:b9:0d:62:48:d6:fc:43:9c:e8:97:9f:79:58:72:
+92:b3:db:20:31:19:e8:2e:ba:d3:4b:0f:39:5f:e0:
+d3:65:82:be:26:e6:bf:fe:b7:ad:c8:ca:fb:9c:38:
+11:61:08:f4:17:81:19:e3:3b:31:a9:f1:ae:bc:7e:
+14:3a:f9:9b:fe:36:11:31:dd:77:f1:07:25:9b:b9:
+82:4f:0c:ff:ae:65:74:8a:d2:8f:e2:f4:6d:f2:04:
+e3:36:41:40:23:e2:13:6e:e4:f1:b0:69:51:14:2a:
+18:7b:8d:44:a9:18:f9:75:95:88:b2:61:e0:59:c4:
+09:28:e9:3c:f5:51:0e:20:ce:45:f3:c5:7d:1f:24:
+4b:82:e4:66:32:77:6f:07:cd:12:73:00:f5:f2:25:
+5c:8c:cb:f0:07:e4:f6:8d:dc:db:05:9f:51:c8:8e:
+80:cd
+Exponent: 3 (0x3)
+X509v3 extensions:
+X509v3 Basic Constraints: critical
+CA:TRUE
+X509v3 Key Usage: critical
+Certificate Sign, CRL Sign
+Signature Algorithm: sha1WithRSAEncryption
+76:a6:46:e6:f3:8e:8c:6b:16:da:c3:39:43:83:0a:df:5e:1d:
+1d:8a:7a:e0:13:07:3e:2d:6c:26:51:47:e2:02:2e:2e:0e:a3:
+a8:87:30:f5:f2:20:af:e1:62:48:94:64:37:25:f6:67:86:62:
+bf:8f:15:84:38:7d:d7:ee:0a:d6:61:04:36:35:40:f5:02:64:
+26:5a:e9:c2:85:08:a6:6b:06:f9:8f:e9:ab:81:87:73:43:0d:
+24:eb:c2:db:1e:8e:e8:76:9c:86:97:21:07:97:20:1b:f0:da:
+b2:92:c4:ff:37:98:bf:00:79:a4:03:2d:1c:3f:f3:e6:98:4b:
+2e:6c:f3:d8:fc:04:4c:d8:2a:fd:31:95:f6:40:3e:0e:0c:f5:
+89:9e:71:b3:af:08:51:04:79:c2:25:31:30:82:9d:d9:85:a0:
+c5:46:08:78:b1:b0:bf:19:16:db:9e:1b:12:17:a0:af:8c:3f:
+99:57:e1:32:94:8b:6a:f7:c4:9c:3a:3e:05:e8:0c:e4:5e:6c:
+c1:02:59:78:ac:51:5b:20:1a:9b:6d:96:e0:61:1a:cc:2c:1c:
+45:39:e1:b7:54:75:2b:a9:00:fd:06:9f:ff:6e:77:6e:0d:c9:
+d3:5e:63:57:59:97:d6:ba:12:a6:15:8c:a0:f3:2d:b5:e6:bd:
+57:22:33:8d</p>
+    </div>
+    <div class="article-footer">
+<blockquote class="mt-2x">
+  <ul class="post-copyright list-unstyled">
+    <li class="post-copyright-link hidden-xs">
+      <strong>Permalink: </strong>
+      <a href="https://nlitsme.github.io/2019/11/msm-8974-bootrom/" title="The MSM 8974 bootrom" target="_blank" rel="external">https://nlitsme.github.io/2019/11/msm-8974-bootrom/</a>
+    </li>
+    <li class="post-copyright-license">
+      <strong>License：</strong><a href="http://creativecommons.org/licenses/by/4.0/deed.en" target="_blank" rel="external">CC BY 4.0 CN</a>
+    </li>
+  </ul>
+</blockquote>
+
+<div class="panel panel-default panel-badger">
+  <div class="panel-body">
+    <figure class="media">
+      <div class="media-left">
+        <a href="https://github.com/nlitsme" target="_blank" class="img-burn thumb-sm visible-lg">
+          <img src="https://nlitsme.github.io/avatar.png" class="img-rounded w-full" alt="">
+        </a>
+      </div>
+      <div class="media-body">
+        <h3 class="media-heading"><a href="https://github.com/nlitsme" target="_blank"><span class="text-dark">Willem Hengeveld</span><small class="ml-1x"></small></a></h3>
+        <div>Interested in taking things apart.</div>
+      </div>
+    </figure>
+  </div>
+</div>
+
+    </div>
+  </article>
+</div>
+<section id="comments">
+    <div id="disqus_thread">
+        <noscript>Please enable JavaScript to view the <a href="//disqus.com/?ref_noscript">comments powered by Disqus.</a></noscript>
+    </div>
+</section>
+
+<hr>
+
+</main><footer class="footer" itemscope itemtype="http://schema.org/WPFooter">
+<ul class="social-links">
+    <li><a href="https://github.com/nlitsme" target="_blank" title="github" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-github"></i></a></li>
+    <li><a href="https://gitlab.com/itsme" target="_blank" title="gitlab" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-gitlab"></i></a></li>
+    <li><a href="https://www.reddit.com/user/nlitsme1" target="_blank" title="reddit" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-reddit"></i></a></li>
+    <li><a href="/index.xml" target="_blank" title="rss" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-rss"></i></a></li>
+    <li><a href="https://stackoverflow.com/users/1049677/" target="_blank" title="stackoverflow" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-stackoverflow"></i></a></li>
+    <li><a href="https://twitter.com/twitsme" target="_blank" title="twitter" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-twitter"></i></a></li>
+    <li><a href="https://youtube.com/channel/UCmYzOAvL7VTpZmQXtuqJsZg" target="_blank" title="youtube" data-toggle=tooltip data-placement=top >
+            <i class="icon icon-youtube"></i></a></li>
+</ul>
+
+  <div class="copyright">
+    &copy;2000  -
+    2020
+    <!-- based on https://github.com/xiaoheiAh/hugo-theme-pure -->
+  </div>
+</footer>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.2/MathJax.js?config=TeX-MML-AM_SVG"></script>
+<script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+            showMathMenu: false, //disables context menu
+            tex2jax: {
+            inlineMath: [ ['$','$'], ['\\(','\\)'] ]
+           }
+    });
+</script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/jquery@3.4.1/dist/jquery.min.js"></script>
+<script>
+    window.jQuery || document.write('<script src="js/jquery.min.js"><\/script>')
+</script>
+<script type="text/javascript" src="/assets/js/highlight.pack.js"></script>
+<script>
+    hljs.configure({
+        tabReplace: '    ', 
+        classPrefix: ''     
+        
+    })
+    hljs.initHighlightingOnLoad();
+</script>
+<script src="https://nlitsme.github.io/js/application.min.bdeb64b910570b6c41badc6a05b7afb0c8ad9efd8525de3c7257d59e786326a3.js"></script>
+<script src="https://nlitsme.github.io/js/plugin.min.fdac970cab83e09d53dc1375262e937ce79eb7c241a1672b120c35a47a21b227.js"></script>
+
+<script>
+    (function (window) {
+        var INSIGHT_CONFIG = {
+            TRANSLATION: {
+                POSTS: 'Posts',
+                PAGES: 'Pages',
+                CATEGORIES: 'Categories',
+                TAGS: 'Tags',
+                UNTITLED: '(Untitled)',
+            },
+            ROOT_URL: 'https:\/\/nlitsme.github.io\/',
+            CONTENT_URL: 'https:\/\/nlitsme.github.io\/\/searchindex.json ',
+        };
+        window.INSIGHT_CONFIG = INSIGHT_CONFIG;
+    })(window);
+</script>
+<script type="text/javascript" src="https://nlitsme.github.io/js/insight.min.a343cd9a5a7698336b28ef3a7c16a3a1b1d2d5fb17dc8ed04022bbe08cc5459073a15bdafa3a8a58cdd56080784bdd69fa70b1ae8597565c799c57ed00f0e120.js" defer></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/tocbot/4.4.2/tocbot.min.js"></script>
+<script>
+    tocbot.init({
+        
+        tocSelector: '.js-toc',
+        
+        contentSelector: '.js-toc-content',
+        
+        headingSelector: 'h1, h2, h3',
+        
+        hasInnerContainers: true,
+    });
+</script>
+
+<script>
+    var disqus_config = function () {
+        this.page.url = 'https:\/\/nlitsme.github.io\/2019\/11\/msm-8974-bootrom\/';
+        this.page.identifier = 'nlitsme';
+    };
+    (function () {
+        var d = document, s = d.createElement('script');
+        s.src = '//' + 'nlitsme' + '.disqus.com/embed.js';
+        s.setAttribute('data-timestamp', +new Date());
+        (d.head || d.body).appendChild(s);
+    })();
+</script>
+
+
+  </body>
+</html>

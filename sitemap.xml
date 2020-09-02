@@ -1,0 +1,642 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
+  xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/08/2020-08-07-mpmp12-marching-band-problem/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/posts/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/puzzle/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/thinkmaths/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/</loc>
+    <lastmod>2020-08-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/07/2020-07-27-mpmp11-david-and-anton/</loc>
+    <lastmod>2020-07-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/06/2020-06-27-mpmp9-take-away-triangles/</loc>
+    <lastmod>2020-06-27T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/06/2020-06-11-mpmp8-paper-folding/</loc>
+    <lastmod>2020-06-11T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/06/youtube-tool/</loc>
+    <lastmod>2020-06-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/commandline/</loc>
+    <lastmod>2020-06-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/python/</loc>
+    <lastmod>2020-06-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/youtube/</loc>
+    <lastmod>2020-06-09T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/05/2020-05-29-mpmp7-unique-distancing/</loc>
+    <lastmod>2020-05-28T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/about/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/02/2020-02-07-ancient-tools/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/msdos/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/museum/</loc>
+    <lastmod>2020-02-07T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/hugo/</loc>
+    <lastmod>2020-02-04T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/problems/</loc>
+    <lastmod>2020-02-04T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/02/hugo-problems/</loc>
+    <lastmod>2020-02-04T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/git/</loc>
+    <lastmod>2020-02-03T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/02/needlesly-large-gitrepos/</loc>
+    <lastmod>2020-02-03T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/02/python-number-conversion/</loc>
+    <lastmod>2020-02-02T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/c&#43;&#43;/</loc>
+    <lastmod>2020-01-17T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2020/01/c-wannahaves/</loc>
+    <lastmod>2020-01-17T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/qualcomm/</loc>
+    <lastmod>2019-11-08T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/reversing/</loc>
+    <lastmod>2019-11-08T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2019/11/msm-8974-bootrom/</loc>
+    <lastmod>2019-11-08T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2019/10/osx-backup-problem/</loc>
+    <lastmod>2019-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/osx/</loc>
+    <lastmod>2019-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/timemachine/</loc>
+    <lastmod>2019-10-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2019/10/c-type_tests/</loc>
+    <lastmod>2019-10-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/templates/</loc>
+    <lastmod>2019-10-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2019/08/python-wannahaves/</loc>
+    <lastmod>2019-08-29T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2018/11/fix-android-sdk/</loc>
+    <lastmod>2018-11-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/android/</loc>
+    <lastmod>2018-11-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2017/10/python-internals/</loc>
+    <lastmod>2017-10-03T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/crypto/</loc>
+    <lastmod>2016-12-15T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/vim/</loc>
+    <lastmod>2016-12-15T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2016/12/vim-encryption/</loc>
+    <lastmod>2016-12-15T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/portability/</loc>
+    <lastmod>2016-12-06T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2016/12/writing-portable-python-code/</loc>
+    <lastmod>2016-12-06T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/hexdmper/</loc>
+    <lastmod>2016-11-28T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2016/11/hexdumper-for-c-iostreams/</loc>
+    <lastmod>2016-11-28T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/benchmark/</loc>
+    <lastmod>2016-11-26T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2016/11/benchmarking-some-python-crypto-libraries/</loc>
+    <lastmod>2016-11-26T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/crack/</loc>
+    <lastmod>2016-11-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/pdf/</loc>
+    <lastmod>2016-11-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2016/11/pdf-certificate-encryption/</loc>
+    <lastmod>2016-11-24T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2016/11/custom-pycrypto/</loc>
+    <lastmod>2016-11-22T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2016/09/pytorify/</loc>
+    <lastmod>2016-09-02T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/tor/</loc>
+    <lastmod>2016-09-02T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2016/01/about-bitcoin-addresses/</loc>
+    <lastmod>2016-01-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/bitcoin/</loc>
+    <lastmod>2016-01-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2015/10/key-exchange/</loc>
+    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/math/</loc>
+    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/philosophy/</loc>
+    <lastmod>2015-10-29T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/elcapitan/</loc>
+    <lastmod>2015-10-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2015/10/osx-1011-sandbox/</loc>
+    <lastmod>2015-10-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/osx10.11/</loc>
+    <lastmod>2015-10-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/ida/</loc>
+    <lastmod>2014-12-16T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2014/12/2014-12-16-ida-operands/</loc>
+    <lastmod>2014-12-16T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2014/10/2014-10-20-strange-url-in-ios-captivenetworksupport-binary/</loc>
+    <lastmod>2014-10-20T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2014/07/2014-07-31-exploring-the-blockchain/</loc>
+    <lastmod>2014-07-31T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/ecdsa/</loc>
+    <lastmod>2014-06-19T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2014/06/2014-06-19-ecdsa-explanation/</loc>
+    <lastmod>2014-06-19T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/galois-field/</loc>
+    <lastmod>2014-06-18T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/modular-arithmetic/</loc>
+    <lastmod>2014-06-18T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2014/06/2014-06-18-modular-arithmetic-in-python/</loc>
+    <lastmod>2014-06-18T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/itsutils/</loc>
+    <lastmod>2008-06-02T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2008/06/2008-06-02-itsutils/</loc>
+    <lastmod>2008-06-02T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/wince/</loc>
+    <lastmod>2008-06-02T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/perl/</loc>
+    <lastmod>2008-06-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2008/06/2008-06-01-perl-scripting-for-ida/</loc>
+    <lastmod>2008-06-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/arm/</loc>
+    <lastmod>2008-03-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/2008/03/2008-03-21-weird-bytes-in-wince-binaries/</loc>
+    <lastmod>2008-03-21T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/netware/</loc>
+    <lastmod>1996-07-18T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1996/07/1996-07-18-ncp-netwarecoreprotocol/</loc>
+    <lastmod>1996-07-18T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1994/11/1994-11-30-soundblaster/</loc>
+    <lastmod>1994-11-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/soundblaster/</loc>
+    <lastmod>1994-11-30T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1994/11/1994-11-28-ipx-functions/</loc>
+    <lastmod>1994-11-28T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1994/08/1994-08-23-novell-bindery-format/</loc>
+    <lastmod>1994-08-23T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1994/08/1994-08-01-ncp-functions/</loc>
+    <lastmod>1994-08-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1994/03/1995-03-01-various-hardware/</loc>
+    <lastmod>1994-03-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/pchardware/</loc>
+    <lastmod>1994-03-01T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/interrupts/</loc>
+    <lastmod>1993-06-18T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1993/06/1993-06-18-msdos-interrupt-catcher/</loc>
+    <lastmod>1993-06-18T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1992/12/1992-12-16-msdos-demon-dialer-tool/</loc>
+    <lastmod>1992-12-16T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/1992/10/1992-10-17-msdos-game-of-life/</loc>
+    <lastmod>1992-10-17T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+  <url>
+    <loc>https://nlitsme.github.io/tags/life/</loc>
+    <lastmod>1992-10-17T00:00:00+00:00</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.5</priority>
+  </url>
+  
+</urlset>

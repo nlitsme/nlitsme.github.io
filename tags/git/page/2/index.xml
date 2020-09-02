@@ -1,0 +1,263 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>git on Willem&#39;s blog</title>
+    <link>https://nlitsme.github.io/tags/git/</link>
+    <description>Recent content in git on Willem&#39;s blog</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <lastBuildDate>Mon, 03 Feb 2020 00:00:00 +0000</lastBuildDate>
+    
+        <atom:link href="https://nlitsme.github.io/tags/git/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Hexdumper for C&#43;&#43; IOStreams</title>
+      <link>https://nlitsme.github.io/2016/11/hexdumper-for-c-iostreams/</link>
+      <pubDate>Mon, 28 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2016/11/hexdumper-for-c-iostreams/</guid>
+      <description>&lt;p&gt;A &lt;code&gt;hex::dumper&lt;/code&gt; object which can output hexdumps in several ways, configured by using various stream manipulators.
+Usage is as simple as:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;std::cout &amp;lt;&amp;lt; hex::hexstring &amp;lt;&amp;lt; hex::dumper(data, size) &amp;lt;&amp;lt; std::endl;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;or&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;std::cout &amp;lt;&amp;lt; hex::offset(0x12000) &amp;lt;&amp;lt; std::hex &amp;lt;&amp;lt; hex::dumper(data, size) &amp;lt;&amp;lt; std::endl;
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>Benchmarking some python crypto libraries</title>
+      <link>https://nlitsme.github.io/2016/11/benchmarking-some-python-crypto-libraries/</link>
+      <pubDate>Sat, 26 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2016/11/benchmarking-some-python-crypto-libraries/</guid>
+      <description>&lt;p&gt;I wrote a little benchmark, comparing the &lt;a href=&#34;https://github.com/dlitz/pycrypto&#34;&gt;PyCrypto&lt;/a&gt; and &lt;a href=&#34;https://github.com/pyca/cryptography&#34;&gt;cryptography&lt;/a&gt; python modules.&lt;/p&gt;
+&lt;p&gt;You can find the script &lt;a href=&#34;https://github.com/nlitsme/pyCryptoBenchmarking&#34;&gt;here&lt;/a&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;results&#34;&gt;results&lt;/h1&gt;
+&lt;p&gt;Most symmetric ciphers are significantly faster in &lt;code&gt;pyCrypto&lt;/code&gt; for small blocksizes.
+but cryptography is much faster for larger data.&lt;/p&gt;
+&lt;p&gt;The &lt;code&gt;ratio&lt;/code&gt; is the byterate of &lt;code&gt;pycrypto&lt;/code&gt; divided by the byterate of &lt;code&gt;cryptography&lt;/code&gt;.
+So values less than 1 mean: &lt;code&gt;cryptography&lt;/code&gt; is faster, values larger than 1: &lt;code&gt;pycrypto&lt;/code&gt; is faster.&lt;/p&gt;
+&lt;p&gt;I found that the &lt;code&gt;cryptography&lt;/code&gt; library is generally faster for large data volumes, while &lt;code&gt;pycrypto&lt;/code&gt;
+is faster for encrypting small items.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>PDF Certificate Encryption</title>
+      <link>https://nlitsme.github.io/2016/11/pdf-certificate-encryption/</link>
+      <pubDate>Thu, 24 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2016/11/pdf-certificate-encryption/</guid>
+      <description>&lt;p&gt;Code for this project can be found here: &lt;a href=&#34;https://github.com/nlitsme/pyPdfCrack&#34;&gt;https://github.com/nlitsme/pyPdfCrack&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;PDFS can be encrypted in several ways, the simplest being the &lt;code&gt;std&lt;/code&gt; encryption, using an owner and user password.
+A more secure way is to use password protected certificates.
+In this post I describe how exactly these certificates are encrypted, and how they are used to decrypt a pdf.
+Also I provide python code for parsing the certificate, pdf and do the decryption.
+Finally I wrote some simple password cracking tools for the certificate.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Adding custom ciphers to pyCrypto using Cipher modes from pyCrypto</title>
+      <link>https://nlitsme.github.io/2016/11/custom-pycrypto/</link>
+      <pubDate>Tue, 22 Nov 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2016/11/custom-pycrypto/</guid>
+      <description>&lt;p&gt;A python module for adding custom ciphers to &lt;code&gt;pyCrypto&lt;/code&gt;.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>pytorify - A python module which torifies your python program.</title>
+      <link>https://nlitsme.github.io/2016/09/pytorify/</link>
+      <pubDate>Fri, 02 Sep 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2016/09/pytorify/</guid>
+      <description>&lt;p&gt;A module which makes sure all sockets use the TOR proxy at port 9050.
+Simply add the &lt;code&gt;-mtorify&lt;/code&gt; switch to your python commandline.&lt;/p&gt;
+&lt;p&gt;Source code is available on &lt;a href=&#34;https://github.com/nlitsme/pytorify&#34;&gt;github&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;This module works with both python2 and python3.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>About bitcoin addresses ambiguity</title>
+      <link>https://nlitsme.github.io/2016/01/about-bitcoin-addresses/</link>
+      <pubDate>Thu, 21 Jan 2016 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2016/01/about-bitcoin-addresses/</guid>
+      <description>&lt;p&gt;A bitcoin address is the hash of an elliptic curve point representation.
+Bitcoin addresses are ambiguous in several ways.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;First: This point can be represented in two ways: &amp;lsquo;full&amp;rsquo;, or &amp;lsquo;compressed&amp;rsquo;.&lt;/li&gt;
+&lt;li&gt;Then, there are some points which can be represented in two ways, this
+is because the group order is not exactly 2^256, but a little bit less.&lt;/li&gt;
+&lt;li&gt;Another issue: during signature checking, the sign of an equation is
+ignore, leading to more ambiguity.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Key Exchange</title>
+      <link>https://nlitsme.github.io/2015/10/key-exchange/</link>
+      <pubDate>Thu, 29 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2015/10/key-exchange/</guid>
+      <description>&lt;p&gt;Note: this post is more philosophical, it does not describe any actual useful keyexchange algorithm.&lt;/p&gt;
+&lt;p&gt;Looking at how keyexchange protocols are constructed.
+And trying (unsuccesfully) to formulate a set of rules for constructing
+a keyexchange protocol.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>osx 10.11 problems</title>
+      <link>https://nlitsme.github.io/2015/10/osx-1011-sandbox/</link>
+      <pubDate>Thu, 01 Oct 2015 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2015/10/osx-1011-sandbox/</guid>
+      <description>&lt;p&gt;After installing OSX El Capitan ( OSX 10.11 ), I ran into several problems:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;I was unable to modity system files&lt;/li&gt;
+&lt;li&gt;Problem with Java based apps&lt;/li&gt;
+&lt;li&gt;Problem with kernel extensions&lt;/li&gt;
+&lt;li&gt;Menumeters no longer works&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Here are some workarounds.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>modifying ida operands</title>
+      <link>https://nlitsme.github.io/2014/12/2014-12-16-ida-operands/</link>
+      <pubDate>Tue, 16 Dec 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2014/12/2014-12-16-ida-operands/</guid>
+      <description>&lt;p&gt;There are several ways to modify the operand representation in IDA:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;code&gt;set_opinfo&lt;/code&gt;, &lt;code&gt;get_opinfo&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;op_offset&lt;/code&gt;,  &lt;code&gt;get_offbase&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;op_offset_ex&lt;/code&gt;&lt;/li&gt;
+&lt;li&gt;&lt;code&gt;set_refinfo&lt;/code&gt;, &lt;code&gt;get_refinfo&lt;/code&gt;  &amp;ndash; Don&amp;rsquo;t use&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Strange url in iOS CaptiveNetworkSupport binary</title>
+      <link>https://nlitsme.github.io/2014/10/2014-10-20-strange-url-in-ios-captivenetworksupport-binary/</link>
+      <pubDate>Mon, 20 Oct 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2014/10/2014-10-20-strange-url-in-ios-captivenetworksupport-binary/</guid>
+      <description>&lt;p&gt;While looking at traffic generated by iOS 8, I noticed that the request iOS uses to figure out if
+the current WLAN network it is connected to the internet had changed.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Exploring the bitcoin blockchain</title>
+      <link>https://nlitsme.github.io/2014/07/2014-07-31-exploring-the-blockchain/</link>
+      <pubDate>Thu, 31 Jul 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2014/07/2014-07-31-exploring-the-blockchain/</guid>
+      <description>&lt;p&gt;Most bitcoin transactions are &amp;lsquo;standard&amp;rsquo;, some are not. This is a summary of what is not standard in the bitcoin blockchain.
+Some interesting finds: the wikileaks cable&amp;rsquo;s are in the blockchain, and so are a bunch of links to childporn sites.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>ECDSA calculations</title>
+      <link>https://nlitsme.github.io/2014/06/2014-06-19-ecdsa-explanation/</link>
+      <pubDate>Thu, 19 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2014/06/2014-06-19-ecdsa-explanation/</guid>
+      <description>&lt;p&gt;Explaining ECDSA calculations&lt;/p&gt;
+&lt;p&gt;In this post I assume you know what ECDSA is, and how modular arithmetic works.
+I will also explained why you must never re-use the signing secret.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Modular arithmetic in python</title>
+      <link>https://nlitsme.github.io/2014/06/2014-06-18-modular-arithmetic-in-python/</link>
+      <pubDate>Wed, 18 Jun 2014 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2014/06/2014-06-18-modular-arithmetic-in-python/</guid>
+      <description>&lt;p&gt;When working on bitcoin and elliptic curve stuff I wrote some code to make the calculations
+easily understandable&lt;/p&gt;
+&lt;p&gt;The repository can be found on &lt;a href=&#34;https://github.com/nlitsme/bcutils&#34;&gt;github&lt;/a&gt;&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>itsutils</title>
+      <link>https://nlitsme.github.io/2008/06/2008-06-02-itsutils/</link>
+      <pubDate>Mon, 02 Jun 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2008/06/2008-06-02-itsutils/</guid>
+      <description>&lt;p&gt;itsutils is a set of tools that make life of the windows ce hacker easier. for instance, with pmemdump you can inspect the memory of the kernel or running processes.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;with &amp;lsquo;psetmem&amp;rsquo; you can modify memory&lt;/li&gt;
+&lt;li&gt;with pregutl you can read or change the devices register.&lt;/li&gt;
+&lt;li&gt;with pmemmap you can get a quick overview of what physical memory is mapped where.&lt;/li&gt;
+&lt;li&gt;with pps you can get a list of processes, threads or modules.&lt;/li&gt;
+&lt;li&gt;with pdocread, pdocwrite you can read disk-on-chip flash chips.&lt;/li&gt;
+&lt;li&gt;with psdread, psdwrite you can read/write sdcards.&lt;/li&gt;
+&lt;li&gt;with ppostmsg you can send windows messages to windows, or list all windows on the device.&lt;/li&gt;
+&lt;/ul&gt;</description>
+    </item>
+    
+    <item>
+      <title>Perl scripting for the IDA disassembler</title>
+      <link>https://nlitsme.github.io/2008/06/2008-06-01-perl-scripting-for-ida/</link>
+      <pubDate>Sun, 01 Jun 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2008/06/2008-06-01-perl-scripting-for-ida/</guid>
+      <description>&lt;p&gt;i created a plugin for &lt;a href=&#34;https://hex-rays.com&#34;&gt;ida (the interactive disassembler)&lt;/a&gt;, which allows you to script ida in perl. the current api is identical to the ida idc scripting language. current features:&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>Strange byte sequence in wince arm binaries</title>
+      <link>https://nlitsme.github.io/2008/03/2008-03-21-weird-bytes-in-wince-binaries/</link>
+      <pubDate>Fri, 21 Mar 2008 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/2008/03/2008-03-21-weird-bytes-in-wince-binaries/</guid>
+      <description>&lt;p&gt;These 0x90 bytes ( or 0x24 dwords ) occur often in windows ce arm binaries&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;00000000 00004033 00444101 09401050 00004005 00534c01 09401050 00002078
+00534c01 802910ec 0000c0f0 00534b01 812910ec 00000000 00545204 813910ec
+0000900b 00545204 813910ec 0000d0c9 00545204 813910ec 0000e04c 00545204
+13001186 000050ba 004c4404 0020100b 0000a0cc 00474e05 905010b7 00006008
+00433306 920010b7 00000476 00433306
+&lt;/code&gt;&lt;/pre&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Netware Core Protocol</title>
+      <link>https://nlitsme.github.io/1996/07/1996-07-18-ncp-netwarecoreprotocol/</link>
+      <pubDate>Thu, 18 Jul 1996 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1996/07/1996-07-18-ncp-netwarecoreprotocol/</guid>
+      <description>&lt;p&gt;This is from way back when I was working on Novell Netware.&lt;/p&gt;
+&lt;p&gt;A large list of all NCP functions.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>reverse engineering my soundblaster card</title>
+      <link>https://nlitsme.github.io/1994/11/1994-11-30-soundblaster/</link>
+      <pubDate>Wed, 30 Nov 1994 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1994/11/1994-11-30-soundblaster/</guid>
+      <description>&lt;p&gt;This is some ancient research into my soundblaster card&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>IPX dos function list</title>
+      <link>https://nlitsme.github.io/1994/11/1994-11-28-ipx-functions/</link>
+      <pubDate>Mon, 28 Nov 1994 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1994/11/1994-11-28-ipx-functions/</guid>
+      <description>&lt;p&gt;A list of Netware IPX protocol functions available through a DOS interrupt.&lt;/p&gt;</description>
+    </item>
+    
+    <item>
+      <title>The Novell Netware bindery format</title>
+      <link>https://nlitsme.github.io/1994/08/1994-08-23-novell-bindery-format/</link>
+      <pubDate>Tue, 23 Aug 1994 00:00:00 +0000</pubDate>
+      
+      <guid>https://nlitsme.github.io/1994/08/1994-08-23-novell-bindery-format/</guid>
+      <description>&lt;p&gt;This is from way back when I was working on Novell Netware.&lt;/p&gt;
+&lt;p&gt;Describing how the structure of the Netware bindery files.&lt;/p&gt;</description>
+    </item>
+    
+  </channel>
+</rss>
